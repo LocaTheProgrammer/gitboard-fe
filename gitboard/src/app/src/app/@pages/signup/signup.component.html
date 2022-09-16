@@ -1,0 +1,102 @@
+<div class="container">
+
+    <div class="row mt-3">
+        <div class="col-12 text-center">
+            <h1>Sign up</h1>
+        </div>
+    </div>
+
+    <form [formGroup]="userSignupForm">
+        <div class="row mt-5">
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
+                </div>
+                <input formControlName="name" type="text" class="form-control" placeholder="Name" aria-label="Name"
+                    aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
+                </div>
+                <input formControlName="surname" type="text" class="form-control" placeholder="Surname"
+                    aria-label="Surname" aria-describedby="basic-addon1">
+            </div>
+
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i
+                            class="bi bi-envelope-exclamation-fill"></i></span>
+                </div>
+                <input formControlName="mail" type="text" class="form-control" placeholder="E-Mail" aria-label="E-Mail" [ngClass]="mailNotMatching ? 'not-matching' : '' " 
+                    aria-describedby="basic-addon1">
+
+            </div> <div class="input-group mb-3">
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i
+                            class="bi bi-envelope-exclamation-fill"></i></span>
+                </div>
+                <input formControlName="mailRepeat" type="text" class="form-control" placeholder="Repeat E-Mail" aria-label="E-Mail" [ngClass]="mailNotMatching ? 'not-matching' : '' " 
+                    aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend" *ngIf="isPasswordVisible">
+                    <button class="btn btn-outline-secondary" type="button" (click)="showPassword()"><i
+                            class="bi bi-eye-fill"></i></button>
+                </div>
+                <div class="input-group-prepend" *ngIf="!isPasswordVisible">
+                    <button class="btn btn-outline-secondary" type="button" (click)="showPassword()"><i
+                            class="bi bi-eye-slash-fill"></i></button>
+                </div>
+                <input formControlName="password" placeholder="Password"  [ngClass]="passwordNotMatching ? 'not-matching' : '' "
+                    [type]="isPasswordVisible ? 'text' : 'password' " class="form-control" aria-label=""
+                    aria-describedby="basic-addon1">
+
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend" *ngIf="isPasswordVisible">
+                    <button class="btn btn-outline-secondary" type="button" (click)="showPassword()"><i
+                            class="bi bi-eye-fill"></i></button>
+                </div>
+                <div class="input-group-prepend" *ngIf="!isPasswordVisible">
+                    <button class="btn btn-outline-secondary" type="button" (click)="showPassword()"><i
+                            class="bi bi-eye-slash-fill"></i></button>
+                </div>
+                <input formControlName="passwordRepeat" placeholder="Repeat Password"  [ngClass]="passwordNotMatching ? 'not-matching' : '' "
+                    [type]="isPasswordVisible ? 'text' : 'password' " class="form-control" aria-label=""
+                    aria-describedby="basic-addon1">
+
+            </div>
+
+        </div>
+        <div class="row mt-2">
+            <div class="col">
+
+            </div>
+            <div class="col d-flex justify-content-center">
+                <button [disabled]="!userSignupForm.valid || !checkEmailAndPassword()" (click)="signup()" class="btn btn-primary"
+                    [ngClass]="!userSignupForm.valid ? 'button-disabled' : '' ">
+                    Sign Up
+                </button>
+
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
+    </form>
+
+    <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
+            <div *ngIf="successMessage === 1" class="p-3 mb-2 bg-success text-white">Account created, check email to confirm. The email could be found in the spam folder</div>
+            <div *ngIf="successMessage === 2" class="p-3 mb-2 bg-danger text-white">Something whent wrong, tryin' signing up with an already used mail?</div>
+        </div>
+    </div>
+
+</div>
