@@ -12,6 +12,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './src/app/@pages/signup/signup.component';
+import { PasswordForgottenComponent } from './src/app/@pages/password-forgotten/password-forgotten.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SignupComponent } from './src/app/@pages/signup/signup.component';
     NavbarComponent,
     LoginComponent,
     HomeComponent,
-    SignupComponent
+    SignupComponent,
+    PasswordForgottenComponent
   ],
   imports: [
     BrowserModule,
