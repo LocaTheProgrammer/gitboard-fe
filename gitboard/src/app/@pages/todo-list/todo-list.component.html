@@ -11,7 +11,7 @@
         <div class="col example-container text-center">
             <h2>In Progress</h2>
     
-            <div cdkDropList [cdkDropListData]="todo" class="example-list" (cdkDropListDropped)="drop($event)">
+            <div cdkDropList [cdkDropListData]="inProgress" class="example-list" (cdkDropListDropped)="drop($event)">
                 <div class="example-box" *ngFor="let item of inProgress" cdkDrag>{{item}}</div>
             </div>
         </div>
