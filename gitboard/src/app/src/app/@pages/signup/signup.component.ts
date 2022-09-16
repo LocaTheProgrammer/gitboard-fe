@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../@services/user.service';
 
@@ -7,16 +7,18 @@ import { UserService } from '../../@services/user.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, AfterContentChecked {
 
   successMessage=0;//0 base 1 successo 2 errore
+  incorrectMail: boolean=true;
 
   constructor(private fb: FormBuilder,
     private userService: UserService) { }
 
-
-  ngOnChanges(): void {
-    this.checkEmailAndPassword()
+  ngAfterContentChecked(): void {
+    this.checkEmail()
+    this.checkPassword()
+    this.isMailIncorrect()
   }
 
 
@@ -56,9 +58,17 @@ export class SignupComponent implements OnInit {
     })
   }
 
-  checkEmailAndPassword(){
 
+  checkEmail(){
     this.mailNotMatching=false;
+    if(this.userSignupForm.value.mail != this.userSignupForm.value.mailRepeat){
+      this.mailNotMatching=true;
+      return false;
+    }
+    return true;
+  }
+
+  checkPassword(){
     this.passwordNotMatching=false;
 
     if(this.userSignupForm.value.mail != this.userSignupForm.value.mailRepeat){
@@ -72,5 +82,19 @@ export class SignupComponent implements OnInit {
     }
 
     return true;
+  }
+
+  checkEmailAndPassword(){
+
+    if(this.checkEmail() && this.checkPassword()){
+      return true;
+    }
+    return false;
+  }
+
+  isMailIncorrect(){
+    this.incorrectMail=false;
+    let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');   
+    this.incorrectMail = regex.test(this.userSignupForm.value.mail);
   }
 }

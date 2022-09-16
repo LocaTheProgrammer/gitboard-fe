@@ -10,92 +10,121 @@
         <div class="row mt-5">
 
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
-                </div>
+
+                <span class="input-group-text" id="basic-addon1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg>
+                </span>
+
                 <input formControlName="name" type="text" class="form-control" placeholder="Name" aria-label="Name"
                     aria-describedby="basic-addon1">
             </div>
 
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
-                </div>
+                <span class="input-group-text" id="basic-addon1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg>
+                </span>
                 <input formControlName="surname" type="text" class="form-control" placeholder="Surname"
                     aria-label="Surname" aria-describedby="basic-addon1">
             </div>
 
 
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i
-                            class="bi bi-envelope-exclamation-fill"></i></span>
-                </div>
-                <input formControlName="mail" type="text" class="form-control" placeholder="E-Mail" aria-label="E-Mail" [ngClass]="mailNotMatching ? 'not-matching' : '' " 
-                    aria-describedby="basic-addon1">
+                <span class="input-group-text" id="basic-addon1">@</span>
+                <input formControlName="mail" type="text" class="form-control" placeholder="E-Mail" aria-label="E-Mail"
+                    [ngClass]="mailNotMatching ? 'not-matching' : '' " aria-describedby="basic-addon1">
 
-            </div> <div class="input-group mb-3">
+            </div>
+            <div class="input-group mb-3">
 
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i
-                            class="bi bi-envelope-exclamation-fill"></i></span>
-                </div>
-                <input formControlName="mailRepeat" type="text" class="form-control" placeholder="Repeat E-Mail" aria-label="E-Mail" [ngClass]="mailNotMatching ? 'not-matching' : '' " 
+                <span class="input-group-text" id="basic-addon1">@</span>
+                <input formControlName="mailRepeat" type="email" class="form-control" placeholder="Repeat E-Mail"
+                    aria-label="E-Mail" [ngClass]="mailNotMatching ? 'not-matching' : '' "
                     aria-describedby="basic-addon1">
             </div>
 
             <div class="input-group mb-3">
-                <div class="input-group-prepend" *ngIf="isPasswordVisible">
-                    <button class="btn btn-outline-secondary" type="button" (click)="showPassword()"><i
-                            class="bi bi-eye-fill"></i></button>
-                </div>
-                <div class="input-group-prepend" *ngIf="!isPasswordVisible">
-                    <button class="btn btn-outline-secondary" type="button" (click)="showPassword()"><i
-                            class="bi bi-eye-slash-fill"></i></button>
-                </div>
-                <input formControlName="password" placeholder="Password"  [ngClass]="passwordNotMatching ? 'not-matching' : '' "
+                <button *ngIf="isPasswordVisible" class="btn btn-outline-secondary" type="button" id="button-addon1" (click)="showPassword()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                        <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                        <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/>
+                      </svg>
+                </button>
+                <button *ngIf="!isPasswordVisible" class="btn btn-outline-secondary" type="button" id="button-addon1" (click)="showPassword()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                      </svg>
+                </button>
+                <input formControlName="password" placeholder="Password"
+                    [ngClass]="passwordNotMatching ? 'not-matching' : '' "
                     [type]="isPasswordVisible ? 'text' : 'password' " class="form-control" aria-label=""
                     aria-describedby="basic-addon1">
 
             </div>
 
             <div class="input-group mb-3">
-                <div class="input-group-prepend" *ngIf="isPasswordVisible">
-                    <button class="btn btn-outline-secondary" type="button" (click)="showPassword()"><i
-                            class="bi bi-eye-fill"></i></button>
-                </div>
-                <div class="input-group-prepend" *ngIf="!isPasswordVisible">
-                    <button class="btn btn-outline-secondary" type="button" (click)="showPassword()"><i
-                            class="bi bi-eye-slash-fill"></i></button>
-                </div>
-                <input formControlName="passwordRepeat" placeholder="Repeat Password"  [ngClass]="passwordNotMatching ? 'not-matching' : '' "
+                <button *ngIf="isPasswordVisible" class="btn btn-outline-secondary" type="button" id="button-addon1" (click)="showPassword()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                        <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                        <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/>
+                      </svg>
+                </button>
+                <button *ngIf="!isPasswordVisible" class="btn btn-outline-secondary" type="button" id="button-addon1" (click)="showPassword()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                      </svg>
+                </button>
+                <input formControlName="passwordRepeat" placeholder="Repeat Password"
+                    [ngClass]="passwordNotMatching ? 'not-matching' : '' "
                     [type]="isPasswordVisible ? 'text' : 'password' " class="form-control" aria-label=""
                     aria-describedby="basic-addon1">
 
             </div>
 
         </div>
-        <div class="row mt-2">
-            <div class="col">
 
+        <!--error messages-->
+        <div class="row mt-3">
+            <div *ngIf="mailNotMatching" class="alert alert-danger" role="alert">
+                Mail Not Matching!
             </div>
+            <div *ngIf="passwordNotMatching" class="alert alert-danger" role="alert">
+                Password Not Matching!
+            </div>
+            <div *ngIf="!incorrectMail" class="alert alert-danger" role="alert">
+                Email is incorrect!
+            </div>
+           
+        </div>
+
+
+        <div class="row mt-2">
             <div class="col d-flex justify-content-center">
-                <button [disabled]="!userSignupForm.valid || !checkEmailAndPassword()" (click)="signup()" class="btn btn-primary"
-                    [ngClass]="!userSignupForm.valid ? 'button-disabled' : '' ">
+                <button [disabled]="!userSignupForm.valid || !checkEmailAndPassword() || !incorrectMail" (click)="signup()"
+                    class="btn btn-primary" [ngClass]="!userSignupForm.valid ? 'button-disabled' : '' ">
                     Sign Up
                 </button>
-
-            </div>
-            <div class="col">
-
             </div>
         </div>
     </form>
 
     <div class="row mt-5">
         <div class="col d-flex justify-content-center">
-            <div *ngIf="successMessage === 1" class="p-3 mb-2 bg-success text-white">Account created, check email to confirm. The email could be found in the spam folder</div>
-            <div *ngIf="successMessage === 2" class="p-3 mb-2 bg-danger text-white">Something whent wrong, tryin' signing up with an already used mail?</div>
+            <div *ngIf="successMessage === 1" class="p-3 mb-2 bg-success text-white">Account created, check email to
+                confirm. The email could be found in the spam folder</div>
+            <div *ngIf="successMessage === 2" class="p-3 mb-2 bg-danger text-white">Something whent wrong, tryin'
+                signing up with an already used mail?</div>
         </div>
     </div>
 
