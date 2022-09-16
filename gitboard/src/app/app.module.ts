@@ -13,6 +13,8 @@ import { NavbarComponent } from './@components/navbar/navbar.component';
 import { LoginComponent } from './@pages/login/login.component';
 import { PasswordForgottenComponent } from './@pages/password-forgotten/password-forgotten.component';
 import { SignupComponent } from './@pages/signup/signup.component';
+import { TodoListComponent } from './@pages/todo-list/todo-list.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { SignupComponent } from './@pages/signup/signup.component';
     LoginComponent,
     HomeComponent,
     SignupComponent,
-    PasswordForgottenComponent
+    PasswordForgottenComponent,
+    TodoListComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import { SignupComponent } from './@pages/signup/signup.component';
     MatGridListModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]
