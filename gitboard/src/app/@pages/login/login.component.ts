@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
     if(localStorage.getItem('token')){
-      this.router.navigateByUrl('reserved-area')
+      this.router.navigateByUrl('todo-list')
     }
 
     this.userLoginForm = this.fb.group({
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       if(response.token){
         this.loginError=false;
         localStorage.setItem('token', response.token)
-        this.router.navigateByUrl("/reserved-area")
+        this.router.navigateByUrl("/todo-list")
       } 
     }, () =>{
         this.loginError=true;
