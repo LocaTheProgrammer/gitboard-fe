@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './@pages/home/home.component';
 import { LoginComponent } from './@pages/login/login.component';
 import { PasswordForgottenComponent } from './@pages/password-forgotten/password-forgotten.component';
+import { SignUpSuccessfulComponent } from './@pages/sign-up-successful/sign-up-successful.component';
 import { SignupComponent } from './@pages/signup/signup.component';
 import { TodoListComponent } from './@pages/todo-list/todo-list.component';
 
@@ -14,6 +15,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'password-forgotten', component: PasswordForgottenComponent },
   { path: 'todo-list', component: TodoListComponent },
+  { path: 'sign-up-success', component: SignUpSuccessfulComponent },
+
 ];
 
 @NgModule({

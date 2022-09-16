@@ -15,6 +15,7 @@ import { PasswordForgottenComponent } from './@pages/password-forgotten/password
 import { SignupComponent } from './@pages/signup/signup.component';
 import { TodoListComponent } from './@pages/todo-list/todo-list.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { SignUpSuccessfulComponent } from './@pages/sign-up-successful/sign-up-successful.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     HomeComponent,
     SignupComponent,
     PasswordForgottenComponent,
-    TodoListComponent
+    TodoListComponent,
+    SignUpSuccessfulComponent
   ],
   imports: [
     BrowserModule,
