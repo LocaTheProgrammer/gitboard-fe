@@ -35,7 +35,6 @@ export class UserService {
 
   createAccount(name:string, surname:string, email:string, password:string){
     let url=this.auth.concat('rest/user/create')
-    console.log({name, surname, email, password})
     return this.HttpClient.post<any>(url, {name, surname, email, password})
   }
 }

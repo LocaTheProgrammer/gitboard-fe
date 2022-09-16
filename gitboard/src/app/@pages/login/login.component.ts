@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.userService.getBearerToken(this.userLoginForm.value.mail, this.userLoginForm.value.password).subscribe(response=>{
-      console.log(response)
       if(response.token){
         this.loginError=false;
         localStorage.setItem('token', response.token)
