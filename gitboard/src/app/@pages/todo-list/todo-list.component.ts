@@ -10,7 +10,7 @@ export class TodoListComponent {
 
   todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 
-  inProgress = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
+  inProgress = ['Living', 'Breathing'];
 
   done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
 
