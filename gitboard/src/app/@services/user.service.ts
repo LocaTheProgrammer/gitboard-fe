@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
 
-  auth:string="http://localhost:8090/wmmw/";
+  auth:string="http://localhost:8090/todolist/";
 
 
   constructor(private HttpClient: HttpClient) { }
