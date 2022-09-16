@@ -14,4 +14,13 @@ export class NavbarComponent {
     this.router.navigateByUrl(location);
   }
 
+  isUserLogged(): boolean{
+    return localStorage.getItem('token') ? true : false
+  }
+
+  logout(){
+    localStorage.setItem('token', '')
+    this.router.navigateByUrl("")
+  }
+
 }

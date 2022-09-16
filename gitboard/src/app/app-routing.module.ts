@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ConfirmResetComponent } from './@pages/confirm-reset/confirm-reset.component';
 import { HomeComponent } from './@pages/home/home.component';
 import { LoginComponent } from './@pages/login/login.component';
 import { PasswordForgottenComponent } from './@pages/password-forgotten/password-forgotten.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'password-forgotten', component: PasswordForgottenComponent },
   { path: 'todo-list', component: TodoListComponent },
   { path: 'sign-up-success', component: SignUpSuccessfulComponent },
+  { path: 'confirm-reset', component: ConfirmResetComponent },
 
 ];
 
