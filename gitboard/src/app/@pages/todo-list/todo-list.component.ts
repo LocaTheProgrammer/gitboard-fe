@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { TaskService } from 'src/app/@services/task.service';
+import { Task } from 'src/app/@models/Task';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,17 +10,23 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class TodoListComponent implements OnInit {
   
-  todo = [];
+  todo : string [] = [];
 
-  inProgress = [];
+  inProgress : string [] = [];
 
-  done = [];
+  done : string [] = [];
 
+  taskList : Task [] = [];
 
-  constructor(){}
+  constructor(private taskService:TaskService){}
   
   ngOnInit() {
-    
+    let email= localStorage.getItem('email')+''
+    this.taskService.getUserTaskListByUserEmail(email).subscribe((response:any)=>{
+      this.taskList=response.body
+      console.log(this.taskList)
+      this.loadArrays()
+    })
   }
 
   
@@ -33,6 +41,22 @@ export class TodoListComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
+    }
+  }
+
+  loadArrays(){
+    for(let task of this.taskList){
+      switch(task.listName){
+        case 'todo':
+          this.todo.push(task.taskName)
+          break;
+        case 'progress':
+            this.inProgress.push(task.taskName)
+        break;
+        case 'done':
+          this.done.push(task.taskName)
+          break;
+      }
     }
   }
 
