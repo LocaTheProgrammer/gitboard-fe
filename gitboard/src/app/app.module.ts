@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './@pages/home/home.component';
 import { NavbarComponent } from './@components/navbar/navbar.component';
 import { LoginComponent } from './@pages/login/login.component';
@@ -18,6 +18,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SignUpSuccessfulComponent } from './@pages/sign-up-successful/sign-up-successful.component';
 import { ConfirmResetComponent } from './@pages/confirm-reset/confirm-reset.component';
 import { SpinnerComponent } from './@components/spinner/spinner.component';
+import { AuthGuardService } from './@services/auth/AuthGuardService';
+import { AuthInterceptor } from './@services/auth/AuthInterceptor';
+import { AuthService } from './@services/auth/AuthService';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,14 @@ import { SpinnerComponent } from './@components/spinner/spinner.component';
     HttpClientModule,
     DragDropModule
   ],
-  providers: [],
+  providers: [ 
+    AuthGuardService, 
+    AuthService, 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi:true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,6 +7,7 @@ import { PasswordForgottenComponent } from './@pages/password-forgotten/password
 import { SignUpSuccessfulComponent } from './@pages/sign-up-successful/sign-up-successful.component';
 import { SignupComponent } from './@pages/signup/signup.component';
 import { TodoListComponent } from './@pages/todo-list/todo-list.component';
+import { AuthGuardService } from './@services/auth/AuthGuardService';
 
 
 const routes: Routes = [
@@ -15,7 +16,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'password-forgotten', component: PasswordForgottenComponent },
-  { path: 'todo-list', component: TodoListComponent },
+  { path: 'todo-list', component: TodoListComponent, canActivate: [AuthGuardService]},
   { path: 'sign-up-success', component: SignUpSuccessfulComponent },
   { path: 'confirm-reset', component: ConfirmResetComponent },
 
