@@ -11,6 +11,7 @@ export class SignupComponent implements OnInit, AfterContentChecked {
 
   successMessage=0;//0 base 1 successo 2 errore
   incorrectMail: boolean=true;
+  isLoading:boolean = false;
 
   constructor(private fb: FormBuilder,
     private userService: UserService) { }
@@ -49,11 +50,14 @@ export class SignupComponent implements OnInit, AfterContentChecked {
   }
 
   signup(){
+    this.isLoading = true;
     this.userService.createAccount(this.userSignupForm.value.name, this.userSignupForm.value.surname,this.userSignupForm.value.mail, this.userSignupForm.value.password).subscribe(ret =>{
       if(ret.statusCode === 200){
         this.successMessage=1;
+        this.isLoading=false;
       }else{
         this.successMessage=2;
+        this.isLoading=false;
       }
     })
   }

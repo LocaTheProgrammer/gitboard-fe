@@ -17,6 +17,7 @@ import { TodoListComponent } from './@pages/todo-list/todo-list.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SignUpSuccessfulComponent } from './@pages/sign-up-successful/sign-up-successful.component';
 import { ConfirmResetComponent } from './@pages/confirm-reset/confirm-reset.component';
+import { SpinnerComponent } from './@components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ConfirmResetComponent } from './@pages/confirm-reset/confirm-reset.comp
     PasswordForgottenComponent,
     TodoListComponent,
     SignUpSuccessfulComponent,
-    ConfirmResetComponent
+    ConfirmResetComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
