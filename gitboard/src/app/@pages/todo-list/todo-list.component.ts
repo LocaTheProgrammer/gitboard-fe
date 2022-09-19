@@ -42,6 +42,7 @@ export class TodoListComponent implements OnInit {
         event.currentIndex,
       );
     }
+    this.updateTaskList(event)
   }
 
   loadArrays(){
@@ -59,5 +60,38 @@ export class TodoListComponent implements OnInit {
       }
     }
   }
+
+  //TODO: cdk-drop-list-0
+  //IN PROGRESS: cdk-drop-list-1
+  //DONE: cdk-drop-list-2
+
+  updateTaskList(event:any){
+    let task: Task;
+    let listName='';
+    let taskName='';
+    let taskPosition;
+    
+    taskPosition=event.currentIndex
+
+    switch(event.container.id){
+      case 'cdk-drop-list-0':
+        listName='todo'
+        taskName=this.todo[event.currentIndex]
+      break;
+      case 'cdk-drop-list-1':
+        listName='progress'
+        taskName=this.inProgress[event.currentIndex]
+      break;
+      case 'cdk-drop-list-2':
+        listName='done'
+        taskName=this.done[event.currentIndex]
+      break;
+    }
+
+    task=new Task(listName, taskName, taskPosition)
+    console.log(task)
+  }
+
+
 
 }
