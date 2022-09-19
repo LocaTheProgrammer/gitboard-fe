@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
       if(response.token){
         this.loginError=false;
         localStorage.setItem('token', response.token)
+        localStorage.setItem('email',this.userLoginForm.value.mail)
         this.router.navigateByUrl("/todo-list")
       } 
     }, () =>{
