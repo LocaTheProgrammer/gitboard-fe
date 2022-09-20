@@ -20,6 +20,7 @@ export class NavbarComponent {
 
   logout(){
     localStorage.setItem('token', '')
+    localStorage.setItem('email', '')
     this.router.navigateByUrl("")
   }
 

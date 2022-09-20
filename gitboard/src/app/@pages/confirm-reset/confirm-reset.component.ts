@@ -36,11 +36,13 @@ export class ConfirmResetComponent implements OnInit {
   }
 
   changeForgottenPassword(){
-    this.userService.resetPassword(this.email, this.password).subscribe(()=>{
-      this.isPasswordReset=1
-    },
-    ()=>{
-      this.isPasswordReset=2
+    this.userService.resetPassword(this.email, this.password).subscribe(response=>{
+      console.log(response)
+      if(response.status === 200){
+        this.isPasswordReset=1
+      }else{
+        this.isPasswordReset=2
+      }
     })
   }
 

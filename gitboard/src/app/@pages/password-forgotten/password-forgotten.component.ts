@@ -14,12 +14,15 @@ export class PasswordForgottenComponent{
   constructor(private userService:UserService) {}
 
   resetPassword(){
-    this.userService.forgotPassword(this.email).subscribe(()=>{
-      this.isMessageSent=1
+    this.userService.forgotPassword(this.email).subscribe((response)=>{
+      if(response.status === 200){
+        this.isMessageSent=1
+      }else{
+          this.isMessageSent=2
+      }
+      
     },
-    ()=>{
-      this.isMessageSent=2
-    })
+    )
   }
 
 }
