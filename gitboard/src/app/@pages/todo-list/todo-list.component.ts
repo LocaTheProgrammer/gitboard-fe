@@ -32,15 +32,12 @@ export class TodoListComponent implements OnInit {
 
   getUserTaskListByUserEmail(){
     this.taskService.getUserTaskListByUserEmail(this.email).subscribe((response:any)=>{
-      console.log(response)
       this.taskList=response
-      console.log(this.taskList)
       this.loadArrays()
     })
   }
   
   drop(event:any) { // CdkDragDrop<string[]>
-    console.log(event)
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -110,9 +107,7 @@ export class TodoListComponent implements OnInit {
         taskName=this.done[event.currentIndex]
       break;
       default:
-        console.log("+++++++++++++++++")
-        console.log("ERROR CONTAINER: "+event.container.id)
-        console.log("+++++++++++++++++")
+        this.updateError=true
     }
     
     
@@ -122,7 +117,6 @@ export class TodoListComponent implements OnInit {
     
     task=new Task(listName, taskName, taskPosition, taskId, taskListId)
 
-    console.log(task)
     this.taskService.updateTaskList(task).subscribe(()=>{
       this.updateError=false
       this.isFirstShifting=false
