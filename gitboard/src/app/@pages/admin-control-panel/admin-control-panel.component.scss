@@ -21,3 +21,11 @@
     padding: 5rem;
     border-radius: 15px;
 }
+
+::ng-deep.mat-form-field-wrapper.ng-tns-c35-0{
+    padding-bottom: 0;
+}
+
+::ng-deep.mat-form-field-underline.ng-tns-c35-0.ng-star-inserted{
+    display: none;
+}

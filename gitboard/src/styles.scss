@@ -6,3 +6,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 a:hover{
     cursor: pointer;
 }
+
+button:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+  }
