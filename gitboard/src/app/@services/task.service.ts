@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Task } from '../@models/Task';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +15,9 @@ export class TaskService {
 
   getUserTaskListByUserEmail(email:string){
     return this.HttpClient.post<any>(`${this.endpoint+'getUserTaskList'}`, {email})
+  }
+
+  updateTaskList(task:Task){
+    return this.HttpClient.put<any>(`${this.endpoint+'updateTaskList'}`, task)
   }
 }

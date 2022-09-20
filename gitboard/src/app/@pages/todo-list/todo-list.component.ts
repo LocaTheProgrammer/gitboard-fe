@@ -11,24 +11,30 @@ import { Task } from 'src/app/@models/Task';
 export class TodoListComponent implements OnInit {
   
   todo : string [] = [];
-
   inProgress : string [] = [];
-
   done : string [] = [];
-
   taskList : Task [] = [];
+  email:string=''
+  isLoading:boolean=false;
+
+  containerName:string=''
+  containerCounter:number=0
+  isFirstShifting=true;
 
   constructor(private taskService:TaskService){}
   
   ngOnInit() {
-    let email= localStorage.getItem('email')+''
-    this.taskService.getUserTaskListByUserEmail(email).subscribe((response:any)=>{
+    this.email = localStorage.getItem('email')+''
+    this.getUserTaskListByUserEmail();
+  }
+
+  getUserTaskListByUserEmail(){
+    this.taskService.getUserTaskListByUserEmail(this.email).subscribe((response:any)=>{
       this.taskList=response.body
       console.log(this.taskList)
       this.loadArrays()
     })
   }
-
   
   drop(event:any) { // CdkDragDrop<string[]>
     console.log(event)
@@ -46,6 +52,9 @@ export class TodoListComponent implements OnInit {
   }
 
   loadArrays(){
+    this.todo = [];
+      this.inProgress = [];
+      this.done = [];
     for(let task of this.taskList){
       switch(task.listName){
         case 'todo':
@@ -59,6 +68,10 @@ export class TodoListComponent implements OnInit {
           break;
       }
     }
+    if(!this.isFirstShifting){
+      this.containerCounter=this.containerCounter+3
+      this.isLoading=false
+    }
   }
 
   //TODO: cdk-drop-list-0
@@ -66,30 +79,52 @@ export class TodoListComponent implements OnInit {
   //DONE: cdk-drop-list-2
 
   updateTaskList(event:any){
+    this.isLoading=true;
     let task: Task;
     let listName='';
     let taskName='';
-    let taskPosition;
+    let taskPosition:number;
+    let taskId:any;
+    let taskListId:any;
     
     taskPosition=event.currentIndex
 
-    switch(event.container.id){
-      case 'cdk-drop-list-0':
+    this.containerName=event.container.id
+    let containerNumber=this.containerName.charAt(this.containerName.length-1)
+    let switchCondition=+containerNumber-this.containerCounter
+
+    switch(switchCondition){
+      case 0:
         listName='todo'
         taskName=this.todo[event.currentIndex]
       break;
-      case 'cdk-drop-list-1':
+      case 1:
         listName='progress'
         taskName=this.inProgress[event.currentIndex]
       break;
-      case 'cdk-drop-list-2':
+      case 2:
         listName='done'
         taskName=this.done[event.currentIndex]
       break;
+      default:
+        console.log("+++++++++++++++++")
+        console.log("ERROR CONTAINER: "+event.container.id)
+        console.log("+++++++++++++++++")
     }
+    
+    taskId=this.taskList.find(task => (task.taskName == taskName))?.taskId
+    taskListId=this.taskList.find(task => task.taskId==taskId)?.taskListId
+    
+    
+    task=new Task(listName, taskName, taskPosition, taskId, taskListId)
 
-    task=new Task(listName, taskName, taskPosition)
     console.log(task)
+    this.taskService.updateTaskList(task).subscribe(()=>{
+      this.isFirstShifting=false
+      this.taskList = [];
+      this.getUserTaskListByUserEmail()
+    })
+
   }
 
 
