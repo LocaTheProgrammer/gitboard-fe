@@ -9,9 +9,9 @@ import { UserService } from '../../@services/user.service';
 })
 export class SignupComponent implements OnInit, AfterContentChecked {
 
-  successMessage=0;//0 base 1 successo 2 errore
-  incorrectMail: boolean=true;
-  isLoading:boolean = false;
+  successMessage = 0;//0 base 1 successo 2 errore
+  incorrectMail: boolean = true;
+  isLoading: boolean = false;
 
   constructor(private fb: FormBuilder,
     private userService: UserService) { }
@@ -23,15 +23,15 @@ export class SignupComponent implements OnInit, AfterContentChecked {
   }
 
 
-  isPasswordVisible=false;
-  userSignupForm!:FormGroup;
+  isPasswordVisible = false;
+  userSignupForm!: FormGroup;
 
 
-  mailNotMatching:boolean=false
-  passwordNotMatching:boolean=false
+  mailNotMatching: boolean = false
+  passwordNotMatching: boolean = false
 
-  picker:any
-  date!: {year: number, month: number};
+  picker: any
+  date!: { year: number, month: number };
 
   ngOnInit(): void {
     this.userSignupForm = this.fb.group({
@@ -45,60 +45,62 @@ export class SignupComponent implements OnInit, AfterContentChecked {
   }
 
 
-  showPassword(){
-    this.isPasswordVisible=!this.isPasswordVisible;
+  showPassword() {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  signup(){
+  signup() {
     this.isLoading = true;
-    this.userService.createAccount(this.userSignupForm.value.name, this.userSignupForm.value.surname,this.userSignupForm.value.mail, this.userSignupForm.value.password).subscribe(ret =>{
-      if(ret.statusCode === 200){
-        this.successMessage=1;
-        this.isLoading=false;
-      }else{
-        this.successMessage=2;
-        this.isLoading=false;
+    this.userService.createAccount(this.userSignupForm.value.name, this.userSignupForm.value.surname, this.userSignupForm.value.mail, this.userSignupForm.value.password).subscribe(ret => {
+      console.log(ret)
+      if (ret.status === 200) {
+        this.successMessage = 1;
+        this.isLoading = false;
       }
-    })
+    },
+      () => {
+        this.successMessage = 2;
+        this.isLoading = false;
+      })
   }
 
 
-  checkEmail(){
-    this.mailNotMatching=false;
-    if(this.userSignupForm.value.mail != this.userSignupForm.value.mailRepeat){
-      this.mailNotMatching=true;
+  checkEmail() {
+    this.mailNotMatching = false;
+    if (this.userSignupForm.value.mail != this.userSignupForm.value.mailRepeat) {
+      this.mailNotMatching = true;
       return false;
     }
     return true;
   }
 
-  checkPassword(){
-    this.passwordNotMatching=false;
+  checkPassword() {
+    this.passwordNotMatching = false;
 
-    if(this.userSignupForm.value.mail != this.userSignupForm.value.mailRepeat){
-      this.mailNotMatching=true;
+    if (this.userSignupForm.value.mail != this.userSignupForm.value.mailRepeat) {
+      this.mailNotMatching = true;
       return false;
     }
 
-    if(this.userSignupForm.value.password != this.userSignupForm.value.passwordRepeat){
-      this.passwordNotMatching=true;
+    if (this.userSignupForm.value.password != this.userSignupForm.value.passwordRepeat) {
+      this.passwordNotMatching = true;
       return false;
     }
 
     return true;
   }
 
-  checkEmailAndPassword(){
+  checkEmailAndPassword() {
 
-    if(this.checkEmail() && this.checkPassword()){
+    if (this.checkEmail() && this.checkPassword()) {
       return true;
     }
     return false;
   }
 
-  isMailIncorrect(){
-    this.incorrectMail=false;
-    let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');   
+  isMailIncorrect() {
+    this.incorrectMail = false;
+    let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
     this.incorrectMail = regex.test(this.userSignupForm.value.mail);
   }
 }

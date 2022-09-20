@@ -21,6 +21,8 @@ export class TodoListComponent implements OnInit {
   containerCounter:number=0
   isFirstShifting=true;
 
+  updateError:boolean=false
+
   constructor(private taskService:TaskService){}
   
   ngOnInit() {
@@ -30,7 +32,8 @@ export class TodoListComponent implements OnInit {
 
   getUserTaskListByUserEmail(){
     this.taskService.getUserTaskListByUserEmail(this.email).subscribe((response:any)=>{
-      this.taskList=response.body
+      console.log(response)
+      this.taskList=response
       console.log(this.taskList)
       this.loadArrays()
     })
@@ -70,8 +73,8 @@ export class TodoListComponent implements OnInit {
     }
     if(!this.isFirstShifting){
       this.containerCounter=this.containerCounter+3
-      this.isLoading=false
     }
+    this.isLoading=false
   }
 
   //TODO: cdk-drop-list-0
@@ -90,7 +93,7 @@ export class TodoListComponent implements OnInit {
     taskPosition=event.currentIndex
 
     this.containerName=event.container.id
-    let containerNumber=this.containerName.charAt(this.containerName.length-1)
+    let containerNumber=this.containerName.substring(this.containerName.lastIndexOf("-")+1, this.containerName.length)
     let switchCondition=+containerNumber-this.containerCounter
 
     switch(switchCondition){
@@ -112,6 +115,7 @@ export class TodoListComponent implements OnInit {
         console.log("+++++++++++++++++")
     }
     
+    
     taskId=this.taskList.find(task => (task.taskName == taskName))?.taskId
     taskListId=this.taskList.find(task => task.taskId==taskId)?.taskListId
     
@@ -120,9 +124,14 @@ export class TodoListComponent implements OnInit {
 
     console.log(task)
     this.taskService.updateTaskList(task).subscribe(()=>{
+      this.updateError=false
       this.isFirstShifting=false
       this.taskList = [];
       this.getUserTaskListByUserEmail()
+    },()=>{
+      this.updateError=true
+    this.isLoading=false
+
     })
 
   }
