@@ -24,6 +24,10 @@
                         <li *ngIf="isUserLogged()">
                             <hr class="dropdown-divider">
                         </li>
+                        <li *ngIf="isUserLogged()"><a class="dropdown-item" (click)="navigateTo('control-panel')">Control Panel</a></li>
+                        <li *ngIf="isUserLogged()">
+                            <hr class="dropdown-divider">
+                        </li>
                         <li><a *ngIf="isUserLogged()" class="dropdown-item" (click)="logout()">Logout</a></li>
                     </ul>
                 </li>

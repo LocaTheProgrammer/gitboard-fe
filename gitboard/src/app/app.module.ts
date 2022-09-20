@@ -21,6 +21,14 @@ import { SpinnerComponent } from './@components/spinner/spinner.component';
 import { AuthGuardService } from './@services/auth/AuthGuardService';
 import { AuthInterceptor } from './@services/auth/AuthInterceptor';
 import { AuthService } from './@services/auth/AuthService';
+import { AdminControlPanelComponent } from './@pages/admin-control-panel/admin-control-panel.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+
+
+
 
 @NgModule({
   declarations: [
@@ -33,7 +41,8 @@ import { AuthService } from './@services/auth/AuthService';
     TodoListComponent,
     SignUpSuccessfulComponent,
     ConfirmResetComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    AdminControlPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +53,15 @@ import { AuthService } from './@services/auth/AuthService';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    DragDropModule
+    DragDropModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule 
   ],
   providers: [ 
+    MatDatepickerModule,
     AuthGuardService, 
     AuthService, 
     {

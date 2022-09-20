@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminControlPanelComponent } from './@pages/admin-control-panel/admin-control-panel.component';
 import { ConfirmResetComponent } from './@pages/confirm-reset/confirm-reset.component';
 import { HomeComponent } from './@pages/home/home.component';
 import { LoginComponent } from './@pages/login/login.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'todo-list', component: TodoListComponent, canActivate: [AuthGuardService]},
   { path: 'sign-up-success', component: SignUpSuccessfulComponent },
   { path: 'confirm-reset', component: ConfirmResetComponent },
+  { path: 'control-panel', component: AdminControlPanelComponent, canActivate: [AuthGuardService] },
 
 ];
 
