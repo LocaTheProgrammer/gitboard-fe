@@ -16,19 +16,24 @@
                         Reserved Area
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li *ngIf="!isUserLogged()"><a class="dropdown-item" (click)="navigateTo('login')">Login</a></li>
-                        <li *ngIf="!isUserLogged()"><a class="dropdown-item" (click)="navigateTo('signup')">Sign Up</a></li>
+                        <span *ngIf="!isUserLogged()">
+                            <li><a class="dropdown-item" (click)="navigateTo('login')">Login</a></li>
+                            <li><a class="dropdown-item" (click)="navigateTo('signup')">Sign Up</a></li>
+                        </span>
+                        
 
-                       
-                        <li *ngIf="isUserLogged()"><a class="dropdown-item" (click)="navigateTo('todo-list')">To Do List</a></li>
-                        <li *ngIf="isUserLogged()">
+                        <span *ngIf="isUserLogged()">
+                            <li><a class="dropdown-item" (click)="navigateTo('todo-list')">To Do List</a></li>
+                        <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li *ngIf="isUserLogged()"><a class="dropdown-item" (click)="navigateTo('control-panel')">Control Panel</a></li>
-                        <li *ngIf="isUserLogged()">
+                        <li><a class="dropdown-item" (click)="navigateTo('control-panel')">Control Panel</a></li>
+                        <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a *ngIf="isUserLogged()" class="dropdown-item" (click)="logout()">Logout</a></li>
+                        <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+                        </span>    
+                        
                     </ul>
                 </li>
             </ul>

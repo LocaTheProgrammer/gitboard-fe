@@ -66,6 +66,9 @@ export class TodoListComponent implements OnInit {
         case 'done':
           this.done.push(task.taskName)
           break;
+        default:
+          this.updateError=true
+        break;
       }
     }
     if(!this.isFirstShifting){
