@@ -11,18 +11,18 @@ export class TaskService {
   endpoint:string=environment.apiURL+"/todolist/rest/task/";
 
 
-  constructor(private HttpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
 
   getUserTaskListByUserEmail(email:string){
-    return this.HttpClient.post<any>(`${this.endpoint+'getUserTaskList'}`, {email})
+    return this.httpClient.post<any>(`${this.endpoint+'getUserTaskList'}`, {email})
   }
 
   getDynamicUserTaskList(email:string){
-    return this.HttpClient.post<any>(`${this.endpoint+'getDynamicUserTaskList'}`, {email})
+    return this.httpClient.post<any>(`${this.endpoint+'getDynamicUserTaskList'}`, {email})
   }
 
   updateTaskList(task:Task){
-    return this.HttpClient.put<any>(`${this.endpoint+'updateTaskList'}`, task)
+    return this.httpClient.put<any>(`${this.endpoint+'updateTaskList'}`, task)
   }
 }

@@ -9,11 +9,11 @@ export class CategoryService {
   endpoint:string=environment.apiURL+"/todolist/rest/category/";
 
 
-  constructor(private HttpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
 
   getCategories(){
-    return this.HttpClient.get<any>(`${this.endpoint}getCategories`)
+    return this.httpClient.get<any>(`${this.endpoint}getCategories`)
   }
   
 }
