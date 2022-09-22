@@ -27,6 +27,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { DragNDropComponent } from './@components/drag-n-drop/drag-n-drop.component';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -42,7 +44,8 @@ import { MatSelectModule } from '@angular/material/select';
     SignUpSuccessfulComponent,
     ConfirmResetComponent,
     SpinnerComponent,
-    AdminControlPanelComponent
+    AdminControlPanelComponent,
+    DragNDropComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    CommonModule
   ],
   providers: [ 
     MatDatepickerModule,

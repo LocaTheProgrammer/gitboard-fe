@@ -17,6 +17,10 @@ export class TaskService {
     return this.HttpClient.post<any>(`${this.endpoint+'getUserTaskList'}`, {email})
   }
 
+  getDynamicUserTaskList(email:string){
+    return this.HttpClient.post<any>(`${this.endpoint+'getDynamicUserTaskList'}`, {email})
+  }
+
   updateTaskList(task:Task){
     return this.HttpClient.put<any>(`${this.endpoint+'updateTaskList'}`, task)
   }

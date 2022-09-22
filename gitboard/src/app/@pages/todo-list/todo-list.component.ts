@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { TaskService } from 'src/app/@services/task.service';
 import { Task } from 'src/app/@models/Task';
+import { CategoryDTO } from 'src/app/@models/CategoryDTO';
+import { CategoryService } from 'src/app/@services/category.service';
+import { TaskList } from 'src/app/@models/TaskList';
 
 @Component({
   selector: 'app-todo-list',
@@ -23,18 +26,31 @@ export class TodoListComponent implements OnInit {
 
   updateError:boolean=false
 
-  constructor(private taskService:TaskService){}
+
+  inputTaskList!:TaskList[]
+  inputCategoryList!:CategoryDTO[]
+
+  constructor(private taskService:TaskService, private categoryService:CategoryService){}
   
   ngOnInit() {
     this.email = localStorage.getItem('email')+''
+
     this.getUserTaskListByUserEmail();
   }
 
   getUserTaskListByUserEmail(){
-    this.taskService.getUserTaskListByUserEmail(this.email).subscribe((response:any)=>{
-      this.taskList=response
-      this.loadArrays()
+    this.categoryService.getCategories().subscribe(response=>{
+      this.inputCategoryList=[]
+      this.inputCategoryList=response
     })
+    this.taskService.getDynamicUserTaskList(this.email).subscribe(tl=>{
+      this.inputTaskList=[]
+      this.inputTaskList=tl
+    })
+    // this.taskService.getUserTaskListByUserEmail(this.email).subscribe((response:any)=>{
+    //   this.taskList=response
+    //   this.loadArrays()
+    // })
   }
   
   drop(event:any) { // CdkDragDrop<string[]>
@@ -52,7 +68,7 @@ export class TodoListComponent implements OnInit {
   }
 
   loadArrays(){
-    this.todo = [];
+      this.todo = [];
       this.inProgress = [];
       this.done = [];
     for(let task of this.taskList){
@@ -120,7 +136,13 @@ export class TodoListComponent implements OnInit {
     
     task=new Task(listName, taskName, taskPosition, taskId, taskListId)
 
-    this.taskService.updateTaskList(task).subscribe(()=>{
+    
+
+  }
+
+  printTask($event:any){
+    console.log($event)
+    this.taskService.updateTaskList($event).subscribe(()=>{
       this.updateError=false
       this.isFirstShifting=false
       this.taskList = [];
@@ -130,7 +152,6 @@ export class TodoListComponent implements OnInit {
     this.isLoading=false
 
     })
-
   }
 
 
