@@ -34,11 +34,13 @@
         <div class="row button-container justify-content-center mt-5">
             <div class="col-4 d-flex justify-content-center">
                 <button class="btn btn-primary" (click)="showDiv('createBoard')">
-                    Create Board
+                    Create Project Board
                 </button>
             </div>
             <div class="col-4 d-flex justify-content-center">
-                
+                <button class="btn btn-primary" (click)="showDiv('assign')">
+                    Assign Task to Project Board
+                </button>
             </div>
             <div class="col-4 d-flex justify-content-center">
                 
@@ -60,6 +62,9 @@
             <app-create-task></app-create-task>
         </div>
         <div *ngIf="isCreateBoardVisible">
+            <app-create-board></app-create-board>
+        </div>
+        <div *ngIf="isAssignVisible">
             <app-create-board></app-create-board>
         </div>
     </div>
