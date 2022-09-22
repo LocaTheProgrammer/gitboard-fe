@@ -33,6 +33,7 @@ import { CreateCompanyComponent } from './@components/create-company/create-comp
 import { EditCompanyComponent } from './@components/edit-company/edit-company.component';
 import { CreateTaskComponent } from './@components/create-task/create-task.component';
 import { CreateBoardComponent } from './@components/create-board/create-board.component';
+import { CreateProjectComponent } from './@components/create-project/create-project.component';
 
 
 
@@ -53,7 +54,8 @@ import { CreateBoardComponent } from './@components/create-board/create-board.co
     CreateCompanyComponent,
     EditCompanyComponent,
     CreateTaskComponent,
-    CreateBoardComponent
+    CreateBoardComponent,
+    CreateProjectComponent
   ],
   imports: [
     BrowserModule,
