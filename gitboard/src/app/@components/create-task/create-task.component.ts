@@ -14,4 +14,11 @@ export class CreateTaskComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  isFormValid(){
+    return true
+  }
+
+  submitForm(){
+    console.log(true)
+  }
 }

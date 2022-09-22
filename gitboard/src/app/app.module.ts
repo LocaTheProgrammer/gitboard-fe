@@ -34,6 +34,7 @@ import { EditCompanyComponent } from './@components/edit-company/edit-company.co
 import { CreateTaskComponent } from './@components/create-task/create-task.component';
 import { CreateBoardComponent } from './@components/create-board/create-board.component';
 import { AddTaskToBoardComponent } from './@components/add-task-to-board/add-task-to-board.component';
+import { CreateCompanyAdminComponent } from './@components/create-company-admin/create-company-admin.component';
 
 
 
@@ -55,7 +56,8 @@ import { AddTaskToBoardComponent } from './@components/add-task-to-board/add-tas
     EditCompanyComponent,
     CreateTaskComponent,
     CreateBoardComponent,
-    AddTaskToBoardComponent
+    AddTaskToBoardComponent,
+    CreateCompanyAdminComponent
   ],
   imports: [
     BrowserModule,
