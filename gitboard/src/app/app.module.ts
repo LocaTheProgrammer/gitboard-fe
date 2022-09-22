@@ -29,6 +29,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { DragNDropComponent } from './@components/drag-n-drop/drag-n-drop.component';
 import { CommonModule } from '@angular/common';
+import { CreateCompanyComponent } from './@components/create-company/create-company.component';
+import { EditCompanyComponent } from './@components/edit-company/edit-company.component';
 
 
 
@@ -45,7 +47,9 @@ import { CommonModule } from '@angular/common';
     ConfirmResetComponent,
     SpinnerComponent,
     AdminControlPanelComponent,
-    DragNDropComponent
+    DragNDropComponent,
+    CreateCompanyComponent,
+    EditCompanyComponent
   ],
   imports: [
     BrowserModule,
