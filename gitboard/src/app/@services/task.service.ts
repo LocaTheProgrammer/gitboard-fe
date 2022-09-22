@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../@models/Task';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  endpoint:string="http://localhost:8090/todolist/rest/task/";
+  endpoint:string=environment.apiURL+"/todolist/rest/task/";
 
 
   constructor(private HttpClient: HttpClient) { }
