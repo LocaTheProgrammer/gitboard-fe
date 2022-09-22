@@ -14,7 +14,7 @@ export class UserService {
 
 
   getBearerToken(username: any, password: any): Observable<any> {
-    return this.httpClient.post<any>(`${this.endpoint+'authenticate'}`, { username, password })
+    return this.httpClient.post<any>(`${this.endpoint}rest/auth/authenticate`, { username, password })
   }
 
   confirmAccount(token:string){
