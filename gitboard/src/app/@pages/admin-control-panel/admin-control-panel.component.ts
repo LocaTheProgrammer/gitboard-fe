@@ -18,6 +18,7 @@ export class AdminControlPanelComponent implements OnInit {
   isAssignVisible: boolean = false
 
   error: boolean = false
+  isCreateCompanyAdminVisible: boolean = false;
 
   constructor() { }
 
@@ -47,6 +48,9 @@ export class AdminControlPanelComponent implements OnInit {
       case 'assign':
         this.isAssignVisible = true;
         break;
+      case 'createCompanyAdmin':
+        this.isCreateCompanyAdminVisible = true;
+        break;
       default:
         this.error = true;
     }
@@ -60,7 +64,7 @@ export class AdminControlPanelComponent implements OnInit {
     this.error = false;
     this.isCreateBoardVisible = false;
     this.isAssignVisible = false
-
+    this.isCreateCompanyAdminVisible = false;
   }
 
 }
