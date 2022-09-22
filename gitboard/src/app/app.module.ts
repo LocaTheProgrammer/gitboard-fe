@@ -31,6 +31,7 @@ import { DragNDropComponent } from './@components/drag-n-drop/drag-n-drop.compon
 import { CommonModule } from '@angular/common';
 import { CreateCompanyComponent } from './@components/create-company/create-company.component';
 import { EditCompanyComponent } from './@components/edit-company/edit-company.component';
+import { CreateTaskComponent } from './@components/create-task/create-task.component';
 
 
 
@@ -49,7 +50,8 @@ import { EditCompanyComponent } from './@components/edit-company/edit-company.co
     AdminControlPanelComponent,
     DragNDropComponent,
     CreateCompanyComponent,
-    EditCompanyComponent
+    EditCompanyComponent,
+    CreateTaskComponent
   ],
   imports: [
     BrowserModule,

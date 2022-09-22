@@ -15,7 +15,7 @@
 
     <div *ngIf="isMenuVisible" class="row button-container justify-content-center mt-5">
         <div class="col-4 d-flex justify-content-center">
-            <button class="btn btn-primary" (click)="showDiv('create')">
+            <button class="btn btn-primary" (click)="showDiv('createCompany')">
                 Create Company
             </button>
         </div>
@@ -24,15 +24,24 @@
                 Edit Company
             </button>
         </div>
+        <div class="col-4 d-flex justify-content-center">
+            <button class="btn btn-primary" (click)="showDiv('createTask')">
+                Create Task
+            </button>
+        </div>
     </div>
 
 
     <div *ngIf="!isMenuVisible">
-        <div *ngIf="isCreateVisible">
+        <div *ngIf="isCreateCompanyVisible">
             <app-create-company></app-create-company>
         </div>
         <div *ngIf="isEditVisible">
             <app-edit-company></app-edit-company>
+        </div>
+
+        <div *ngIf="isCreateTaskVisible">
+            <app-create-task></app-create-task>
         </div>
     </div>
 

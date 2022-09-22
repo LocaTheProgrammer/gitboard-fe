@@ -9,36 +9,48 @@ import { CompanyDTO } from 'src/app/@models/CompanyDTO';
 })
 export class AdminControlPanelComponent implements OnInit {
 
-  isMenuVisible:boolean=true
+  isMenuVisible: boolean = true
 
-  isCreateVisible:boolean=false
-  isEditVisible:boolean=false
+  isCreateCompanyVisible: boolean = false
+  isEditVisible: boolean = false
+  isCreateTaskVisible: boolean = false
 
+  error: boolean = false
 
+  constructor() { }
 
-  constructor(){}
- 
   ngOnInit(): void {
 
   }
 
-  showMenu(){
-    this.isMenuVisible=true
+  showMenu() {
+    this.isMenuVisible = true
   }
 
-  showDiv(div:string){
-    this.isMenuVisible=false;
-    this.isCreateVisible=false;
-    this.isEditVisible=false;
-
-    switch(div){
-      case 'create':
-        this.isCreateVisible=true;
+  showDiv(div: string) {
+    this.initializeView()
+    switch (div) {
+      case 'createCompany':
+        this.isCreateCompanyVisible = true;
         break;
       case 'edit':
-          this.isEditVisible=true;
+        this.isEditVisible = true;
         break;
+      case 'createTask':
+        this.isCreateTaskVisible = true;
+        break;
+      default:
+        this.error = true;
     }
+  }
+
+  initializeView(){
+    this.isMenuVisible = false;
+    this.isCreateCompanyVisible = false;
+    this.isEditVisible = false;
+    this.isCreateTaskVisible = false;
+    this.error = false;
+
   }
 
 }
