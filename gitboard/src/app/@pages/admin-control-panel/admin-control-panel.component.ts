@@ -14,6 +14,7 @@ export class AdminControlPanelComponent implements OnInit {
   isCreateCompanyVisible: boolean = false
   isEditVisible: boolean = false
   isCreateTaskVisible: boolean = false
+  isCreateBoardVisible: boolean = false
 
   error: boolean = false
 
@@ -36,9 +37,12 @@ export class AdminControlPanelComponent implements OnInit {
       case 'edit':
         this.isEditVisible = true;
         break;
-      case 'createTask':
-        this.isCreateTaskVisible = true;
+        case 'createTask':
+          this.isCreateTaskVisible = true;
         break;
+      case 'createBoard':
+        this.isCreateBoardVisible = true;
+       break;
       default:
         this.error = true;
     }
@@ -50,6 +54,8 @@ export class AdminControlPanelComponent implements OnInit {
     this.isEditVisible = false;
     this.isCreateTaskVisible = false;
     this.error = false;
+    this.isCreateBoardVisible = false;
+
 
   }
 

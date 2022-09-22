@@ -32,6 +32,7 @@ import { CommonModule } from '@angular/common';
 import { CreateCompanyComponent } from './@components/create-company/create-company.component';
 import { EditCompanyComponent } from './@components/edit-company/edit-company.component';
 import { CreateTaskComponent } from './@components/create-task/create-task.component';
+import { CreateBoardComponent } from './@components/create-board/create-board.component';
 
 
 
@@ -51,7 +52,8 @@ import { CreateTaskComponent } from './@components/create-task/create-task.compo
     DragNDropComponent,
     CreateCompanyComponent,
     EditCompanyComponent,
-    CreateTaskComponent
+    CreateTaskComponent,
+    CreateBoardComponent
   ],
   imports: [
     BrowserModule,

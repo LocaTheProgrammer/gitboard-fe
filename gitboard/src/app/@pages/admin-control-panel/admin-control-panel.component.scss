@@ -22,10 +22,14 @@
     border-radius: 15px;
 }
 
-::ng-deep.mat-form-field-wrapper.ng-tns-c35-0{
+::ng-deep.mat-form-field-wrapper{
     padding-bottom: 0;
 }
 
-::ng-deep.mat-form-field-underline.ng-tns-c35-0.ng-star-inserted{
+::ng-deep.mat-form-field-underline{
     display: none;
+}
+
+.btn.btn-primary{
+    min-width: 200px;
 }
