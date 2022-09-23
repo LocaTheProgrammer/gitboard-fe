@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskService } from 'src/app/@services/task.service';
+import { TaskDTO } from 'src/app/@services/TaskDTO';
 
 @Component({
   selector: 'app-create-task',
@@ -8,17 +10,26 @@ import { Component, OnInit } from '@angular/core';
 export class CreateTaskComponent implements OnInit {
 
   newTaskName:string=''
-
-  constructor() { }
+  message=''
+  isTaskSaved:number = 0
+  constructor(private taskService : TaskService) { }
 
   ngOnInit(): void {
   }
 
   isFormValid(){
-    return true
+    return this.newTaskName != ''
   }
 
   submitForm(){
-    console.log(true)
+    let task = new TaskDTO(this.newTaskName);
+    this.taskService.create(task).subscribe(result => {
+      this.message=result.message
+      this.isTaskSaved=1
+    },
+    error=>{
+      this.message=error.message
+      this.isTaskSaved=2
+    })
   }
 }
