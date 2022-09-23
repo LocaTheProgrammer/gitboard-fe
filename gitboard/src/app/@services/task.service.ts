@@ -23,6 +23,6 @@ export class TaskService {
   }
 
   updateTaskList(task:Task){
-    return this.httpClient.put<any>(`${this.endpoint+'updateTaskList'}`, task)
+    return this.httpClient.put<any>(`${this.endpoint+'updateTaskList'}`, {task})
   }
 }

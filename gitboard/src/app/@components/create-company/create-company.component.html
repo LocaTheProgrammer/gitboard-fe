@@ -1,7 +1,7 @@
 <div class="background-elements">
     <!-- Crea le Compagnie, assegna i Company-Admin. -->
 
-    <div class="row mt-5 justify-content-center">
+    <div class="row justify-content-center">
         <div class="col-4 d-flex justify-content-center">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">
@@ -34,15 +34,25 @@
         <div class="col-4 d-flex text-start">
             <span class="align-self-center fw-500">Assign Company to Company-Admin</span>
         </div>
-        <div class="col-4 d-flex justify-content-center">
+        <div class="col-4 d-flex justify-content-center" (click)="getFreeAdmins()">
             <mat-form-field appearance="fill">
                 <mat-label>Select a company to edit or delete</mat-label>
                 <mat-select [(ngModel)]="companyAdminSelected">
-                    <mat-option *ngFor="let companyAdmin of companyAdminList" [value]="companyAdmin.id">
+                    <mat-option *ngFor="let companyAdmin of companyAdminList" [value]="companyAdmin">
                         {{companyAdmin.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
+            <div class="alert alert-success" role="alert" *ngIf="isCompanySaved !== 0 && isCompanySaved === 1">
+                This is a success alert—check it out!
+              </div>
+              <div class="alert alert-danger" role="alert" *ngIf="isCompanySaved !== 0 && isCompanySaved === 2">
+                This is a danger alert—check it out!
+              </div>
         </div>
     </div>
 

@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ThisReceiver } from '@angular/compiler';
+import { AfterContentChecked, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CompanyAdminDTO } from 'src/app/@models/CompanyAdminDTO';
 import { CompanyDTO } from 'src/app/@models/CompanyDTO';
+import { CompanyAdminService } from 'src/app/@services/company-admin.service';
+import { CompanyService } from 'src/app/@services/company.service';
 
 @Component({
   selector: 'app-create-company',
@@ -9,43 +12,40 @@ import { CompanyDTO } from 'src/app/@models/CompanyDTO';
 })
 export class CreateCompanyComponent implements OnInit {
 
-  company1: CompanyDTO = new CompanyDTO (0, "kiko")
-  company2: CompanyDTO = new CompanyDTO (1, "acer")
-  company3: CompanyDTO = new CompanyDTO (2, "samsung")
-
-  companyList:CompanyDTO [] = [this.company1, this.company2, this.company3] 
-
-  companyAdmin1: CompanyDTO = new CompanyDTO (0, "pippo")
-  companyAdmin2: CompanyDTO = new CompanyDTO (1, "pluto")
-  companyAdmin3: CompanyDTO = new CompanyDTO (2, "paperino")
-
-  companyAdminList:CompanyDTO [] = [this.companyAdmin1, this.companyAdmin2, this.companyAdmin3] 
+  companyAdminList:any [] = [] 
 
 
   companySelected!:CompanyDTO
-  companyAdminSelected!:CompanyAdminDTO
+  companyAdminSelected : CompanyAdminDTO | undefined
   
   newCompanyName:string=''
   
   startDate:any
   endDate:any
 
-  constructor() { }
+  message:string=''
+
+  //0 nulla
+  //1 ok
+  //2 errr
+  isCompanySaved=0;
+
+  constructor(private companyAdminService:CompanyAdminService, private companyService:CompanyService) { }
 
   ngOnInit(): void {
+   this.getFreeAdmins()
   }
 
-  editCompany(){
-    console.log("company to edit: "+this.companySelected)
+  getFreeAdmins(){
+    this.companyAdminSelected = undefined
+    this.companyAdminService.findAllAvailableAdmin().subscribe(availableAdmins=>{
+      this.companyAdminList=availableAdmins;
+    })
   }
 
   
   isCompanySelected(){
     return this.companySelected!=undefined ? true : false
-  }
-
-  deleteCompany(){
-    console.log("company to delete: "+this.companySelected)
   }
 
   isFormValid(){
@@ -54,10 +54,17 @@ export class CreateCompanyComponent implements OnInit {
   }
 
   submitForm(){
-    console.log(this.startDate)
-    console.log(this.endDate)
-    console.log(this.newCompanyName)
-    console.log(this.companyAdminSelected)
+    let company = new CompanyDTO(this.newCompanyName,this.startDate,this.endDate,this.companyAdminSelected!, 0)
+    this.companyService.createCompany(company).subscribe(result =>{
+      this.getFreeAdmins()
+      this.message=result.message
+      this.isCompanySaved=1
+    },
+    err=>{
+      this.message=err.message
+      this.isCompanySaved=2
+      console.log(err)
+    })
   }
 
 }

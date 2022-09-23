@@ -10,20 +10,15 @@ import { CompanyDTO } from 'src/app/@models/CompanyDTO';
 })
 export class AddTaskToBoardComponent implements OnInit {
 
-  company1: CompanyDTO = new CompanyDTO (0, "kiko")
-  company2: CompanyDTO = new CompanyDTO (1, "acer")
-  company3: CompanyDTO = new CompanyDTO (2, "samsung")
 
   toppings = new FormControl('');
 
 
-  companyList:CompanyDTO [] = [this.company1, this.company2, this.company3] 
+  companyList:CompanyDTO [] = [] 
 
-  companyAdmin1: CompanyDTO = new CompanyDTO (0, "pippo")
-  companyAdmin2: CompanyDTO = new CompanyDTO (1, "pluto")
-  companyAdmin3: CompanyDTO = new CompanyDTO (2, "paperino")
 
-  companyAdminList:CompanyDTO [] = [this.companyAdmin1, this.companyAdmin2, this.companyAdmin3] 
+
+  companyAdminList:CompanyDTO [] = [] 
 
 
   companySelected!:CompanyDTO
