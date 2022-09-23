@@ -28,10 +28,8 @@ export class DragNDropComponent implements OnInit {
   }
 
   drop(event: any, catId: number) { // CdkDragDrop<string[]>
-    console.log(event)
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log("cacca")
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -39,15 +37,11 @@ export class DragNDropComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
-    console.log(event)
-
     }
     this.updateTaskList(event, catId)
   }
 
   loadArrays(catId: number, task: Task) {
-    console.log("cat id: " + this.containerNumber)
-
     this.taskList[this.containerNumber].taskDTOList.forEach(element => {
       element.listName = this.categoryList[catId].description
     })

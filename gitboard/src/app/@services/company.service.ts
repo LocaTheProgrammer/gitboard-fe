@@ -11,10 +11,12 @@ export class CompanyService {
   endpoint: string = environment.apiURL + "/todolist/rest/company/";
 
   constructor(private httpClient: HttpClient) { }
-
+  
+  getAll() {
+    return this.httpClient.get<any>(`${this.endpoint}getAll`)
+  }
 
   createCompany(company: CompanyDTO) {
-    console.log(company)
     return this.httpClient.post<any>(`${this.endpoint}createCompany`, company)
   }
 

@@ -63,7 +63,6 @@ export class CreateCompanyComponent implements OnInit {
     err=>{
       this.message=err.message
       this.isCompanySaved=2
-      console.log(err)
     })
   }
 
