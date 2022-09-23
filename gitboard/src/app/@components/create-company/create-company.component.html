@@ -48,11 +48,11 @@
     <div class="row mt-5">
         <div class="col d-flex justify-content-center">
             <div class="alert alert-success" role="alert" *ngIf="isCompanySaved !== 0 && isCompanySaved === 1">
-                This is a success alert—check it out!
-              </div>
-              <div class="alert alert-danger" role="alert" *ngIf="isCompanySaved !== 0 && isCompanySaved === 2">
-                This is a danger alert—check it out!
-              </div>
+                {{message}}
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="isCompanySaved !== 0 && isCompanySaved === 2">
+                {{message}}
+            </div>
         </div>
     </div>
 
