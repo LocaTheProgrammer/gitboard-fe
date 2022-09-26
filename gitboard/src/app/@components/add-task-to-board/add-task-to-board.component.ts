@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { CompanyAdminDTO } from 'src/app/@models/CompanyAdminDTO';
-import { CompanyDTO } from 'src/app/@models/CompanyDTO';
+import { BasicUserDTO } from 'src/app/@models/BasicUserDTO';
+import { CategoryDTO } from 'src/app/@models/CategoryDTO';
+import { ProjectDTO } from 'src/app/@models/projectDTO';
+import { Task } from 'src/app/@models/Task';
+import { TaskDescription } from 'src/app/@models/TaskDescription';
+import { TaskListProject } from 'src/app/@models/TaskistProject';
+import { TaskList } from 'src/app/@models/TaskList';
+import { CategoryService } from 'src/app/@services/category.service';
+import { ProjectService } from 'src/app/@services/project.service';
+import { TaskService } from 'src/app/@services/task.service';
+import { UserService } from 'src/app/@services/user.service';
 
 @Component({
   selector: 'app-add-task-to-board',
@@ -11,51 +19,78 @@ import { CompanyDTO } from 'src/app/@models/CompanyDTO';
 export class AddTaskToBoardComponent implements OnInit {
 
 
-  toppings = new FormControl('');
+  action = 0;
 
 
-  companyList:CompanyDTO [] = [] 
+  project!: ProjectDTO;
+  category!: CategoryDTO
+
+  projectList: ProjectDTO[] = []
+  categoryList:CategoryDTO [] = []
+  taskList: TaskList[] = []
+  isProjectListEmpty: boolean = false;
+  userList: BasicUserDTO[] = [];
+  user!:BasicUserDTO;
 
 
+  task!:TaskDescription
 
-  companyAdminList:CompanyDTO [] = [] 
+  tasks!:TaskDescription[]
 
 
-  companySelected!:CompanyDTO
-  companyAdminSelected!:CompanyAdminDTO
-  
-  newCompanyName:string=''
-  
-  startDate:any
-  endDate:any
-
-  constructor() { }
+  constructor(private userService:UserService, private projectService: ProjectService, private taskService: TaskService, private categoryService:CategoryService) { }
 
   ngOnInit(): void {
+    this.findAllProjects()
+    this.findAllCategories()
+    this.findAllTask()
+    this.findAllUsers() 
   }
 
-  editCompany(){
-    console.log("company to edit: "+this.companySelected)
+  findAllCategories(){
+    this.categoryService.getCategories().subscribe(categories =>{
+      this.categoryList = categories
+    })
   }
 
-  
-  isCompanySelected(){
-    return this.companySelected!=undefined ? true : false
+  findAllProjects() {
+    this.isProjectListEmpty=false;
+    this.projectService.findAll().subscribe(allProjects => {
+      this.projectList = allProjects
+      if(this.projectList.length == 0){
+        this.isProjectListEmpty=true;
+      }
+    })
   }
 
-  deleteCompany(){
-    console.log("company to delete: "+this.companySelected)
+  findAllUsers(){
+    this.userService.findAllBasic().subscribe(users =>{
+      this.userList=users
+    })
   }
 
-  isFormValid(){
-    if(this.startDate!=undefined && this.endDate != undefined && this.newCompanyName!='' && this.companyAdminSelected != undefined) { return true }
-    return false;
+  findAllTask(){
+    return this.taskService.findAllTask().subscribe(tasks =>{
+      this.tasks = tasks;
+      console.log(this.tasks)
+    })
   }
 
-  submitForm(){
-    console.log(this.startDate)
-    console.log(this.endDate)
-    console.log(this.newCompanyName)
-    console.log(this.companyAdminSelected)
+  isFormValid() {
+    if(this.user==undefined || this.category==undefined || this.project == undefined || this.task == undefined){return false}
+    return true;
+  }
+
+  submitForm() {
+    //(listName:string, taskName:string, taskPosition:number, taskId:number, taskListId:number)
+    let task = new Task(this.category.description, this.task.description, 0, this.task.id, 0, this.project.id)
+    let tlp = new TaskListProject(this.user.email, task);
+    this.taskService.createTaskList(tlp).subscribe(response => {
+      console.log(response)
+    })
+  }
+
+  changeAction(value: number) {
+    this.action = value;
   }
 }

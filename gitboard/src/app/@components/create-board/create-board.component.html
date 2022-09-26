@@ -21,7 +21,7 @@
     </div>
 
     <!--selezione admin-->
-    <div class="row mt-5 justify-content-center" *ngIf="isCompanySelected()">
+    <div class="row mt-5 justify-content-center">
 
         <div class="col-6 d-flex justify-content-center" (click)="getAllCompanyAdmins()">
             <mat-form-field appearance="fill">
@@ -38,7 +38,7 @@
 
 
 
-    <div class="row mt-5 justify-content-center" *ngIf="isCompanyAndAdminSelected()">
+    <div class="row mt-5 justify-content-center">
         <div class="col-6 d-flex justify-content-center">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">
@@ -51,6 +51,14 @@
                 </span>
                 <input type="text" class="form-control" placeholder="New Board Name" aria-label="Username"
                     [(ngModel)]="newBoardName" aria-describedby="basic-addon1">
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5"  *ngIf="noAvailableAdmin">
+        <div class="col d-flex justify-content-center">
+            <div class="alert alert-danger" role="alert">
+                No Available Admin
             </div>
         </div>
     </div>

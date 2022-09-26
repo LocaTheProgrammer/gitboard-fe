@@ -25,6 +25,7 @@ export class DragNDropComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.taskList)
   }
 
   drop(event: any, catId: number) { // CdkDragDrop<string[]>
@@ -42,8 +43,8 @@ export class DragNDropComponent implements OnInit {
   }
 
   loadArrays(catId: number, task: Task) {
-    this.taskList[this.containerNumber].taskDTOList.forEach(element => {
-      element.listName = this.categoryList[catId].description
+    this.taskList[this.containerNumber].taskListDTOList.forEach(element => {
+      element.listName = this.categoryList[catId-1].description
     })
 
     this.containerCounter = this.containerCounter + 3
@@ -70,10 +71,10 @@ export class DragNDropComponent implements OnInit {
 
     this.containerNumber = +containerNumber - this.containerCounter
 
-    listName = this.categoryList[catId].description
-    taskName = this.taskList[catId].taskDTOList[event.currentIndex].taskName
-    taskId = this.taskList[catId].taskDTOList[event.currentIndex].taskId
-    taskListId = this.taskList[catId].taskDTOList[event.currentIndex].taskListId
+    listName = this.categoryList[catId-1].description
+    taskName = this.taskList[catId-1].taskListDTOList[event.currentIndex].taskName
+    taskId = this.taskList[catId-1].taskListDTOList[event.currentIndex].taskId
+    taskListId = this.taskList[catId-1].taskListDTOList[event.currentIndex].taskListId
 
 
     task = new Task(listName, taskName, taskPosition, taskId, taskListId)

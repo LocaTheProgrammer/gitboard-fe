@@ -21,6 +21,7 @@ export class CreateBoardComponent implements OnInit {
   adminSelected!:CompanyAdminDTO
   message: string='';
   isProjectSaved: number=0;
+  noAvailableAdmin: boolean = false;
 
   constructor(private companyService: CompanyService, private companyAdminService: CompanyAdminService, private projectService:ProjectService) { }
 
@@ -54,14 +55,19 @@ export class CreateBoardComponent implements OnInit {
   }
 
   getCompanyLists() {
+    this.companyAdminList = []
     this.companyService.getAll().subscribe(companies => {
       this.companyList = companies
     })
   }
 
   getAllCompanyAdmins(){
+    this.noAvailableAdmin = false 
     this.companyAdminService.getAllCompanyAdmins(this.companySelected).subscribe(companyAdmins =>{
       this.companyAdminList = companyAdmins
+      if(this.companyAdminList.length == 0){
+        this.noAvailableAdmin=true;
+      }
     })
   }
 

@@ -15,7 +15,11 @@ export class ProjectService {
 
 
   create(project: ProjectDTO) {
-    return this.httpClient.post<any>(`${this.endpoint+'create'}`, project)
+    return this.httpClient.post<any>(`${this.endpoint}create`, project)
+  }
+
+  findAll(){
+    return this.httpClient.get<any>(`${this.endpoint}findAll`)
   }
 
 }

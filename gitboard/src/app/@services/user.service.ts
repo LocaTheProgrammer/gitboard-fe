@@ -38,4 +38,9 @@ export class UserService {
     let url=this.endpoint.concat('rest/user/create')
     return this.httpClient.post<any>(url, {name, surname, email, password})
   }
+
+  findAllBasic(){
+    return this.httpClient.get<any>(`${this.endpoint}rest/user/findAllBasic`)
+
+  }
 }

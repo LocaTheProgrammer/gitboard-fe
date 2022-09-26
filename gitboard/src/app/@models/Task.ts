@@ -5,12 +5,15 @@ export class Task{
     public taskId:number
     public taskListId:number
 
-    constructor(listName:string, taskName:string, taskPosition:number, taskId:number, taskListId:number){
+    public projectId?:number
+
+    constructor(listName:string, taskName:string, taskPosition:number, taskId:number, taskListId:number, projectId?:number){
         this.listName=listName
         this.taskName=taskName
         this.taskPosition=taskPosition
         this.taskId=taskId
         this.taskListId=taskListId
+        this.projectId=projectId
     }
 
 }

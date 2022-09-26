@@ -1,5 +1,12 @@
 <div class="background-elements">
 
+
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <h1>Create Admin</h1>
+        </div>
+    </div>
+
     <div class="row justify-content-center">
         <div class="col justify-content-center">
             <div class="input-group mb-3">
@@ -11,6 +18,18 @@
                 </span>
                 <input type="text" class="form-control" placeholder="Company Admin name" [(ngModel)]="newCompanyAdmin"
                     aria-describedby="basic-addon1">
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
+            <div class="alert alert-success" role="alert" *ngIf="creationStatus !== 0 && creationStatus === 1">
+                {{creationMessage}}
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="creationStatus !== 0 && creationStatus === 2">
+                {{creationMessage}}
             </div>
         </div>
     </div>

@@ -1,9 +1,9 @@
 import { Task } from "./Task"
 
 export class TaskList{
-    public taskDTOList:Task[]
+    public taskListDTOList:Task[]
 
     constructor(taskDTOList:Task[]){
-        this.taskDTOList=taskDTOList
+        this.taskListDTOList=taskDTOList
     }
 }

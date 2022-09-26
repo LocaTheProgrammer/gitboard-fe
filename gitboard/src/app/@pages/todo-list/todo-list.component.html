@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div class="row mt-5" *ngIf="!isLoading">
+    <div class="row mt-5" *ngIf="!isLoading && inputTaskList && inputCategoryList">
         <app-drag-n-drop [taskList]="inputTaskList" (result)="printTask($event)" [categoryList]="inputCategoryList"></app-drag-n-drop>
     </div>
     
