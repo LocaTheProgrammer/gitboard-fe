@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BasicUserDTO } from 'src/app/@models/BasicUserDTO';
 import { CategoryDTO } from 'src/app/@models/CategoryDTO';
-import { ProjectDTO } from 'src/app/@models/projectDTO';
+import { ProjectDTO } from 'src/app/@models/ProjectDTO';
 import { Task } from 'src/app/@models/Task';
 import { TaskDescription } from 'src/app/@models/TaskDescription';
 import { TaskListProject } from 'src/app/@models/TaskistProject';
