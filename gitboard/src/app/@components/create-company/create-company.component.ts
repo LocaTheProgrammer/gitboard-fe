@@ -59,7 +59,7 @@ export class CreateCompanyComponent implements OnInit {
   }
 
   submitForm(){
-    let company = new CompanyDTO(this.newCompanyName,this.startDate,this.endDate,this.companyAdminSelected!, 0)
+    let company = new CompanyDTO(this.newCompanyName,this.startDate,this.endDate,this.companyAdminSelected!)
     this.companyService.createCompany(company).subscribe(result =>{
       this.getFreeAdmins()
       this.message=result.message

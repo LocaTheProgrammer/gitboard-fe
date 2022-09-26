@@ -18,10 +18,6 @@ import { UserService } from 'src/app/@services/user.service';
 })
 export class AddTaskToBoardComponent implements OnInit {
 
-
-  action = 0;
-
-
   project!: ProjectDTO;
   category!: CategoryDTO
 
@@ -32,10 +28,12 @@ export class AddTaskToBoardComponent implements OnInit {
   userList: BasicUserDTO[] = [];
   user!:BasicUserDTO;
 
+  isBoardUpdated:number = 0
 
   task!:TaskDescription
 
   tasks!:TaskDescription[]
+  message: string='';
 
 
   constructor(private userService:UserService, private projectService: ProjectService, private taskService: TaskService, private categoryService:CategoryService) { }
@@ -82,15 +80,19 @@ export class AddTaskToBoardComponent implements OnInit {
   }
 
   submitForm() {
+    this.isBoardUpdated=0
     //(listName:string, taskName:string, taskPosition:number, taskId:number, taskListId:number)
     let task = new Task(this.category.description, this.task.description, 0, this.task.id, 0, this.project.id)
     let tlp = new TaskListProject(this.user.email, task);
     this.taskService.createTaskList(tlp).subscribe(response => {
-      console.log(response)
+      this.isBoardUpdated=1
+      this.message=response.message
+    },
+    err=>{
+      this.isBoardUpdated=2
+      this.message=err.message
     })
   }
 
-  changeAction(value: number) {
-    this.action = value;
-  }
+
 }
