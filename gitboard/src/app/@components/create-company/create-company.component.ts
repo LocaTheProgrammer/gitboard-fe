@@ -29,6 +29,7 @@ export class CreateCompanyComponent implements OnInit {
   //1 ok
   //2 errr
   isCompanySaved=0;
+  noAvailableAdmin: boolean = false;
 
   constructor(private companyAdminService:CompanyAdminService, private companyService:CompanyService) { }
 
@@ -38,8 +39,12 @@ export class CreateCompanyComponent implements OnInit {
 
   getFreeAdmins(){
     this.companyAdminSelected = undefined
+    this.noAvailableAdmin=false;
     this.companyAdminService.findAllAvailableAdmin().subscribe(availableAdmins=>{
       this.companyAdminList=availableAdmins;
+      if(this.companyAdminList.length == 0){
+        this.noAvailableAdmin=true;
+      }
     })
   }
 

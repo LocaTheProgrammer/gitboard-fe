@@ -36,13 +36,20 @@
         </div>
         <div class="col-4 d-flex justify-content-center" (click)="getFreeAdmins()">
             <mat-form-field appearance="fill">
-                <mat-label>Select a company to edit or delete</mat-label>
+                <mat-label>Select and admin</mat-label>
                 <mat-select [(ngModel)]="companyAdminSelected">
                     <mat-option *ngFor="let companyAdmin of companyAdminList" [value]="companyAdmin">
                         {{companyAdmin.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+        </div>
+    </div>
+    <div class="row mt-5"  *ngIf="noAvailableAdmin">
+        <div class="col d-flex justify-content-center">
+            <div class="alert alert-danger" role="alert">
+                No Available Admin
+            </div>
         </div>
     </div>
     <div class="row mt-5">
