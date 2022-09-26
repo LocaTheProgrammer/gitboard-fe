@@ -5,3 +5,15 @@
 .cdk-drop-list.example-list:hover{
     cursor: move;
 }
+
+.cdk-drag.example-box{
+    border: 1px solid;
+    text-align: center;
+    border-radius: 15px;
+    padding: 0.5rem;
+    margin-bottom: 10px;
+}
+
+.row.text-center{
+    text-align: center!important;
+}
