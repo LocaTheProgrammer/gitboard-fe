@@ -24,14 +24,9 @@
         </div>
     </div>
 
-    <div class="row mt-5">
+    <div *ngIf="isTaskSaved" class="row mt-5">
         <div class="col d-flex justify-content-center">
-            <div class="alert alert-success" role="alert" *ngIf="isTaskSaved !== 0 && isTaskSaved === 1">
-                {{message}}
-            </div>
-            <div class="alert alert-danger" role="alert" *ngIf="isTaskSaved !== 0 && isTaskSaved === 2">
-                {{message}}
-            </div>
+            <app-result-message [alertType]="alertType" [message]="message"></app-result-message>
         </div>
     </div>
 

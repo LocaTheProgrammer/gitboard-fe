@@ -11,7 +11,8 @@ export class CreateTaskComponent implements OnInit {
 
   newTaskName:string=''
   message=''
-  isTaskSaved:number = 0
+  isTaskSaved:boolean=false;
+  alertType!: string;
   constructor(private taskService : TaskService) { }
 
   ngOnInit(): void {
@@ -25,11 +26,11 @@ export class CreateTaskComponent implements OnInit {
     let task = new TaskDTO(this.newTaskName);
     this.taskService.create(task).subscribe(() => {
       this.message='ok'
-      this.isTaskSaved=1
+      this.alertType="success"
     },
     ()=>{
+      this.alertType="danger"
       this.message='smth went wrong'
-      this.isTaskSaved=2
-    })
+    },()=>this.isTaskSaved=true)
   }
 }
