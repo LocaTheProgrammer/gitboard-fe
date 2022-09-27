@@ -1,8 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { CompanyAdminDTO } from 'src/app/@models/CompanyAdminDTO';
-import { CompanyAdminFullDTO } from 'src/app/@models/CompanyAdminFullDTO';
-import { CompanyDTO } from 'src/app/@models/CompanyDTO';
-import { ProjectDTO } from 'src/app/@models/ProjectDTO';
+import { CompanyAdminFullDTO } from 'src/app/@models/DTO/CompanyAdminFullDTO';
+import { CompanyDTO } from 'src/app/@models/DTO/CompanyDTO';
+import { ProjectDTO } from 'src/app/@models/DTO/ProjectDTO';
 import { CompanyAdminService } from 'src/app/@services/company-admin.service';
 import { CompanyService } from 'src/app/@services/company.service';
 import { ProjectService } from 'src/app/@services/project.service';

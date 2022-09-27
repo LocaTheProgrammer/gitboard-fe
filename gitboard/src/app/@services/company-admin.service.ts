@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { CompanyAdminNameDTO } from '../@models/CompanyAdminNameDTO';
-import { CompanyDTO } from '../@models/CompanyDTO';
-import { CompanyAdminDTO } from '../@models/CompanyAdminDTO';
+import { CompanyAdminNameDTO } from '../@models/DTO/CompanyAdminNameDTO';
+import { CompanyDTO } from '../@models/DTO/CompanyDTO';
+
 @Injectable({
   providedIn: 'root'
 })

@@ -1,13 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { CompanyAdminDTO } from 'src/app/@models/CompanyAdminDTO';
-import { CompanyDTO } from 'src/app/@models/CompanyDTO';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-admin-control-panel',
   templateUrl: './admin-control-panel.component.html',
   styleUrls: ['./admin-control-panel.component.scss']
 })
-export class AdminControlPanelComponent implements OnInit {
+export class AdminControlPanelComponent {
 
   isMenuVisible: boolean = true
 
@@ -22,9 +20,6 @@ export class AdminControlPanelComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-
-  }
 
   showMenu() {
     this.isMenuVisible = true

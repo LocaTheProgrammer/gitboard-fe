@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CompanyAdminDTO } from 'src/app/@models/CompanyAdminDTO';
-import { CompanyDTO } from 'src/app/@models/CompanyDTO';
-import { CompanyNewAdminDTO } from 'src/app/@models/CompanyNewAdminDTO';
+import { CompanyAdminDTO } from 'src/app/@models/DTO/CompanyAdminDTO';
+import { CompanyDTO } from 'src/app/@models/DTO/CompanyDTO';
+import { CompanyNewAdminDTO } from 'src/app/@models/DTO/CompanyNewAdminDTO';
+
 import { CompanyAdminService } from 'src/app/@services/company-admin.service';
 import { CompanyService } from 'src/app/@services/company.service';
 

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { BasicUserDTO } from 'src/app/@models/BasicUserDTO';
-import { CategoryDTO } from 'src/app/@models/CategoryDTO';
-import { ProjectDTO } from 'src/app/@models/ProjectDTO';
-import { Task } from 'src/app/@models/Task';
-import { TaskDescription } from 'src/app/@models/TaskDescription';
-import { TaskListProject } from 'src/app/@models/TaskistProject';
-import { TaskList } from 'src/app/@models/TaskList';
+import { BasicUserDTO } from 'src/app/@models/DTO/BasicUserDTO';
+import { CategoryDTO } from 'src/app/@models/DTO/CategoryDTO';
+import { ProjectDTO } from 'src/app/@models/DTO/ProjectDTO';
+import { Task } from 'src/app/@models/DTO/Task';
+import { TaskDescription } from 'src/app/@models/DTO/TaskDescription';
+import { TaskListProject } from 'src/app/@models/DTO/TaskistProject';
+import { TaskList } from 'src/app/@models/DTO/TaskList';
+
 import { CategoryService } from 'src/app/@services/category.service';
 import { ProjectService } from 'src/app/@services/project.service';
 import { TaskService } from 'src/app/@services/task.service';

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CompanyAdminDTO } from 'src/app/@models/CompanyAdminDTO';
-import { CompanyAdminNameDTO } from 'src/app/@models/CompanyAdminNameDTO';
+import { CompanyAdminNameDTO } from 'src/app/@models/DTO/CompanyAdminNameDTO';
 import { CompanyAdminService } from 'src/app/@services/company-admin.service';
 
 @Component({

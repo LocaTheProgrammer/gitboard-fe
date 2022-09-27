@@ -1,8 +1,8 @@
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CategoryDTO } from 'src/app/@models/CategoryDTO';
-import { Task } from 'src/app/@models/Task';
-import { TaskList } from 'src/app/@models/TaskList';
+import { CategoryDTO } from 'src/app/@models/DTO/CategoryDTO';
+import { Task } from 'src/app/@models/DTO/Task';
+import { TaskList } from 'src/app/@models/DTO/TaskList';
 
 @Component({
   selector: 'app-drag-n-drop',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from 'src/app/@services/task.service';
-import { TaskDTO } from 'src/app/@services/TaskDTO';
+import { TaskDTO } from 'src/app/@models/DTO/TaskDTO';
 
 @Component({
   selector: 'app-create-task',

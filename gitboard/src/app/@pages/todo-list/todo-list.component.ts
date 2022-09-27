@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { TaskService } from 'src/app/@services/task.service';
-import { Task } from 'src/app/@models/Task';
-import { CategoryDTO } from 'src/app/@models/CategoryDTO';
+import { CategoryDTO } from 'src/app/@models/DTO/CategoryDTO';
+import { Task } from 'src/app/@models/DTO/Task';
+import { TaskList } from 'src/app/@models/DTO/TaskList';
 import { CategoryService } from 'src/app/@services/category.service';
-import { TaskList } from 'src/app/@models/TaskList';
+
 
 @Component({
   selector: 'app-todo-list',

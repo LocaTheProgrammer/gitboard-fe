@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Task } from '../@models/Task';
 import { environment } from 'src/environments/environment';
-import { TaskDTO } from './TaskDTO';
-import { TaskListProject } from '../@models/TaskistProject';
+import { TaskListProject } from '../@models/DTO/TaskistProject';
+import { TaskDTO } from '../@models/DTO/TaskDTO';
+
 
 @Injectable({
   providedIn: 'root'
