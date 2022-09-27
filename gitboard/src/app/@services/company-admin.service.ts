@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { CompanyAdminNameDTO } from '../@models/CompanyAdminNameDTO';
 import { CompanyDTO } from '../@models/CompanyDTO';
+import { CompanyAdminDTO } from '../@models/CompanyAdminDTO';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,6 +23,11 @@ export class CompanyAdminService {
 
   findAllAvailableAdmin(){
     return this.httpClient.get<any>(`${this.endpoint}findAllFreeAdmins`)
+  }
+
+  getAllAdminsNotInCompany(companySelected: CompanyDTO) {
+    return this.httpClient.post<any>(`${this.endpoint}findAllNotInCompany`, companySelected)
+    
   }
 
 }

@@ -36,7 +36,11 @@ export class AddTaskToBoardComponent implements OnInit {
   message: string='';
 
 
-  constructor(private userService:UserService, private projectService: ProjectService, private taskService: TaskService, private categoryService:CategoryService) { }
+  constructor(
+    private userService:UserService,
+    private projectService: ProjectService, 
+    private taskService: TaskService, 
+    private categoryService:CategoryService) { }
 
   ngOnInit(): void {
     this.findAllProjects()
@@ -75,10 +79,11 @@ export class AddTaskToBoardComponent implements OnInit {
   }
 
   isFormValid() {
-    if(this.user==undefined || this.category==undefined || this.project == undefined || this.task == undefined){return false}
-    return true;
+    return !(this.user==undefined || this.category==undefined || this.project == undefined || this.task == undefined)
   }
 
+
+  //componente al posto della visualizzazione isBoard
   submitForm() {
     this.isBoardUpdated=0
     //(listName:string, taskName:string, taskPosition:number, taskId:number, taskListId:number)

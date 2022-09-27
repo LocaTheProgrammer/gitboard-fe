@@ -58,17 +58,23 @@ export class CreateCompanyComponent implements OnInit {
     return false;
   }
 
+  //TODO CHANGE MESSAGE
   submitForm(){
-    let company = new CompanyDTO(this.newCompanyName,this.startDate,this.endDate,this.companyAdminSelected!)
-    this.companyService.createCompany(company).subscribe(result =>{
-      this.getFreeAdmins()
-      this.message=result.message
-      this.isCompanySaved=1
-    },
-    err=>{
-      this.message=err.message
-      this.isCompanySaved=2
-    })
+    if(this.companyAdminSelected){
+      let companyAdminArray:CompanyAdminDTO[]=[this.companyAdminSelected]
+      let company = new CompanyDTO(this.newCompanyName,this.startDate,this.endDate,companyAdminArray)
+      console.log(company)
+      this.companyService.createCompany(company).subscribe(() =>{
+        this.getFreeAdmins()
+        this.message='ok'
+        this.isCompanySaved=1
+      },
+      ()=>{
+        this.message='smth went wrong'
+        this.isCompanySaved=2
+      })
+    }
+    
   }
 
 }

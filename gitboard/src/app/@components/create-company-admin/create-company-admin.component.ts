@@ -22,15 +22,16 @@ export class CreateCompanyAdminComponent implements OnInit {
     return this.newCompanyAdmin != ''
   }
 
+  //TODO fare messaggio componente
   submitForm() {
     let admin: CompanyAdminNameDTO = new CompanyAdminNameDTO(this.newCompanyAdmin)
-    this.companyAdminService.createCompanyAdmin(admin).subscribe(ok => {
+    this.companyAdminService.createCompanyAdmin(admin).subscribe(() => {
       this.creationStatus = 1
-      this.creationMessage = ok.message
+      this.creationMessage = 'ok'
     },
-      err => {
+      () => {
         this.creationStatus = 2
-        this.creationMessage = err.message
+        this.creationMessage = 'smth went wrong'
       })
   }
 }

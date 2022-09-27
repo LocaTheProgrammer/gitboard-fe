@@ -46,8 +46,7 @@ export class DragNDropComponent implements OnInit {
     this.taskList[this.containerNumber].taskListDTOList.forEach(element => {
       element.listName = this.categoryList[catId-1].description
     })
-
-    this.containerCounter = this.containerCounter + 3
+    this.containerCounter += this.categoryList.length
 
     this.isLoading = false
 

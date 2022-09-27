@@ -23,12 +23,12 @@ export class CreateTaskComponent implements OnInit {
 
   submitForm(){
     let task = new TaskDTO(this.newTaskName);
-    this.taskService.create(task).subscribe(result => {
-      this.message=result.message
+    this.taskService.create(task).subscribe(() => {
+      this.message='ok'
       this.isTaskSaved=1
     },
-    error=>{
-      this.message=error.message
+    ()=>{
+      this.message='smth went wrong'
       this.isTaskSaved=2
     })
   }

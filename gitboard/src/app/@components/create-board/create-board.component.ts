@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CompanyAdminDTO } from 'src/app/@models/CompanyAdminDTO';
+import { CompanyAdminFullDTO } from 'src/app/@models/CompanyAdminFullDTO';
 import { CompanyDTO } from 'src/app/@models/CompanyDTO';
 import { ProjectDTO } from 'src/app/@models/ProjectDTO';
 import { CompanyAdminService } from 'src/app/@services/company-admin.service';
@@ -16,9 +17,9 @@ export class CreateBoardComponent implements OnInit {
   newBoardName: string = ''
   companyName:string = ''
   companyList: CompanyDTO[] = []
-  companyAdminList: CompanyAdminDTO[] = []
+  companyAdminList: CompanyAdminFullDTO[] = []
   companySelected!: CompanyDTO 
-  adminSelected!:CompanyAdminDTO
+  adminSelected!:CompanyAdminFullDTO
   message: string='';
   isProjectSaved: number=0;
   noAvailableAdmin: boolean = false;
@@ -34,8 +35,12 @@ export class CreateBoardComponent implements OnInit {
   }
   
   submitForm() {
-    let admins : CompanyAdminDTO [] = [this.adminSelected]
+    console.log(this.companySelected)
+    console.log(this.adminSelected)
+    this.adminSelected.company=this.companySelected
+    let admins : CompanyAdminFullDTO [] = [this.adminSelected]
     let project:ProjectDTO = new ProjectDTO(this.newBoardName, admins)
+    console.log(project)
     this.projectService.create(project).subscribe(result =>{
       this.message=result.message
       this.isProjectSaved=1
@@ -65,6 +70,7 @@ export class CreateBoardComponent implements OnInit {
     this.noAvailableAdmin = false 
     this.companyAdminService.getAllCompanyAdmins(this.companySelected).subscribe(companyAdmins =>{
       this.companyAdminList = companyAdmins
+      console.log(this.companyAdminList)
       if(this.companyAdminList.length == 0){
         this.noAvailableAdmin=true;
       }
