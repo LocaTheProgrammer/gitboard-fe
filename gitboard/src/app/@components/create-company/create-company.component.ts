@@ -25,11 +25,9 @@ export class CreateCompanyComponent implements OnInit {
 
   message:string=''
 
-  //0 nulla
-  //1 ok
-  //2 errr
-  isCompanySaved=0;
+  isCompanySaved:boolean = false;
   noAvailableAdmin: boolean = false;
+  alertType!: string;
 
   constructor(private companyAdminService:CompanyAdminService, private companyService:CompanyService) { }
 
@@ -60,6 +58,7 @@ export class CreateCompanyComponent implements OnInit {
 
   //TODO CHANGE MESSAGE
   submitForm(){
+    this.isCompanySaved=false
     if(this.companyAdminSelected){
       let companyAdminArray:CompanyAdminDTO[]=[this.companyAdminSelected]
       let company = new CompanyDTO(this.newCompanyName,this.startDate,this.endDate,companyAdminArray)
@@ -67,12 +66,13 @@ export class CreateCompanyComponent implements OnInit {
       this.companyService.createCompany(company).subscribe(() =>{
         this.getFreeAdmins()
         this.message='ok'
-        this.isCompanySaved=1
+        this.alertType="success"
       },
       ()=>{
         this.message='smth went wrong'
-        this.isCompanySaved=2
-      })
+        this.alertType="danger"
+      },
+      ()=>this.isCompanySaved=true)
     }
     
   }

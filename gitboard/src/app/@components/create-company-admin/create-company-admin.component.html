@@ -22,15 +22,9 @@
         </div>
         
     </div>
-
-    <div class="row mt-5">
+    <div *ngIf="isCreated" class="row mt-5">
         <div class="col d-flex justify-content-center">
-            <div class="alert alert-success" role="alert" *ngIf="creationStatus !== 0 && creationStatus === 1">
-                {{creationMessage}}
-            </div>
-            <div class="alert alert-danger" role="alert" *ngIf="creationStatus !== 0 && creationStatus === 2">
-                {{creationMessage}}
-            </div>
+            <app-result-message [alertType]="alertType" [message]="creationMessage"></app-result-message>
         </div>
     </div>
 

@@ -11,8 +11,9 @@ import { CompanyAdminService } from 'src/app/@services/company-admin.service';
 export class CreateCompanyAdminComponent implements OnInit {
 
   newCompanyAdmin: string = ''
-  creationStatus = 0;
+  isCreated: boolean = false
   creationMessage: string = ''
+  alertType!: string;
   constructor(private companyAdminService: CompanyAdminService) { }
 
   ngOnInit(): void {
@@ -26,12 +27,14 @@ export class CreateCompanyAdminComponent implements OnInit {
   submitForm() {
     let admin: CompanyAdminNameDTO = new CompanyAdminNameDTO(this.newCompanyAdmin)
     this.companyAdminService.createCompanyAdmin(admin).subscribe(() => {
-      this.creationStatus = 1
       this.creationMessage = 'ok'
+      this.alertType = 'success'
     },
-      () => {
-        this.creationStatus = 2
-        this.creationMessage = 'smth went wrong'
-      })
+    () => {
+      this.alertType = 'danger'
+      this.creationMessage = 'smth went wrong'
+    },
+    () => this.isCreated = true)
   }
+  
 }

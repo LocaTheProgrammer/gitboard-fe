@@ -15,40 +15,41 @@ import { ProjectService } from 'src/app/@services/project.service';
 export class CreateBoardComponent implements OnInit {
 
   newBoardName: string = ''
-  companyName:string = ''
+  companyName: string = ''
   companyList: CompanyDTO[] = []
   companyAdminList: CompanyAdminFullDTO[] = []
-  companySelected!: CompanyDTO 
-  adminSelected!:CompanyAdminFullDTO
-  message: string='';
-  isProjectSaved: number=0;
+  companySelected!: CompanyDTO
+  adminSelected!: CompanyAdminFullDTO
+  message: string = '';
+  isProjectSaved: boolean = false;
   noAvailableAdmin: boolean = false;
+  alertType!: string;
 
-  constructor(private companyService: CompanyService, private companyAdminService: CompanyAdminService, private projectService:ProjectService) { }
+  constructor(private companyService: CompanyService, private companyAdminService: CompanyAdminService, private projectService: ProjectService) { }
 
   ngOnInit(): void {
     this.getCompanyLists()
   }
 
-  isCompanyAndAdminSelected(){
+  isCompanyAndAdminSelected() {
     return this.adminSelected != undefined
   }
-  
+
   submitForm() {
-    console.log(this.companySelected)
-    console.log(this.adminSelected)
-    this.adminSelected.company=this.companySelected
-    let admins : CompanyAdminFullDTO [] = [this.adminSelected]
-    let project:ProjectDTO = new ProjectDTO(this.newBoardName, admins)
-    console.log(project)
-    this.projectService.create(project).subscribe(result =>{
-      this.message=result.message
-      this.isProjectSaved=1
+    this.isProjectSaved = false
+    this.adminSelected.company = this.companySelected
+    let admins: CompanyAdminFullDTO[] = [this.adminSelected]
+    let project: ProjectDTO = new ProjectDTO(this.newBoardName, admins)
+
+    this.projectService.create(project).subscribe(() => {
+      this.message = "oook"
+      this.alertType="success"
     },
-    error => {
-      this.message=error.message
-      this.isProjectSaved=2
-    })
+    () => {
+      this.alertType="danger"
+        this.message = "opsssss"
+    },
+    ()=>this.isProjectSaved=true)
   }
 
   isFormValid() {
@@ -66,13 +67,13 @@ export class CreateBoardComponent implements OnInit {
     })
   }
 
-  getAllCompanyAdmins(){
-    this.noAvailableAdmin = false 
-    this.companyAdminService.getAllCompanyAdmins(this.companySelected).subscribe(companyAdmins =>{
+  getAllCompanyAdmins() {
+    this.noAvailableAdmin = false
+    this.companyAdminService.getAllCompanyAdmins(this.companySelected).subscribe(companyAdmins => {
       this.companyAdminList = companyAdmins
       console.log(this.companyAdminList)
-      if(this.companyAdminList.length == 0){
-        this.noAvailableAdmin=true;
+      if (this.companyAdminList.length == 0) {
+        this.noAvailableAdmin = true;
       }
     })
   }

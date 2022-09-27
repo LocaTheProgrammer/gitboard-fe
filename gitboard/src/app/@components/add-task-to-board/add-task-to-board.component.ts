@@ -28,12 +28,13 @@ export class AddTaskToBoardComponent implements OnInit {
   userList: BasicUserDTO[] = [];
   user!:BasicUserDTO;
 
-  isBoardUpdated:number = 0
+  isBoardUpdated:boolean=false
 
   task!:TaskDescription
 
   tasks!:TaskDescription[]
   message: string='';
+  alertType!: string;
 
 
   constructor(
@@ -85,18 +86,18 @@ export class AddTaskToBoardComponent implements OnInit {
 
   //componente al posto della visualizzazione isBoard
   submitForm() {
-    this.isBoardUpdated=0
+    this.isBoardUpdated=false
     //(listName:string, taskName:string, taskPosition:number, taskId:number, taskListId:number)
     let task = new Task(this.category.description, this.task.description, 0, this.task.id, 0, this.project.id)
     let tlp = new TaskListProject(this.user.email, task);
-    this.taskService.createTaskList(tlp).subscribe(response => {
-      this.isBoardUpdated=1
-      this.message=response.message
+    this.taskService.createTaskList(tlp).subscribe(() => {
+      this.alertType='success'
+      this.message='ok'
     },
-    err=>{
-      this.isBoardUpdated=2
-      this.message=err.message
-    })
+    ()=>{
+      this.alertType='danger'
+      this.message='ooops'
+    },()=>this.isBoardUpdated=true)
   }
 
 
