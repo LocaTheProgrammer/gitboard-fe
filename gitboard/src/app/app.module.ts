@@ -35,6 +35,7 @@ import { CreateTaskComponent } from './@components/create-task/create-task.compo
 import { CreateBoardComponent } from './@components/create-board/create-board.component';
 import { AddTaskToBoardComponent } from './@components/add-task-to-board/add-task-to-board.component';
 import { CreateCompanyAdminComponent } from './@components/create-company-admin/create-company-admin.component';
+import { ResultMessageComponent } from './@components/result-message/result-message.component';
 
 
 
@@ -57,7 +58,8 @@ import { CreateCompanyAdminComponent } from './@components/create-company-admin/
     CreateTaskComponent,
     CreateBoardComponent,
     AddTaskToBoardComponent,
-    CreateCompanyAdminComponent
+    CreateCompanyAdminComponent,
+    ResultMessageComponent
   ],
   imports: [
     BrowserModule,
