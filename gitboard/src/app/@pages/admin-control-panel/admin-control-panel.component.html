@@ -14,38 +14,10 @@
     </div>
 
     <span *ngIf="isMenuVisible">
-        <div class="row button-container justify-content-center mt-5">
-            <div class="col-4 d-flex justify-content-center">
-                <button class="btn btn-primary" (click)="showDiv('createCompanyAdmin')">
-                    Create Company Admin
-                </button>
-            </div>
-            <div class="col-4 d-flex justify-content-center">
-                <button class="btn btn-primary" (click)="showDiv('createCompany')">
-                    Create Company
-                </button>
-            </div>
-
-            <div class="col-4 d-flex justify-content-center">
-                <button class="btn btn-primary" (click)="showDiv('createTask')">
-                    Create Task
-                </button>
-            </div>
-        </div>
-        <div class="row button-container justify-content-center mt-5">
-            <div class="col-4 d-flex justify-content-center">
-                <button class="btn btn-primary" (click)="showDiv('createBoard')">
-                    Create Project Board
-                </button>
-            </div>
-            <div class="col-4 d-flex justify-content-center">
-                <button class="btn btn-primary" (click)="showDiv('assign')">
-                    Assign Task to Project Board
-                </button>
-            </div>
-            <div class="col-4 d-flex justify-content-center">
-                <button class="btn btn-primary" (click)="showDiv('edit')">
-                    Edit Company
+        <div class="row">
+            <div *ngFor="let d of divsArray" class="col-4 d-flex justify-content-center mt-5">
+                <button class="btn btn-primary" (click)="showDiv(d.divName)">
+                    {{d.title}}
                 </button>
             </div>
         </div>
@@ -54,23 +26,13 @@
 
 
     <div *ngIf="!isMenuVisible">
-        <div *ngIf="isCreateCompanyVisible">
-            <app-create-company></app-create-company>
-        </div>
-        <div *ngIf="isEditVisible">
-            <app-edit-company></app-edit-company>
-        </div>
-        <div *ngIf="isCreateTaskVisible">
-            <app-create-task></app-create-task>
-        </div>
-        <div *ngIf="isCreateBoardVisible">
-            <app-create-board></app-create-board>
-        </div>
-        <div *ngIf="isAssignVisible">
-            <app-add-task-to-board></app-add-task-to-board>
-        </div>
-        <div *ngIf="isCreateCompanyAdminVisible">
-            <app-create-company-admin></app-create-company-admin>
+        <div [ngSwitch]="true">
+            <app-create-company *ngSwitchCase="divVisibilityArray[0]"></app-create-company>
+            <app-edit-company *ngSwitchCase="divVisibilityArray[1]"></app-edit-company>
+            <app-create-task *ngSwitchCase="divVisibilityArray[2]"></app-create-task>
+            <app-create-board *ngSwitchCase="divVisibilityArray[3]"></app-create-board>
+            <app-add-task-to-board *ngSwitchCase="divVisibilityArray[4]"></app-add-task-to-board>
+            <app-create-company-admin *ngSwitchCase="divVisibilityArray[5]"></app-create-company-admin>
         </div>
     </div>
 
