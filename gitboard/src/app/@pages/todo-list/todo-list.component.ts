@@ -45,10 +45,8 @@ export class TodoListComponent implements OnInit {
       this.inputCategoryList=response
     })
     this.taskService.getDynamicUserTaskList(this.email).subscribe(tl=>{
-      console.log(tl)
       this.inputTaskList=[]
       this.inputTaskList=tl
-      console.log(this.inputTaskList)
     })
     // this.taskService.getUserTaskListByUserEmail(this.email).subscribe((response:any)=>{
     //   this.taskList=response
@@ -144,7 +142,6 @@ export class TodoListComponent implements OnInit {
   }
 
   printTask($event:any){
-    console.log($event)
     this.taskService.updateTaskList($event).subscribe(()=>{
       this.updateError=false
       this.isFirstShifting=false

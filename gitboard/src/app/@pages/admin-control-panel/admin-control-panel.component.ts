@@ -47,7 +47,6 @@ export class AdminControlPanelComponent {
   }
 
   showDiv(div: string) {
-    console.log(div)
     this.initializeView()
     switch (div) {
       case 'createCompany':

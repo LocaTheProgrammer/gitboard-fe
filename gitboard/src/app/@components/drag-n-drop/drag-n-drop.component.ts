@@ -25,7 +25,6 @@ export class DragNDropComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.taskList)
   }
 
   drop(event: any, catId: number) { // CdkDragDrop<string[]>

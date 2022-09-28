@@ -62,7 +62,6 @@ export class CreateCompanyComponent implements OnInit {
     if(this.companyAdminSelected){
       let companyAdminArray:CompanyAdminDTO[]=[this.companyAdminSelected]
       let company = new CompanyDTO(this.newCompanyName,this.startDate,this.endDate,companyAdminArray)
-      console.log(company)
       this.companyService.createCompany(company).subscribe(() =>{
         this.getFreeAdmins()
         this.message='ok'

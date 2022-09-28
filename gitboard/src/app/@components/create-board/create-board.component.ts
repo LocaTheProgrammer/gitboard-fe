@@ -70,7 +70,6 @@ export class CreateBoardComponent implements OnInit {
     this.noAvailableAdmin = false
     this.companyAdminService.getAllCompanyAdmins(this.companySelected).subscribe(companyAdmins => {
       this.companyAdminList = companyAdmins
-      console.log(this.companyAdminList)
       if (this.companyAdminList.length == 0) {
         this.noAvailableAdmin = true;
       }

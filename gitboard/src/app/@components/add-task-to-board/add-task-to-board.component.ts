@@ -76,7 +76,6 @@ export class AddTaskToBoardComponent implements OnInit {
   findAllTask(){
     return this.taskService.findAllTask().subscribe(tasks =>{
       this.tasks = tasks;
-      console.log(this.tasks)
     })
   }
 
