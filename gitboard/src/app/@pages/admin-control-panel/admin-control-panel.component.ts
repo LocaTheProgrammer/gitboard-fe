@@ -29,15 +29,6 @@ export class AdminControlPanelComponent {
 
   divsArray: AdminPanelDiv[] = [this.createCompanyAdmin, this.createCompany, this.createTask, this.createBoard, this.assign, this.edit]
 
-  // createCompanyAdminComponent: AdminPanelComponent = new AdminPanelComponent("isCreateCompanyVisible", "<app-create-company></app-create-company>", this.isCreateCompanyVisible)
-  // createCompanyComponent: AdminPanelComponent = new AdminPanelComponent("isEditVisible", "<app-edit-company></app-edit-company>", this.isEditVisible)
-  // createTaskComponent: AdminPanelComponent = new AdminPanelComponent("isCreateTaskVisible", "<app-create-task></app-create-task>", this.isCreateTaskVisible)
-  // createBoardComponent: AdminPanelComponent = new AdminPanelComponent("isCreateBoardVisible", "<app-create-board></app-create-board>", this.isCreateBoardVisible)
-  // assignComponent: AdminPanelComponent = new AdminPanelComponent("isAssignVisible", "<app-add-task-to-board></app-add-task-to-board>", this.isAssignVisible)
-  // editComponent: AdminPanelComponent = new AdminPanelComponent("isCreateCompanyAdminVisible", "<app-create-company-admin></app-create-company-admin", this.isCreateCompanyAdminVisible)
-
-  // divComponentsArray: AdminPanelComponent[] = [this.createCompanyAdminComponent, this.createCompanyComponent, this.createTaskComponent, this.createBoardComponent, this.assignComponent, this.editComponent]
-
 
   divVisibilityArray: boolean[] =
     [this.isCreateCompanyVisible,
@@ -103,10 +94,6 @@ export class AdminControlPanelComponent {
       this.isCreateBoardVisible,
       this.isAssignVisible,
       this.isCreateCompanyAdminVisible]
-
-    // for (let i = 0; i < this.divComponentsArray.length; i++) {
-    //   this.divComponentsArray[i].booleanCondition = this.divVisibilityArray[i]
-    // }
   }
 
 }
