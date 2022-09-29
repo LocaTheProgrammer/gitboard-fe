@@ -3,10 +3,12 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CompanyDTO } from '../@models/DTO/CompanyDTO';
+import { ProjectUserDTO } from '../@models/DTO/ProjectUserDTO';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  
 
   endpoint:string=environment.apiURL+"/todolist/";
 
@@ -47,4 +49,5 @@ export class UserService {
   getAllByCompany(company:CompanyDTO){
     return this.httpClient.post<any>(`${this.endpoint}rest/user/getAllByCompany`, company)
   }
+
 }

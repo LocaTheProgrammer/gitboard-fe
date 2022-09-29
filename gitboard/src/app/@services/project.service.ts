@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CompanyDTO } from '../@models/DTO/CompanyDTO';
 import { ProjectDTO } from '../@models/DTO/ProjectDTO';
+import { ProjectUserDTO } from '../@models/DTO/ProjectUserDTO';
 
 
 @Injectable({
@@ -28,4 +29,8 @@ export class ProjectService {
     return this.httpClient.post<any>(`${this.endpoint}getAllByCompany`, company)
   }
 
+  
+  addUserToProject(puDTO: ProjectUserDTO) {
+    return this.httpClient.post<any>(`${this.endpoint}addUserToProject`, puDTO)
+  }
 }

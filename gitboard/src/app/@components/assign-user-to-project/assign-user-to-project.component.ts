@@ -6,6 +6,7 @@ import { MatFormField } from 'src/app/@models/components/MatFormField';
 import { BasicUserDTO } from 'src/app/@models/DTO/BasicUserDTO';
 import { CompanyDTO } from 'src/app/@models/DTO/CompanyDTO';
 import { ProjectDTO } from 'src/app/@models/DTO/ProjectDTO';
+import { ProjectUserDTO } from 'src/app/@models/DTO/ProjectUserDTO';
 import { CompanyService } from 'src/app/@services/company.service';
 import { ProjectService } from 'src/app/@services/project.service';
 import { UserService } from 'src/app/@services/user.service';
@@ -44,6 +45,10 @@ export class AssignUserToProjectComponent implements OnInit {
   isMatFormCompanyLoaded:boolean=false
   isMatFormProjectLoaded:boolean=false
   isMatFormUserLoaded:boolean=false
+  
+  isAdded: boolean=false;
+  alertType: string='';
+  message: string='';
 
   constructor(private projectService: ProjectService, private companyService: CompanyService, private userService: UserService) { }
   
@@ -105,9 +110,22 @@ export class AssignUserToProjectComponent implements OnInit {
   }
 
   save() {
-    console.log(this.companySelected)
-    console.log(this.myControlUsers)
-    console.log(this.myControlProjets)
+    let proj=this.projectList.filter(proj => proj.name=this.myControlProjets.value)
+
+    if(proj[0].id!=undefined){
+    console.log(proj[0])
+
+      let puDTO = new ProjectUserDTO(proj[0].id, this.myControlUsers.value);
+      this.projectService.addUserToProject(puDTO).subscribe(()=>{
+        this.alertType='success'
+        this.message='user added to proj'
+      },
+      ()=>{
+        this.alertType='danger'
+        this.message='user NOT added to proj'
+      }, () => this.isAdded=true)
+      
+    }
   }
 
   private _filterCompany(value: string): string[] {
