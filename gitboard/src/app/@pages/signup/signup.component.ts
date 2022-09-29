@@ -51,16 +51,12 @@ export class SignupComponent implements OnInit, AfterContentChecked {
 
   signup() {
     this.isLoading = true;
-    this.userService.createAccount(this.userSignupForm.value.name, this.userSignupForm.value.surname, this.userSignupForm.value.mail, this.userSignupForm.value.password).subscribe(ret => {
-      if (ret.status === 200) {
-        this.successMessage = 1;
-        this.isLoading = false;
-      }
+    this.userService.createAccount(this.userSignupForm.value.name, this.userSignupForm.value.surname, this.userSignupForm.value.mail, this.userSignupForm.value.password).subscribe(() => {
+      this.successMessage = 1;
     },
       () => {
         this.successMessage = 2;
-        this.isLoading = false;
-      })
+      }, () => this.isLoading = false)
   }
 
 

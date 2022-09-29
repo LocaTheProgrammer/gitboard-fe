@@ -1,0 +1,10 @@
+<mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>{{matFormField.title}}</mat-label>
+    <input type="text" [placeholder]="matFormField.placeholder" aria-label="Select task" matInput
+        [formControl]="matFormField.myFormControl" [matAutocomplete]="matFormField.matAutocompleteValue">
+    <mat-autocomplete #matFormField.matAutocompleteValue="matAutocomplete">
+        <mat-option *ngFor="let el of matFormField.filteredList | async" [value]="el">
+            {{el}}
+        </mat-option>
+    </mat-autocomplete>
+</mat-form-field>

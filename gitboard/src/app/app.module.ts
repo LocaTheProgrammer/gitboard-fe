@@ -36,6 +36,9 @@ import { CreateBoardComponent } from './@components/create-board/create-board.co
 import { AddTaskToBoardComponent } from './@components/add-task-to-board/add-task-to-board.component';
 import { CreateCompanyAdminComponent } from './@components/create-company-admin/create-company-admin.component';
 import { ResultMessageComponent } from './@components/result-message/result-message.component';
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { AssignUserToProjectComponent } from './@components/assign-user-to-project/assign-user-to-project.component';
+import { MatFormFieldAutoCompleteComponent } from './@components/mat-form-field-auto-complete/mat-form-field-auto-complete.component';
 
 
 
@@ -59,7 +62,9 @@ import { ResultMessageComponent } from './@components/result-message/result-mess
     CreateBoardComponent,
     AddTaskToBoardComponent,
     CreateCompanyAdminComponent,
-    ResultMessageComponent
+    ResultMessageComponent,
+    AssignUserToProjectComponent,
+    MatFormFieldAutoCompleteComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +82,8 @@ import { ResultMessageComponent } from './@components/result-message/result-mess
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    CommonModule
+    CommonModule,
+    MatAutocompleteModule
   ],
   providers: [ 
     MatDatepickerModule,

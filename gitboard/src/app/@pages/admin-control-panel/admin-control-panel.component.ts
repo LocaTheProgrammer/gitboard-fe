@@ -16,6 +16,7 @@ export class AdminControlPanelComponent {
   isCreateTaskVisible: boolean = false
   isCreateBoardVisible: boolean = false
   isAssignVisible: boolean = false
+  isAssignUserToProjectVisible: boolean = false
 
   error: boolean = false
   isCreateCompanyAdminVisible: boolean = false;
@@ -26,8 +27,9 @@ export class AdminControlPanelComponent {
   createBoard: AdminPanelDiv = new AdminPanelDiv("Create Project Board", "createBoard")
   assign: AdminPanelDiv = new AdminPanelDiv("Assign Task to Project Board", "assign")
   edit: AdminPanelDiv = new AdminPanelDiv("Edit Company", "edit")
+  assignUserToProject: AdminPanelDiv = new AdminPanelDiv("Assign User To Project", "assignUserToProject")
 
-  divsArray: AdminPanelDiv[] = [this.createCompanyAdmin, this.createCompany, this.createTask, this.createBoard, this.assign, this.edit]
+  divsArray: AdminPanelDiv[] = [this.createCompanyAdmin, this.createCompany, this.createTask, this.createBoard, this.assign, this.edit, this.assignUserToProject]
 
 
   divVisibilityArray: boolean[] =
@@ -36,7 +38,8 @@ export class AdminControlPanelComponent {
     this.isCreateTaskVisible,
     this.isCreateBoardVisible,
     this.isAssignVisible,
-    this.isCreateCompanyAdminVisible]
+    this.isCreateCompanyAdminVisible,
+    this.isAssignUserToProjectVisible]
 
   constructor() { }
 
@@ -67,6 +70,9 @@ export class AdminControlPanelComponent {
       case 'createCompanyAdmin':
         this.isCreateCompanyAdminVisible = true;
         break;
+      case 'assignUserToProject':
+        this.isAssignUserToProjectVisible = true;
+        break;
       default:
         this.error = true;
     }
@@ -82,6 +88,7 @@ export class AdminControlPanelComponent {
     this.isCreateBoardVisible = false;
     this.isAssignVisible = false
     this.isCreateCompanyAdminVisible = false;
+    this.isAssignUserToProjectVisible = false;
   }
 
 
@@ -92,7 +99,8 @@ export class AdminControlPanelComponent {
       this.isCreateTaskVisible,
       this.isCreateBoardVisible,
       this.isAssignVisible,
-      this.isCreateCompanyAdminVisible]
+      this.isCreateCompanyAdminVisible,
+      this.isAssignUserToProjectVisible]
   }
 
 }

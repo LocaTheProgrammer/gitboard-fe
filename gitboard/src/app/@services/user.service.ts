@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { CompanyDTO } from '../@models/DTO/CompanyDTO';
 @Injectable({
   providedIn: 'root'
 })
@@ -41,6 +42,9 @@ export class UserService {
 
   findAllBasic(){
     return this.httpClient.get<any>(`${this.endpoint}rest/user/findAllBasic`)
+  }
 
+  getAllByCompany(company:CompanyDTO){
+    return this.httpClient.post<any>(`${this.endpoint}rest/user/getAllByCompany`, company)
   }
 }

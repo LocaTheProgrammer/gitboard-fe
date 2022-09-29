@@ -1,0 +1,55 @@
+<div class="background-elements">
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <h1>Assign project to User</h1>
+        </div>
+    </div>
+    <div class="row mt-5">
+
+        <div class="col-4 d-flex justify-content-center">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Select company</mat-label>
+                <input type="text" placeholder="Pick one" aria-label="Select task" matInput
+                    [formControl]="myControlCompany" [matAutocomplete]="autoC">
+                <mat-autocomplete #autoC="matAutocomplete">
+                    <mat-option *ngFor="let fc of filteredCompanies | async" [value]="fc">
+                        {{fc}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+
+        <div class="col-4 d-flex justify-content-center" (click)="loadProjectByCompany()">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Select project</mat-label>
+                <input type="text" placeholder="Pick one" aria-label="Select task" matInput
+                    [formControl]="myControlProjets" [matAutocomplete]="autoP">
+                <mat-autocomplete #autoP="matAutocomplete">
+                    <mat-option *ngFor="let fp of filteredProjects | async" [value]="fp">
+                        {{fp}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+        <div class="col-4 d-flex justify-content-center" (click)="loadUsersByCompany()">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Select user</mat-label>
+                <input type="text" placeholder="Pick one" aria-label="Select task" matInput [formControl]="myControlUsers"
+                    [matAutocomplete]="autoF">
+                <mat-autocomplete #autoF="matAutocomplete">
+                    <mat-option *ngFor="let fu of filteredUsers | async" [value]="fu">
+                        {{fu}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
+            <button class="btn btn-primary" (click)="save()" [disabled]="!isFormSubmittable()">
+                SAVE
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { CompanyDTO } from '../@models/DTO/CompanyDTO';
 import { ProjectDTO } from '../@models/DTO/ProjectDTO';
 
 
@@ -21,6 +22,10 @@ export class ProjectService {
 
   findAll(){
     return this.httpClient.get<any>(`${this.endpoint}findAll`)
+  }
+
+  getAllByCompany(company: CompanyDTO){
+    return this.httpClient.post<any>(`${this.endpoint}getAllByCompany`, company)
   }
 
 }
