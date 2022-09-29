@@ -39,6 +39,7 @@ import { ResultMessageComponent } from './@components/result-message/result-mess
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { AssignUserToProjectComponent } from './@components/assign-user-to-project/assign-user-to-project.component';
 import { MatFormFieldAutoCompleteComponent } from './@components/mat-form-field-auto-complete/mat-form-field-auto-complete.component';
+import { ProjectListComponent } from './@pages/project-list/project-list.component';
 
 
 
@@ -64,7 +65,8 @@ import { MatFormFieldAutoCompleteComponent } from './@components/mat-form-field-
     CreateCompanyAdminComponent,
     ResultMessageComponent,
     AssignUserToProjectComponent,
-    MatFormFieldAutoCompleteComponent
+    MatFormFieldAutoCompleteComponent,
+    ProjectListComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { TaskListProject } from '../@models/DTO/TaskistProject';
 import { TaskDTO } from '../@models/DTO/TaskDTO';
+import { ProjectUserDTO } from '../@models/DTO/ProjectUserDTO';
 
 
 @Injectable({
@@ -24,8 +25,8 @@ export class TaskService {
     return this.httpClient.post<any>(`${this.endpoint}getUserTaskList`, {email})
   }
 
-  getDynamicUserTaskList(email:string){
-    return this.httpClient.post<any>(`${this.endpoint}getDynamicUserTaskList`, {email})
+  getDynamicUserTaskList(pu:ProjectUserDTO){
+    return this.httpClient.post<any>(`${this.endpoint}getDynamicUserTaskList`, pu)
   }
 
   updateTaskList(task:Task){

@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
     if(localStorage.getItem('token')){
-      this.router.navigateByUrl('todo-list')
+      this.router.navigateByUrl('projects')
     }
 
     this.userLoginForm = this.fb.group({
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         this.loginError=false;
         localStorage.setItem('token', response.token)
         localStorage.setItem('email',this.userLoginForm.value.mail)
-        this.router.navigateByUrl("/todo-list")
+        this.router.navigateByUrl("/projects")
       } 
     }, () =>{
         this.loginError=true;

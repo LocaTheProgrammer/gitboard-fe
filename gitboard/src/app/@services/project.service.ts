@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { BasicUserDTO } from '../@models/DTO/BasicUserDTO';
 import { CompanyDTO } from '../@models/DTO/CompanyDTO';
 import { ProjectDTO } from '../@models/DTO/ProjectDTO';
 import { ProjectUserDTO } from '../@models/DTO/ProjectUserDTO';
@@ -32,5 +33,9 @@ export class ProjectService {
   
   addUserToProject(puDTO: ProjectUserDTO) {
     return this.httpClient.post<any>(`${this.endpoint}addUserToProject`, puDTO)
+  }
+
+  findByUser(user: BasicUserDTO) {
+    return this.httpClient.post<any>(`${this.endpoint}findByUser`, user)
   }
 }
