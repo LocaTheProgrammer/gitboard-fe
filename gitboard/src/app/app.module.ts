@@ -40,6 +40,7 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { AssignUserToProjectComponent } from './@components/assign-user-to-project/assign-user-to-project.component';
 import { MatFormFieldAutoCompleteComponent } from './@components/mat-form-field-auto-complete/mat-form-field-auto-complete.component';
 import { ProjectListComponent } from './@pages/project-list/project-list.component';
+import { CreateUserComponent } from './@components/create-user/create-user.component';
 
 
 
@@ -66,7 +67,8 @@ import { ProjectListComponent } from './@pages/project-list/project-list.compone
     ResultMessageComponent,
     AssignUserToProjectComponent,
     MatFormFieldAutoCompleteComponent,
-    ProjectListComponent
+    ProjectListComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule,
