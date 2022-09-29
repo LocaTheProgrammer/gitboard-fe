@@ -6,42 +6,37 @@
     </div>
     <div class="row mt-5">
 
+        <!--non sono riuscito a fargli fare il ciclo for perchè il caricamento dei progetti dipende dalla company selezionata-->
         <div class="col-4 d-flex justify-content-center">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Select company</mat-label>
-                <input type="text" placeholder="Pick one" aria-label="Select task" matInput
-                    [formControl]="myControlCompany" [matAutocomplete]="autoC">
-                <mat-autocomplete #autoC="matAutocomplete">
-                    <mat-option *ngFor="let fc of filteredCompanies | async" [value]="fc">
-                        {{fc}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
+                <app-mat-form-field-auto-complete 
+                title="Choose Company"
+                [myFormControl]="myControlCompany"
+                [list]="companyNameList"
+                matAutocompleteValue="autoC"
+                placeholder="Pick One"
+                ></app-mat-form-field-auto-complete>
         </div>
 
         <div class="col-4 d-flex justify-content-center" (click)="loadProjectByCompany()">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Select project</mat-label>
-                <input type="text" placeholder="Pick one" aria-label="Select task" matInput
-                    [formControl]="myControlProjets" [matAutocomplete]="autoP">
-                <mat-autocomplete #autoP="matAutocomplete">
-                    <mat-option *ngFor="let fp of filteredProjects | async" [value]="fp">
-                        {{fp}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
+            
+            <app-mat-form-field-auto-complete 
+                title="Choose Project"
+                [myFormControl]="myControlProjets"
+                [list]="projectNameList"
+                matAutocompleteValue="autoP"
+                placeholder="Pick One"
+                ></app-mat-form-field-auto-complete>
         </div>
         <div class="col-4 d-flex justify-content-center" (click)="loadUsersByCompany()">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Select user</mat-label>
-                <input type="text" placeholder="Pick one" aria-label="Select task" matInput [formControl]="myControlUsers"
-                    [matAutocomplete]="autoF">
-                <mat-autocomplete #autoF="matAutocomplete">
-                    <mat-option *ngFor="let fu of filteredUsers | async" [value]="fu">
-                        {{fu}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
+            
+            <app-mat-form-field-auto-complete 
+            title="Choose User"
+            [myFormControl]="myControlUsers"
+            [list]="userEmailList"
+            matAutocompleteValue="autoU"
+            placeholder="Pick One"
+            ></app-mat-form-field-auto-complete>
+        
         </div>
     </div>
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { MatFormField } from 'src/app/@models/components/MatFormField';
 import { BasicUserDTO } from 'src/app/@models/DTO/BasicUserDTO';
 import { CompanyDTO } from 'src/app/@models/DTO/CompanyDTO';
 import { ProjectDTO } from 'src/app/@models/DTO/ProjectDTO';
@@ -36,9 +37,16 @@ export class AssignUserToProjectComponent implements OnInit {
   filteredProjects!: Observable<string[]>;
   filteredUsers!: Observable<string[]>;
 
+  matFormFieldCompany!:MatFormField
+  matFormFieldArrayProject!:MatFormField
+  matFormFieldArrayUser!:MatFormField
+
+  isMatFormCompanyLoaded:boolean=false
+  isMatFormProjectLoaded:boolean=false
+  isMatFormUserLoaded:boolean=false
 
   constructor(private projectService: ProjectService, private companyService: CompanyService, private userService: UserService) { }
-
+  
   ngOnInit(): void {
     this.loadCompanies()
     this.filteredCompanies = this.myControlCompany.valueChanges.pipe(
@@ -63,6 +71,9 @@ export class AssignUserToProjectComponent implements OnInit {
       this.companyList.forEach(c => {
         this.companyNameList.push(c.name)
       })
+
+      this.matFormFieldCompany=new MatFormField('select company', this.myControlCompany, companies, this.filteredCompanies, 'autoC', 'Pick Me')
+
     })
   }
 
@@ -89,7 +100,15 @@ export class AssignUserToProjectComponent implements OnInit {
     })
   }
 
+  isFormSubmittable() {
+    return !(this.myControlUsers.value == "" || this.myControlProjets.value == "")
+  }
 
+  save() {
+    console.log(this.companySelected)
+    console.log(this.myControlUsers)
+    console.log(this.myControlProjets)
+  }
 
   private _filterCompany(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -110,14 +129,5 @@ export class AssignUserToProjectComponent implements OnInit {
     return this.userEmailList.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  isFormSubmittable() {
-    return !(this.myControlUsers.value == "" || this.myControlProjets.value == "")
-  }
-
-  save() {
-    console.log(this.companySelected)
-    console.log(this.myControlUsers)
-    console.log(this.myControlProjets)
-  }
 
 }
