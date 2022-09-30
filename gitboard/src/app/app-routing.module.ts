@@ -10,6 +10,7 @@ import { SignUpSuccessfulComponent } from './@pages/sign-up-successful/sign-up-s
 import { SignupComponent } from './@pages/signup/signup.component';
 import { TodoListComponent } from './@pages/todo-list/todo-list.component';
 import { AuthGuardService } from './@services/auth/AuthGuardService';
+import { ProductListComponent } from './products/product-list/product-list.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,9 @@ const routes: Routes = [
   { path: 'confirm-reset', component: ConfirmResetComponent },
   { path: 'control-panel', component: AdminControlPanelComponent, canActivate: [AuthGuardService] },
   { path: 'projects', component: ProjectListComponent, canActivate: [AuthGuardService] },
+
+  //mocked api
+  { path: 'products', component: ProductListComponent },
 
 ];
 

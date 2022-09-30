@@ -43,6 +43,7 @@ import { ProjectListComponent } from './@pages/project-list/project-list.compone
 import { CreateUserComponent } from './@components/create-user/create-user.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './data.service';
+import { ProductsModule } from './products/products.module';
 
 
 
@@ -90,6 +91,9 @@ import { DataService } from './data.service';
     MatSelectModule,
     CommonModule,
     MatAutocompleteModule,
+
+    //mock api
+    ProductsModule,
     HttpClientInMemoryWebApiModule.forRoot(DataService),
   ],
   providers: [ 
