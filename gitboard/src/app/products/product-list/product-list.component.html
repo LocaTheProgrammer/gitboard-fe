@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row" *ngIf="products">
         <div class="col d-flex justify-content-center">
-            <input type="text" name="productName" [(ngModel)]="productName"> <!-- [(ngModel)]="product.name"-->
+            <input type="text" name="productName" [(ngModel)]="productName">
             <button [hidden]="add" (click)="addProduct()">add Product</button>
             <button [hidden]="edit" (click)="updateProduct()">Update Product</button>
         </div>
