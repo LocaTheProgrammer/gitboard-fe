@@ -34,49 +34,85 @@ export class DataService implements InMemoryDbService {
                 {
                     taskListId: 1,
                     isDeleted: false,
-                    taskPoistion: 0,
-                    taskListCategoryId: 2,
+                    taskPosition: 0,
+                    taskListCategoryId: 3,
                     projectId: 1,
                     taskId: 1,
+                    userId: 1
+                },
+                {
+                    taskListId: 2,
+                    isDeleted: false,
+                    taskPosition: 1,
+                    taskListCategoryId: 2,
+                    projectId: 1,
+                    taskId: 2,
+                    userId: 1
+                },
+                {
+                    taskListId: 3,
+                    isDeleted: false,
+                    taskPosition: 0,
+                    taskListCategoryId: 1,
+                    projectId: 1,
+                    taskId: 3,
+                    userId: 1
+                },
+                {
+                    taskListId: 1,
+                    isDeleted: false,
+                    taskPosition: 1,
+                    taskListCategoryId: 3,
+                    projectId: 1,
+                    taskId: 4,
+                    userId: 1
+                },
+                {
+                    taskListId: 2,
+                    isDeleted: false,
+                    taskPosition: 0,
+                    taskListCategoryId: 1,
+                    projectId: 1,
+                    taskId: 5,
                     userId: 1
                 }
             ],
 
             taskListCategory: [
                 {
-                    taskListCategoryId: 1,
-                    taskListcategoryDescription: 'todo'
+                    id: 1,
+                    description: 'todo'
                 },
                 {
-                    taskListCategoryId: 2,
-                    taskListcategoryDescription: 'progress'
+                    id: 2,
+                    description: 'progress'
                 },
                 {
-                    taskListCategoryId: 3,
-                    taskListcategoryDescription: 'done'
+                    id: 3,
+                    description: 'done'
                 }
             ],
 
             task: [
                 {
                     taskId: 1,
-                    taskDescription: 'mangiare'
+                    taskName: 'mangiare'
                 },
                 {
                     taskId: 2,
-                    taskDescription: 'bere'
+                    taskName: 'bere'
                 },
                 {
                     taskId: 3,
-                    taskDescription: 'dormire'
+                    taskName: 'dormire'
                 },
                 {
                     taskId: 4,
-                    taskDescription: 'studiare'
+                    taskName: 'studiare'
                 },
                 {
                     taskId: 5,
-                    taskDescription: 'lavorare'
+                    taskName: 'lavorare'
                 },
             ],
 

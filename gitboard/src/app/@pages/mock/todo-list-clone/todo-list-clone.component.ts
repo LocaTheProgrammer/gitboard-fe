@@ -52,10 +52,10 @@ export class TodoListCloneComponent implements OnInit {
   }
 
   initialize() {
-  
-      this.email = localStorage.getItem('email') + ''
-      this.getUserTaskListByUserEmail();
-   
+
+    this.email = localStorage.getItem('email') + ''
+    this.getUserTaskListByUserEmail();
+
   }
 
   getUserTaskListByUserEmail() {
@@ -67,9 +67,9 @@ export class TodoListCloneComponent implements OnInit {
 
       this.cardService.getDynamicUserTaskList().subscribe(tl => {
         this.inputTaskList = []
-      console.log(tl)
+        console.log(tl)
 
-        // this.inputTaskList = tl
+        //  this.inputTaskList = tl
 
         this.cardService.getTaskList().subscribe(tasks => {
           console.log(tasks)
@@ -77,18 +77,59 @@ export class TodoListCloneComponent implements OnInit {
 
 
           //popolo card array 
-          let i=0
-          tl.forEach(task=> {
-            let category=task.listName
+          let i = 0
+          tl.forEach(task => {
+
+            let category: CategoryDTO = categories.filter(category => category.id == task.taskListId)[0]
+
             let position = task.taskPosition
-            let description = task.taskName
-            let card = new Card(description, position, category, i);
-            this.cardList.push(card)
-            console.log(card)
-            i++;
+            let description = tasks.filter(t => t.taskId == task.taskId)
+
+            if (category != undefined) {
+
+              let card = new Card(description[0].taskName, position, category.description, i);
+              this.cardList.push(card)
+              i++;
+
+            }
+
           })
 
-          
+          console.log(this.cardList)
+
+          let todoCardArray: Card[] = []
+          let progCardArray: Card[] = []
+          let doneCardArray: Card[] = []
+
+          for (let card of this.cardList) {
+            switch (card.category) {
+              case 'todo':
+                todoCardArray.push(card)
+                break;
+              case 'progress':
+                progCardArray.push(card)
+                break;
+              case 'done':
+                doneCardArray.push(card)
+                break;
+              default:
+                console.log("error")
+            }
+          }
+
+          todoCardArray = this.sortCardArray(todoCardArray)
+          progCardArray = this.sortCardArray(progCardArray)
+
+          doneCardArray = this.sortCardArray(doneCardArray)
+
+          console.log(this.cardList)
+
+          console.log(todoCardArray)
+          console.log(progCardArray)
+          console.log(doneCardArray)
+
+
+
         })
       })
 
@@ -201,5 +242,11 @@ export class TodoListCloneComponent implements OnInit {
     })
   }
 
+
+  private sortCardArray(array:Card[]){
+   return array.sort((card1: Card, card2: Card) => {
+      return card1.position > card2.position ? 1 : -1;
+    }) 
+  }
 
 }

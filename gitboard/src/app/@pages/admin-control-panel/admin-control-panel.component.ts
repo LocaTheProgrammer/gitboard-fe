@@ -30,7 +30,7 @@ export class AdminControlPanelComponent {
   edit: AdminPanelDiv = new AdminPanelDiv("Edit Company", "edit")
   assignUserToProject: AdminPanelDiv = new AdminPanelDiv("Assign User To Project", "assignUserToProject")
   createUser:AdminPanelDiv = new AdminPanelDiv("Create User", "createUser")
-
+  
   divsArray: AdminPanelDiv[] = [this.createCompanyAdmin, this.createCompany, this.createTask, this.createBoard, this.assign, this.edit, this.assignUserToProject, this.createUser]
 
 

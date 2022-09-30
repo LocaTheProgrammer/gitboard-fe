@@ -12,7 +12,7 @@ import { TaskList } from 'src/app/@models/DTO/TaskList';
 export class DragNDropColoneComponent implements OnInit {
 
   
-  @Input() taskList!: TaskList[]
+  @Input() taskList!: any[]
   @Input() categoryList!: CategoryDTO[]
 
   @Output() isLoading: boolean = false;
@@ -43,7 +43,7 @@ export class DragNDropColoneComponent implements OnInit {
   }
 
   loadArrays(catId: number, task: Task) {
-    this.taskList[this.containerNumber].taskListDTOList.forEach(element => {
+    this.taskList[this.containerNumber].taskListDTOList.forEach((element:any) => {
       element.listName = this.categoryList[catId-1].description
     })
     this.containerCounter += this.categoryList.length

@@ -21,8 +21,8 @@
     </div>
 
     <div class="row mt-5" *ngIf="!isLoading && inputTaskList && inputCategoryList">
-        <app-drag-n-drop-colone [taskList]="inputTaskList" (result)="printTask($event)" [categoryList]="inputCategoryList">
-        </app-drag-n-drop-colone>
+        <app-drag-n-drop-colone  (result)="printTask($event)" [categoryList]="inputCategoryList">
+        </app-drag-n-drop-colone><!--[taskList]="cardList"-->
     </div>
 
     <div class="row mt-5 text-center" *ngIf="updateError">
