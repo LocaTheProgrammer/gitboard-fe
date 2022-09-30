@@ -41,6 +41,8 @@ import { AssignUserToProjectComponent } from './@components/assign-user-to-proje
 import { MatFormFieldAutoCompleteComponent } from './@components/mat-form-field-auto-complete/mat-form-field-auto-complete.component';
 import { ProjectListComponent } from './@pages/project-list/project-list.component';
 import { CreateUserComponent } from './@components/create-user/create-user.component';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { DataService } from './data.service';
 
 
 
@@ -87,7 +89,8 @@ import { CreateUserComponent } from './@components/create-user/create-user.compo
     MatNativeDateModule,
     MatSelectModule,
     CommonModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    HttpClientInMemoryWebApiModule.forRoot(DataService),
   ],
   providers: [ 
     MatDatepickerModule,
