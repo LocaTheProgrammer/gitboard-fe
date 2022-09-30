@@ -44,6 +44,8 @@ import { CreateUserComponent } from './@components/create-user/create-user.compo
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './data.service';
 import { ProductsModule } from './products/products.module';
+import { DragNDropColoneComponent } from './@components/mock/drag-n-drop-colone/drag-n-drop-colone.component';
+import { TodoListCloneComponent } from './@pages/mock/todo-list-clone/todo-list-clone.component';
 
 
 
@@ -71,7 +73,9 @@ import { ProductsModule } from './products/products.module';
     AssignUserToProjectComponent,
     MatFormFieldAutoCompleteComponent,
     ProjectListComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    DragNDropColoneComponent,
+    TodoListCloneComponent
   ],
   imports: [
     BrowserModule,

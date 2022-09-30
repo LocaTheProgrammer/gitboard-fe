@@ -4,6 +4,7 @@ import { AdminControlPanelComponent } from './@pages/admin-control-panel/admin-c
 import { ConfirmResetComponent } from './@pages/confirm-reset/confirm-reset.component';
 import { HomeComponent } from './@pages/home/home.component';
 import { LoginComponent } from './@pages/login/login.component';
+import { TodoListCloneComponent } from './@pages/mock/todo-list-clone/todo-list-clone.component';
 import { PasswordForgottenComponent } from './@pages/password-forgotten/password-forgotten.component';
 import { ProjectListComponent } from './@pages/project-list/project-list.component';
 import { SignUpSuccessfulComponent } from './@pages/sign-up-successful/sign-up-successful.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
 
   //mocked api
   { path: 'products', component: ProductListComponent },
+  { path: 'todo-clone', component: TodoListCloneComponent },
 
 ];
 
