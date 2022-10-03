@@ -281,9 +281,9 @@ export class TodoListCloneComponent implements OnInit {
   }
 
   updateTaskListEmit($event:any){
+    this.resetAll()
     console.log('called')
     console.log($event)
-    this.resetAll()
     this.initialize()
   }
 

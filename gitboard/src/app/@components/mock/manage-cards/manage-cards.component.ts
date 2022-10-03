@@ -46,19 +46,26 @@ export class ManageCardsComponent implements OnInit {
   }
 
   delete() {
-    this.isCallDone = false
-    this.mockCardService.deleteCard(this.taskSelected).subscribe(() => {
-      this.aType = 'success'
-      this.mex = 'delete ok'
-    },
-      () => {
-        this.aType = 'danger'
-        this.mex = 'delete NOT ok'
+    this.mockCardService.deleteCardFromTaskList(this.taskSelected).subscribe((r:any) => {
+      this.isCallDone = false
+      console.log(r)
+      this.mockCardService.deleteCard(this.taskSelected).subscribe(() => {
+        this.aType = 'success'
+        this.mex = 'delete ok'
       },
-      () => {
-        this.getAllTasks()
-        this.isCallDone = true
-      })
+        () => {
+          this.aType = 'danger'
+          this.mex = 'delete NOT ok'
+        },
+        () => {
+          this.getAllTasks()
+          this.isCallDone = true
+          debugger
+          // this.emitter.emit('ok')
+        })
+    }
+    )
+
   }
 
 
