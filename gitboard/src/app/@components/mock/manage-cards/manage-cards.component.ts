@@ -60,68 +60,78 @@ export class ManageCardsComponent implements OnInit {
       })
   }
 
+
+  setTaskSelected($event:any){
+    this.taskSelected=$event
+  }
+
+  setCategorySelected($event:any){
+    this.catSelected=$event
+  }
   addTaskToList() {
-    this.mockCardService.getDynamicUserTaskList().subscribe(taskListResponse => {
-      let todoList: Task[] = []
-      let progressList: Task[]=[]
-      let doneList: Task[]=[]
+    console.log(this.taskSelected)
+    console.log(this.catSelected)
+    // this.mockCardService.getDynamicUserTaskList().subscribe(taskListResponse => {
+    //   let todoList: Task[] = []
+    //   let progressList: Task[]=[]
+    //   let doneList: Task[]=[]
 
-      console.log(taskListResponse)
-      taskListResponse.forEach(task => {
-        switch (task.taskListCategoryId) {
-          case 1:
-            todoList.push(task)
-            break;
-          case 2:
-            progressList.push(task)
-            break;
-          case 3:
-            doneList.push(task)
-            break;
-          default:
-            console.log("error");
-        }
-      })
+    //   console.log(taskListResponse)
+    //   taskListResponse.forEach(task => {
+    //     switch (task.taskListCategoryId) {
+    //       case 1:
+    //         todoList.push(task)
+    //         break;
+    //       case 2:
+    //         progressList.push(task)
+    //         break;
+    //       case 3:
+    //         doneList.push(task)
+    //         break;
+    //       default:
+    //         console.log("error");
+    //     }
+    //   })
 
-      let newTask : any 
+    //   let newTask : any 
 
-      switch (this.catSelected) {
-        case 'todo':
-          newTask = {
-            taskListId:taskListResponse.length,
-            isDeleted:false,
-            taskPosition: todoList.length,
-            taskListCategoryId:1,
-            projectId: 1,
-            taskId: this.taskList.length,
-            userId:1
-          }
-        break;
-        case 'progress':
-          newTask = {
-            taskListId:taskListResponse.length,
-            isDeleted:false,
-            taskPosition: progressList.length,
-            taskListCategoryId:2,
-            projectId: 1,
-            taskId: this.taskList.length,
-            userId:1
-          }
-        break;
-        case 'done':
-          newTask = {
-            taskListId:taskListResponse.length,
-            isDeleted:false,
-            taskPosition: doneList.length,
-            taskListCategoryId:2,
-            projectId: 1,
-            taskId: this.taskList.length,
-            userId:1
-          }
-        break;
-        default:
-          console.log("error")
-      }
-    })
+    //   switch (this.catSelected) {
+    //     case 'todo':
+    //       newTask = {
+    //         taskListId:taskListResponse.length,
+    //         isDeleted:false,
+    //         taskPosition: todoList.length,
+    //         taskListCategoryId:1,
+    //         projectId: 1,
+    //         taskId: this.taskList.length,
+    //         userId:1
+    //       }
+    //     break;
+    //     case 'progress':
+    //       newTask = {
+    //         taskListId:taskListResponse.length,
+    //         isDeleted:false,
+    //         taskPosition: progressList.length,
+    //         taskListCategoryId:2,
+    //         projectId: 1,
+    //         taskId: this.taskList.length,
+    //         userId:1
+    //       }
+    //     break;
+    //     case 'done':
+    //       newTask = {
+    //         taskListId:taskListResponse.length,
+    //         isDeleted:false,
+    //         taskPosition: doneList.length,
+    //         taskListCategoryId:2,
+    //         projectId: 1,
+    //         taskId: this.taskList.length,
+    //         userId:1
+    //       }
+    //     break;
+    //     default:
+    //       console.log("error")
+    //   }
+    // })
   }
 }

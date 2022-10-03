@@ -2,6 +2,8 @@
 <!--TODO REFACTOR-->
 <div class="row">
     <div class="col d-flex justify-content-center">
+        <app-mat-select label="task" objField="taskName" [list]="taskList" (emitter)="setTaskSelected($event)"></app-mat-select>
+<!-- 
         <mat-form-field appearance="fill">
             <mat-label>task</mat-label>
             <mat-select [(ngModel)]="taskSelected">
@@ -9,17 +11,20 @@
                     {{task.taskName}}
                 </mat-option>
             </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
     </div>
     <div class="col d-flex justify-content-center">
-        <mat-form-field appearance="fill">
+
+        <app-mat-select label="category" objField="description" [list]="categoryList" (emitter)="setCategorySelected($event)"></app-mat-select>
+
+        <!-- <mat-form-field appearance="fill">
             <mat-label>category</mat-label>
             <mat-select [(ngModel)]="catSelected">
                 <mat-option *ngFor="let c of categoryList" [value]="c.description">
                     {{c.description}}
                 </mat-option>
             </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
     </div>
 </div>
 

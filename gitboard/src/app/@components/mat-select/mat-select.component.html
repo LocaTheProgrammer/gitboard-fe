@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill">
+    <mat-label>{{label}}</mat-label>
+    <mat-select [(ngModel)]="itemSelected">
+        <mat-option *ngFor="let item of list" [value]="item">
+            {{item[objField]}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

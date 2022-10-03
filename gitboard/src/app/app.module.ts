@@ -50,6 +50,7 @@ import { CreateCardComponent } from './@components/mock/create-card/create-card.
 import { AccordionComponent } from './@components/accordion/accordion.component';
 import { ManageCardsComponent } from './@components/mock/manage-cards/manage-cards.component';
 import { ButtonComponent } from './@components/button/button.component';
+import { MatSelectComponent } from './@components/mat-select/mat-select.component';
 
 
 
@@ -83,7 +84,8 @@ import { ButtonComponent } from './@components/button/button.component';
     CreateCardComponent,
     AccordionComponent,
     ManageCardsComponent,
-    ButtonComponent
+    ButtonComponent,
+    MatSelectComponent
   ],
   imports: [
     BrowserModule,
