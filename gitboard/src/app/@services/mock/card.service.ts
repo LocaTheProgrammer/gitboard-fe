@@ -20,7 +20,7 @@ export class CardService {
   constructor(private http: HttpClient) { }
 
   getDynamicUserTaskList() {
-    return this.http.get<Task[]>(this.taskListUrl)
+    return this.http.get<any[]>(this.taskListUrl)
   }
 
   getCategories(){

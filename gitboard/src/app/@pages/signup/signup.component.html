@@ -126,10 +126,7 @@
     
             <div class="row mt-2">
                 <div class="col d-flex justify-content-center">
-                    <button [disabled]="!userSignupForm.valid || !checkEmailAndPassword() || !incorrectMail" (click)="signup()"
-                        class="btn btn-primary" [ngClass]="!userSignupForm.valid ? 'button-disabled' : '' ">
-                        Sign Up
-                    </button>
+                <app-button btnType="primary" btnText="signup" (click)="signup()" [disabledCondition]="!userSignupForm.valid || !checkEmailAndPassword() || !incorrectMail"></app-button>
                 </div>
             </div>
         </form>

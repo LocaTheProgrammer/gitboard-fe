@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryDTO } from 'src/app/@models/DTO/CategoryDTO';
+import { Task } from 'src/app/@models/DTO/Task';
 import { TaskModelMock } from 'src/app/@models/mock/TaskModelMock';
 import { CardService } from 'src/app/@services/mock/card.service';
 
@@ -17,13 +19,24 @@ export class ManageCardsComponent implements OnInit {
   aType: string = ''
 
   isCallDone: boolean = false
+  categoryList: CategoryDTO[] = [];
+
+  catSelected: string = ''
 
   constructor(private mockCardService: CardService) { }
 
   ngOnInit(): void {
     this.getAllTasks()
+    this.getAllCategories()
   }
 
+  getAllCategories() {
+    this.mockCardService.getCategories().subscribe(
+      response => {
+        this.categoryList = response
+      }
+    )
+  }
 
   getAllTasks() {
     this.mockCardService.getAllTask().subscribe(response => {
@@ -45,5 +58,70 @@ export class ManageCardsComponent implements OnInit {
         this.getAllTasks()
         this.isCallDone = true
       })
+  }
+
+  addTaskToList() {
+    this.mockCardService.getDynamicUserTaskList().subscribe(taskListResponse => {
+      let todoList: Task[] = []
+      let progressList: Task[]=[]
+      let doneList: Task[]=[]
+
+      console.log(taskListResponse)
+      taskListResponse.forEach(task => {
+        switch (task.taskListCategoryId) {
+          case 1:
+            todoList.push(task)
+            break;
+          case 2:
+            progressList.push(task)
+            break;
+          case 3:
+            doneList.push(task)
+            break;
+          default:
+            console.log("error");
+        }
+      })
+
+      let newTask : any 
+
+      switch (this.catSelected) {
+        case 'todo':
+          newTask = {
+            taskListId:taskListResponse.length,
+            isDeleted:false,
+            taskPosition: todoList.length,
+            taskListCategoryId:1,
+            projectId: 1,
+            taskId: this.taskList.length,
+            userId:1
+          }
+        break;
+        case 'progress':
+          newTask = {
+            taskListId:taskListResponse.length,
+            isDeleted:false,
+            taskPosition: progressList.length,
+            taskListCategoryId:2,
+            projectId: 1,
+            taskId: this.taskList.length,
+            userId:1
+          }
+        break;
+        case 'done':
+          newTask = {
+            taskListId:taskListResponse.length,
+            isDeleted:false,
+            taskPosition: doneList.length,
+            taskListCategoryId:2,
+            projectId: 1,
+            taskId: this.taskList.length,
+            userId:1
+          }
+        break;
+        default:
+          console.log("error")
+      }
+    })
   }
 }

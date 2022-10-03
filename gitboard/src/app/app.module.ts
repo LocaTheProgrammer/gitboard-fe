@@ -49,6 +49,7 @@ import { TodoListCloneComponent } from './@pages/mock/todo-list-clone/todo-list-
 import { CreateCardComponent } from './@components/mock/create-card/create-card.component';
 import { AccordionComponent } from './@components/accordion/accordion.component';
 import { ManageCardsComponent } from './@components/mock/manage-cards/manage-cards.component';
+import { ButtonComponent } from './@components/button/button.component';
 
 
 
@@ -81,7 +82,8 @@ import { ManageCardsComponent } from './@components/mock/manage-cards/manage-car
     TodoListCloneComponent,
     CreateCardComponent,
     AccordionComponent,
-    ManageCardsComponent
+    ManageCardsComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,

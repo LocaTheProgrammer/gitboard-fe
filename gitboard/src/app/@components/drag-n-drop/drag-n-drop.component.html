@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <!-- {{dragDropDTO[CATEGORIA].list[TASK].taskName | json}} [c.id].list -->
-            <!--workaround con i c.id perchè per qualche motivo facendo la insert gli id categoria partono da 1 *spallucce*-->
+            <!--workaround con i c.id perchè per qualche motivo facendo la insert gli id categoria partono da 1-->
             <div *ngIf="taskList && categoryList" cdkDropList [cdkDropListData]="taskList[c.id-1].taskListDTOList" class="example-list" (cdkDropListDropped)="drop($event, c.id)">
                 <div class="example-box" *ngFor="let item of taskList[c.id-1].taskListDTOList" cdkDrag>{{item.taskName}}</div>
             </div>
