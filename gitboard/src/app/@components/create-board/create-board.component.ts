@@ -76,4 +76,13 @@ export class CreateBoardComponent implements OnInit {
     })
   }
 
+
+  setCompany($event:any){
+    this.companySelected=$event
+  }
+
+  setCompanyAdmin($event:any){
+    this.adminSelected=$event
+  }
+
 }

@@ -5,6 +5,8 @@
         3 - creare project board
     -->
 
+    <!--TODO TEST-->
+
     <div class="row">
         <div class="col d-flex justify-content-center">
             <h1>Create Project</h1>
@@ -14,14 +16,19 @@
     <!--selezione company-->
     <div class="row justify-content-center mt-5">
         <div class="col-6 d-flex justify-content-center" (click)="getCompanyLists()">
-            <mat-form-field appearance="fill">
+
+            
+            <app-mat-select label="Company" objField="name" [list]="companyList" (emitter)="setCompany($event)">
+            </app-mat-select>
+
+            <!-- <mat-form-field appearance="fill">
                 <mat-label>Company</mat-label>
                 <mat-select [(ngModel)]="companySelected">
                     <mat-option *ngFor="let company of companyList" [value]="company">
                         {{company.name}}
                     </mat-option>
                 </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
         </div>
     </div>
 
@@ -29,14 +36,18 @@
     <div class="row mt-5 justify-content-center">
 
         <div class="col-6 d-flex justify-content-center" (click)="getAllCompanyAdmins()">
-            <mat-form-field appearance="fill">
+
+            <app-mat-select label="Admin" objField="name" [list]="companyAdminList" (emitter)="setCompanyAdmin($event)">
+            </app-mat-select>
+
+            <!-- <mat-form-field appearance="fill">
                 <mat-label>Admin</mat-label>
                 <mat-select [(ngModel)]="adminSelected">
                     <mat-option *ngFor="let companyAdmin of companyAdminList" [value]="companyAdmin">
                         {{companyAdmin.name}}
                     </mat-option>
                 </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
         </div>
 
     </div>

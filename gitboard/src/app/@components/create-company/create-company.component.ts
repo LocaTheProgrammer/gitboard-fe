@@ -76,4 +76,8 @@ export class CreateCompanyComponent implements OnInit {
     
   }
 
+
+  setCompanyAdmin($event:any){
+    this.companyAdminSelected=$event
+  }
 }

@@ -1,6 +1,6 @@
 <div class="background-elements">
     <!-- Crea le Compagnie, assegna i Company-Admin. -->
-
+    <!--TODO TEST-->
     <div class="row">
         <div class="col d-flex justify-content-center">
             <h1>Create Company</h1>
@@ -41,17 +41,22 @@
             <span class="align-self-center fw-500">Assign Company to Company-Admin</span>
         </div>
         <div class="col-4 d-flex justify-content-center" (click)="getFreeAdmins()">
-            <mat-form-field appearance="fill">
+
+            <app-mat-select label="select an admin" objField="name" [list]="companyAdminList"
+                (emitter)="setCompanyAdmin($event)">
+            </app-mat-select>
+
+            <!-- <mat-form-field appearance="fill">
                 <mat-label>Select and admin</mat-label>
                 <mat-select [(ngModel)]="companyAdminSelected">
                     <mat-option *ngFor="let companyAdmin of companyAdminList" [value]="companyAdmin">
                         {{companyAdmin.name}}
                     </mat-option>
                 </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
         </div>
     </div>
-    <div class="row mt-5"  *ngIf="noAvailableAdmin">
+    <div class="row mt-5" *ngIf="noAvailableAdmin">
         <div class="col d-flex justify-content-center">
             <div class="alert alert-danger" role="alert">
                 No Available Admin
@@ -66,7 +71,8 @@
 
     <div class="row mt-5">
         <div class="col d-flex justify-content-center">
-            <app-button btnType="primary" btnText="save" (click)="submitForm()" [disabledCondition]="!isFormValid()"></app-button>
+            <app-button btnType="primary" btnText="save" (click)="submitForm()" [disabledCondition]="!isFormValid()">
+            </app-button>
 
 
             <!-- <button class="btn btn-primary" (click)="submitForm()" [disabled]="!isFormValid()">

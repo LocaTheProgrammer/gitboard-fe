@@ -126,5 +126,15 @@ export class AddTaskToBoardComponent implements OnInit {
       }, () => this.isBoardUpdated = true)
   }
 
+  setProject($event:any){
+    this.project=$event
+  }
 
+  setCategory($event:any){
+    this.category=$event
+  }
+
+  setUser($event:any){
+    this.user=$event
+  }
 }
