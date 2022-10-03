@@ -14,7 +14,7 @@ export class MatSelectComponent implements OnInit, DoCheck {
   @Input() objField!: string
   @Input() list: any[] = []
 
-  @Output() emitter= new EventEmitter<any>();
+  @Output() emitter = new EventEmitter<any>();
 
 
   itemSelected: any=this.list[0];
@@ -31,7 +31,7 @@ export class MatSelectComponent implements OnInit, DoCheck {
   check(){
     const change = this.differ.diff(this);
     if (change) {
-      change.forEachChangedItem(item => {
+      change.forEachChangedItem(() => {
         this.emitter.emit(this.itemSelected)
       });
     }

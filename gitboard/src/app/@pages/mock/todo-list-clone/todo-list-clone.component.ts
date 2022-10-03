@@ -73,6 +73,8 @@ export class TodoListCloneComponent implements OnInit {
       this.cardService.getDynamicUserTaskList().subscribe(tl => {
         this.inputTaskList = []
 
+        console.log(tl)
+
         //  this.inputTaskList = tl
 
         this.cardService.getTaskList().subscribe(tasks => {
@@ -138,7 +140,7 @@ export class TodoListCloneComponent implements OnInit {
             cards: doneCardArray
           }
           this.cardsArray.push(cardArray);
-
+          console.log(this.cardsArray)
 
         })
       })
@@ -276,6 +278,39 @@ export class TodoListCloneComponent implements OnInit {
   hide() {
     this.isCreateVisible = false
     this.isManageVisible = false
+  }
+
+  updateTaskListEmit($event:any){
+    console.log('called')
+    console.log($event)
+    this.resetAll()
+    this.initialize()
+  }
+
+  resetAll(){
+
+    this.todo= [];
+    this.inProgress= [];
+    this.done = [];
+    this.taskList = [];
+    this.email = ''
+    this.isLoading = false;
+    this.isManageVisible = false
+  
+    this.cardsArray = [];
+  
+    this.containerName = ''
+    this.containerCounter = 0
+    this.isFirstShifting = true;
+  
+    this.updateError = false
+  
+  
+    //mock purpose properties
+    this.cardList = []
+    this.taskListMock = []
+    this.isCreateVisible = false
+  
   }
 
 }

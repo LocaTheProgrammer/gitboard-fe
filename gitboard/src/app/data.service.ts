@@ -31,7 +31,7 @@ export class DataService implements InMemoryDbService {
 
             //questa è una card TODO refactor
             taskList: [
-                {
+                {   id:0,
                     taskListId: 1,
                     isDeleted: false,
                     taskPosition: 0,
@@ -40,7 +40,7 @@ export class DataService implements InMemoryDbService {
                     taskId: 1,
                     userId: 1
                 },
-                {
+                {   id:1,
                     taskListId: 2,
                     isDeleted: false,
                     taskPosition: 1,
@@ -49,7 +49,7 @@ export class DataService implements InMemoryDbService {
                     taskId: 2,
                     userId: 1
                 },
-                {
+                {   id:2,
                     taskListId: 3,
                     isDeleted: false,
                     taskPosition: 0,
@@ -58,7 +58,7 @@ export class DataService implements InMemoryDbService {
                     taskId: 3,
                     userId: 1
                 },
-                {
+                {   id:3,
                     taskListId: 4,
                     isDeleted: false,
                     taskPosition: 1,
@@ -67,7 +67,7 @@ export class DataService implements InMemoryDbService {
                     taskId: 4,
                     userId: 1
                 },
-                {
+                {   id:4,
                     taskListId: 5,
                     isDeleted: false,
                     taskPosition: 0,

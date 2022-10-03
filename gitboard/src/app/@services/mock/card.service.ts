@@ -12,7 +12,6 @@ import { TaskModelMock } from 'src/app/@models/mock/TaskModelMock';
 })
 export class CardService {
 
-
   private categoryUrl = 'api/taskListCategory/'
   private taskListUrl = 'api/taskList/'
   private taskUrl = 'api/task/'
@@ -43,4 +42,9 @@ export class CardService {
     return this.http.delete<any>(this.taskUrl + task.id) 
   }
   
+  addTaskToTaskList(newTask: any) {
+    return this.http.post<any>(this.taskListUrl, newTask)
+  }
+
+
 }
