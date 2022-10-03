@@ -26,6 +26,7 @@ export class DragNDropColoneComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.taskList)
   }
 
   drop(event: any, catId: number) { // CdkDragDrop<string[]>
@@ -43,7 +44,7 @@ export class DragNDropColoneComponent implements OnInit {
   }
 
   loadArrays(catId: number, task: Task) {
-    this.taskList[this.containerNumber].taskListDTOList.forEach((element:any) => {
+    this.taskList[this.containerNumber].cards.forEach((element:any) => {
       element.listName = this.categoryList[catId-1].description
     })
     this.containerCounter += this.categoryList.length
@@ -70,15 +71,25 @@ export class DragNDropColoneComponent implements OnInit {
 
     this.containerNumber = +containerNumber - this.containerCounter
 
-    listName = this.categoryList[catId-1].description
-    taskName = this.taskList[catId-1].taskListDTOList[event.currentIndex].taskName
-    taskId = this.taskList[catId-1].taskListDTOList[event.currentIndex].taskId
-    taskListId = this.taskList[catId-1].taskListDTOList[event.currentIndex].taskListId
+    listName = this.categoryList[catId-1].description //ok
+    taskName = this.taskList[catId-1].cards[event.currentIndex].description //ok
+    taskId = this.taskList[catId-1].cards[event.currentIndex].taskId //ok
+    taskListId = this.taskList[catId-1].cards[event.currentIndex].taskListId
 
 
-    task = new Task(listName, taskName, taskPosition, taskId, taskListId)
+    //TODO dinamico
+    let categoryID
+    switch(this.taskList[catId-1].cards[event.currentIndex].category){
+      case 'todo': categoryID=1; break;
+      case 'progress': categoryID=2; break;
+      case 'done': categoryID=3; break;
+    }
 
-   this.loadArrays(catId, task)
+
+    task = new Task(listName, taskName, taskPosition, taskId, taskListId, undefined, categoryID)
+
+    console.log(task)
+   //this.loadArrays(catId, task)
   //  this.result.emit(task)
 
   }

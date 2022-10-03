@@ -6,6 +6,7 @@ import { ProjectUserDTO } from 'src/app/@models/DTO/ProjectUserDTO';
 import { Task } from 'src/app/@models/DTO/Task';
 import { TaskList } from 'src/app/@models/DTO/TaskList';
 import { Card } from 'src/app/@models/mock/Card';
+import { CardArray } from 'src/app/@models/mock/CardArry';
 import { CategoryService } from 'src/app/@services/category.service';
 import { CardService } from 'src/app/@services/mock/card.service';
 import { TaskService } from 'src/app/@services/task.service';
@@ -23,6 +24,8 @@ export class TodoListCloneComponent implements OnInit {
   taskList: Task[] = [];
   email: string = ''
   isLoading: boolean = false;
+
+  cardsArray: CardArray[] = [];
 
   containerName: string = ''
   containerCounter: number = 0
@@ -62,40 +65,34 @@ export class TodoListCloneComponent implements OnInit {
 
     this.cardService.getCategories().subscribe(categories => {
       this.inputCategoryList = []
-      console.log(categories)
       this.inputCategoryList = categories
 
       this.cardService.getDynamicUserTaskList().subscribe(tl => {
         this.inputTaskList = []
-        console.log(tl)
 
         //  this.inputTaskList = tl
 
         this.cardService.getTaskList().subscribe(tasks => {
-          console.log(tasks)
           this.taskListMock = tasks
 
 
           //popolo card array 
-          let i = 0
           tl.forEach(task => {
 
-            let category: CategoryDTO = categories.filter(category => category.id == task.taskListId)[0]
+            let category: CategoryDTO = categories.filter(category => category.id == task.taskListCategoryId)[0]
 
             let position = task.taskPosition
             let description = tasks.filter(t => t.taskId == task.taskId)
 
-            if (category != undefined) {
+            //if (category != undefined) {
 
-              let card = new Card(description[0].taskName, position, category.description, i);
+              let card = new Card(description[0].taskName, position, category.description, task.taskListId, task.taskId);
               this.cardList.push(card)
-              i++;
 
-            }
+            //}
 
           })
 
-          console.log(this.cardList)
 
           let todoCardArray: Card[] = []
           let progCardArray: Card[] = []
@@ -122,12 +119,22 @@ export class TodoListCloneComponent implements OnInit {
 
           doneCardArray = this.sortCardArray(doneCardArray)
 
-          console.log(this.cardList)
 
-          console.log(todoCardArray)
-          console.log(progCardArray)
-          console.log(doneCardArray)
+          let cardArray = new CardArray([]);
+          cardArray = {
+            cards: todoCardArray
+          }
+          this.cardsArray.push(cardArray);
 
+          cardArray = {
+            cards: progCardArray
+          }
+          this.cardsArray.push(cardArray);
+
+          cardArray = {
+            cards: doneCardArray
+          }
+          this.cardsArray.push(cardArray);
 
 
         })
@@ -243,10 +250,10 @@ export class TodoListCloneComponent implements OnInit {
   }
 
 
-  private sortCardArray(array:Card[]){
-   return array.sort((card1: Card, card2: Card) => {
+  private sortCardArray(array: Card[]) {
+    return array.sort((card1: Card, card2: Card) => {
       return card1.position > card2.position ? 1 : -1;
-    }) 
+    })
   }
 
 }

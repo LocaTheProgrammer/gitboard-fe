@@ -20,9 +20,10 @@
         </div>
     </div>
 
-    <div class="row mt-5" *ngIf="!isLoading && inputTaskList && inputCategoryList">
-        <app-drag-n-drop-colone  (result)="printTask($event)" [categoryList]="inputCategoryList">
-        </app-drag-n-drop-colone><!--[taskList]="cardList"-->
+    <!--TODO rendere dinamica la lenght-->
+    <div class="row mt-5" *ngIf="!isLoading && cardsArray.length==3 && inputCategoryList">
+        <app-drag-n-drop-colone  (result)="printTask($event)" [categoryList]="inputCategoryList" [taskList]="cardsArray">
+        </app-drag-n-drop-colone><!---->
     </div>
 
     <div class="row mt-5 text-center" *ngIf="updateError">

@@ -98,7 +98,10 @@ import { TodoListCloneComponent } from './@pages/mock/todo-list-clone/todo-list-
 
     //mock api
     ProductsModule,
-    HttpClientInMemoryWebApiModule.forRoot(DataService),
+    HttpClientInMemoryWebApiModule.forRoot(DataService,{ 
+      rootPath: 'api/',
+      passThruUnknownUrl: true
+  })
   ],
   providers: [ 
     MatDatepickerModule,

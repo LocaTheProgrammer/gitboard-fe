@@ -1,5 +1,13 @@
 <!--CLONE-->
 <!--drag n drop clone-->
+
+<div class="row">
+    <div class="col d-flex justify-content-center">
+        <h1 style="font-weight: 800;">CLONE</h1>
+    </div>
+</div>
+
+
 <div class="row">
 
     <div class="col" *ngFor="let c of categoryList">
@@ -9,8 +17,8 @@
         <div class="row">
             <!-- {{dragDropDTO[CATEGORIA].list[TASK].taskName | json}} [c.id].list -->
             <!--workaround con i c.id perchè per qualche motivo facendo la insert gli id categoria partono da 1 *spallucce*-->
-            <div *ngIf="taskList && categoryList" cdkDropList [cdkDropListData]="taskList[c.id-1].taskListDTOList" class="example-list" (cdkDropListDropped)="drop($event, c.id)">
-                <div class="example-box" *ngFor="let item of taskList[c.id-1].taskListDTOList" cdkDrag>{{item.taskName}}</div>
+            <div *ngIf="taskList && categoryList" cdkDropList [cdkDropListData]="taskList[c.id-1].cards" class="example-list" (cdkDropListDropped)="drop($event, c.id)">
+                <div class="example-box" *ngFor="let item of taskList[c.id-1].cards" cdkDrag>{{item.description}}</div>
             </div>
         </div>
     </div>

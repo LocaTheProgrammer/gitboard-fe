@@ -10,9 +10,9 @@ import { TaskList } from 'src/app/@models/DTO/TaskList';
 })
 export class CardService {
 
-  private categoryUrl = 'api/taskListCategory/'
-  private taskListUrl = 'api/taskList/'
-  private taskUrl = 'api/task/'
+  private categoryUrl = 'api/taskListCategory'
+  private taskListUrl = 'api/taskList'
+  private taskUrl = 'api/task'
   
   constructor(private http: HttpClient) { }
 

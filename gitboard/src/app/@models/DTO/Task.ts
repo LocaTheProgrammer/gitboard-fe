@@ -7,13 +7,17 @@ export class Task{
 
     public projectId?:number
 
-    constructor(listName:string, taskName:string, taskPosition:number, taskId:number, taskListId:number, projectId?:number){
+    //mock-only
+    public taskListCategoryId?:number
+
+    constructor(listName:string, taskName:string, taskPosition:number, taskId:number, taskListId:number, projectId?:number, taskListCategoryId?:number){
         this.listName=listName
         this.taskName=taskName
         this.taskPosition=taskPosition
         this.taskId=taskId
         this.taskListId=taskListId
         this.projectId=projectId
+        this.taskListCategoryId=taskListCategoryId
     }
 
 }
