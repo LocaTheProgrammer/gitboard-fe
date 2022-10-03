@@ -1,0 +1,20 @@
+<!--assign to list-->
+<div class="row">
+    <div class="col d-flex justify-content-center">
+        <mat-form-field appearance="fill">
+            <mat-label>task</mat-label>
+            <mat-select [(ngModel)]="taskSelected">
+                <mat-option *ngFor="let task of taskList" [value]="task">
+                    {{task.taskName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col d-flex justify-content-center">
+        <button class="btn btn-danger" (click)="delete()">
+            DELETE
+        </button>
+    </div>
+</div>
+
+<app-result-message *ngIf="isCallDone" [alertType]="aType" [message]="mex"></app-result-message>

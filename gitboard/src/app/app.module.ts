@@ -46,6 +46,9 @@ import { DataService } from './data.service';
 import { ProductsModule } from './products/products.module';
 import { DragNDropColoneComponent } from './@components/mock/drag-n-drop-colone/drag-n-drop-colone.component';
 import { TodoListCloneComponent } from './@pages/mock/todo-list-clone/todo-list-clone.component';
+import { CreateCardComponent } from './@components/mock/create-card/create-card.component';
+import { AccordionComponent } from './@components/accordion/accordion.component';
+import { ManageCardsComponent } from './@components/mock/manage-cards/manage-cards.component';
 
 
 
@@ -75,7 +78,10 @@ import { TodoListCloneComponent } from './@pages/mock/todo-list-clone/todo-list-
     ProjectListComponent,
     CreateUserComponent,
     DragNDropColoneComponent,
-    TodoListCloneComponent
+    TodoListCloneComponent,
+    CreateCardComponent,
+    AccordionComponent,
+    ManageCardsComponent
   ],
   imports: [
     BrowserModule,

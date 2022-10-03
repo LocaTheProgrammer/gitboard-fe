@@ -22,8 +22,54 @@
 
     <!--TODO rendere dinamica la lenght-->
     <div class="row mt-5" *ngIf="!isLoading && cardsArray.length==3 && inputCategoryList">
-        <app-drag-n-drop-colone  (result)="printTask($event)" [categoryList]="inputCategoryList" [taskList]="cardsArray">
-        </app-drag-n-drop-colone><!---->
+        <app-drag-n-drop-colone (result)="printTask($event)" [categoryList]="inputCategoryList" [taskList]="cardsArray">
+        </app-drag-n-drop-colone>
+        <!---->
+    </div>
+
+
+
+    <div class="row mt-5"  *ngIf="!isCreateVisible || !isManageVisible">
+        <div class="col d-flex justify-content-center">
+            <button (click)="action('create')" class="btn btn-primary" *ngIf="!isCreateVisible">
+                create card
+            </button>
+        </div>
+        <div class="col d-flex justify-content-center">
+            <button (click)="action('manage')" class="btn btn-primary" *ngIf="!isManageVisible">
+                manage cards
+            </button>
+        </div>
+    </div>
+    
+    
+   
+
+
+
+    <div class="row mt-5" *ngIf="isCreateVisible || isManageVisible">
+        <div class="col d-flex justify-content-start">
+            <button (click)="hide() " class="btn btn-primary">
+                hide
+            </button>
+        </div>
+    </div>
+
+
+    <div class="row mt-5" *ngIf="isCreateVisible">
+        <div class="row mt-5">
+            <div class="col d-flex justify-content-center">
+                <app-create-card-mock></app-create-card-mock>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5" *ngIf="isManageVisible">
+        <div class="row mt-5">
+            <div class="col d-flex justify-content-center">
+                <app-manage-cards-mock></app-manage-cards-mock>
+            </div>
+        </div>
     </div>
 
     <div class="row mt-5 text-center" *ngIf="updateError">

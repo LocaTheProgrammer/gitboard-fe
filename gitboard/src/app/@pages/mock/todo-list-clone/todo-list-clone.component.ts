@@ -7,6 +7,7 @@ import { Task } from 'src/app/@models/DTO/Task';
 import { TaskList } from 'src/app/@models/DTO/TaskList';
 import { Card } from 'src/app/@models/mock/Card';
 import { CardArray } from 'src/app/@models/mock/CardArry';
+import { TaskClone } from 'src/app/@models/mock/TaskClone';
 import { CategoryService } from 'src/app/@services/category.service';
 import { CardService } from 'src/app/@services/mock/card.service';
 import { TaskService } from 'src/app/@services/task.service';
@@ -24,6 +25,7 @@ export class TodoListCloneComponent implements OnInit {
   taskList: Task[] = [];
   email: string = ''
   isLoading: boolean = false;
+  isManageVisible: boolean = false
 
   cardsArray: CardArray[] = [];
 
@@ -42,7 +44,8 @@ export class TodoListCloneComponent implements OnInit {
 
   //mock purpose properties
   cardList: Card[] = []
-  taskListMock: Task[] = []
+  taskListMock: TaskClone[] = []
+  isCreateVisible: boolean = false
 
   constructor(
     private taskService: TaskService,
@@ -82,12 +85,12 @@ export class TodoListCloneComponent implements OnInit {
             let category: CategoryDTO = categories.filter(category => category.id == task.taskListCategoryId)[0]
 
             let position = task.taskPosition
-            let description = tasks.filter(t => t.taskId == task.taskId)
+            let description = tasks.filter(t => t.id == task.taskId)
 
             //if (category != undefined) {
 
-              let card = new Card(description[0].taskName, position, category.description, task.taskListId, task.taskId);
-              this.cardList.push(card)
+            let card = new Card(description[0].taskName, position, category.description, task.taskListId, task.taskId);
+            this.cardList.push(card)
 
             //}
 
@@ -254,6 +257,25 @@ export class TodoListCloneComponent implements OnInit {
     return array.sort((card1: Card, card2: Card) => {
       return card1.position > card2.position ? 1 : -1;
     })
+  }
+
+  action(val: string) {
+    this.hide()
+    switch (val) {
+      case 'create':
+        this.isCreateVisible = true;
+        break;
+      case 'manage':
+        this.isManageVisible = true;
+        break;
+      default:
+        console.log('error')
+    }
+  }
+
+  hide() {
+    this.isCreateVisible = false
+    this.isManageVisible = false
   }
 
 }
