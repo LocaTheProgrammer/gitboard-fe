@@ -8,6 +8,7 @@ import { TaskList } from 'src/app/@models/DTO/TaskList';
 import { Card } from 'src/app/@models/mock/Card';
 import { CardArray } from 'src/app/@models/mock/CardArry';
 import { TaskClone } from 'src/app/@models/mock/TaskClone';
+import { AuthService } from 'src/app/@services/auth/AuthService';
 import { CategoryService } from 'src/app/@services/category.service';
 import { CardService } from 'src/app/@services/mock/card.service';
 import { TaskService } from 'src/app/@services/task.service';
@@ -51,15 +52,17 @@ export class TodoListCloneComponent implements OnInit {
     private taskService: TaskService,
     private _Activatedroute: ActivatedRoute,
     private cardService: CardService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
+
     this.initialize()
   }
 
   initialize() {
-
-    this.email = localStorage.getItem('email') + ''
+    let token = this.authService.getDecodedAccessToken()
+    this.email = token.sub
     this.getUserTaskListByUserEmail();
 
   }
@@ -243,7 +246,7 @@ export class TodoListCloneComponent implements OnInit {
 
   printTask($event: any) {
     console.log($event)
-    
+
     this.resetAll()
     this.cardService.updateTaskList($event).subscribe(() => {
       this.updateError = false
@@ -284,37 +287,37 @@ export class TodoListCloneComponent implements OnInit {
     this.isManageVisible = false
   }
 
-  updateTaskListEmit($event:any){
+  updateTaskListEmit($event: any) {
     this.resetAll()
     console.log('called')
     console.log($event)
     this.initialize()
   }
 
-  resetAll(){
+  resetAll() {
 
-    this.todo= [];
-    this.inProgress= [];
+    this.todo = [];
+    this.inProgress = [];
     this.done = [];
     this.taskList = [];
     this.email = ''
     this.isLoading = false;
     this.isManageVisible = false
-  
+
     this.cardsArray = [];
-  
+
     this.containerName = ''
     this.containerCounter = 0
     this.isFirstShifting = true;
-  
+
     this.updateError = false
-  
-  
+
+
     //mock purpose properties
     this.cardList = []
     this.taskListMock = []
     this.isCreateVisible = false
-  
+
   }
 
 }

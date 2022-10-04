@@ -7,6 +7,7 @@ import { TaskList } from 'src/app/@models/DTO/TaskList';
 import { CategoryService } from 'src/app/@services/category.service';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectUserDTO } from 'src/app/@models/DTO/ProjectUserDTO';
+import { AuthService } from 'src/app/@services/auth/AuthService';
 
 
 @Component({
@@ -35,17 +36,18 @@ export class TodoListComponent implements OnInit {
   inputCategoryList!: CategoryDTO[]
   message: string = '';
 
-  constructor(private taskService: TaskService, private categoryService: CategoryService, private _Activatedroute: ActivatedRoute) { }
+  constructor(private taskService: TaskService, private categoryService: CategoryService, private _Activatedroute: ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit() {
     this.initialize()
   }
 
-  initialize(){
+  initialize() {
     let id = this._Activatedroute.snapshot.paramMap.get("id");
     if (id != null && !isNaN(+id)) {
       this.id = +id;
-      this.email = localStorage.getItem('email') + ''
+      let token = this.authService.getDecodedAccessToken()
+      this.email = token.sub
       this.getUserTaskListByUserEmail();
     } else {
       this.message = "invalid project id"
@@ -58,7 +60,7 @@ export class TodoListComponent implements OnInit {
       this.inputCategoryList = []
       this.inputCategoryList = response
     })
-    let pu=new ProjectUserDTO(this.id, this.email)
+    let pu = new ProjectUserDTO(this.id, this.email)
     this.taskService.getDynamicUserTaskList(pu).subscribe(tl => {
       this.inputTaskList = []
       this.inputTaskList = tl

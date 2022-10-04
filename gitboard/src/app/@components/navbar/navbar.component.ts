@@ -8,19 +8,18 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) { }
 
-  navigateTo(location:string){
+  navigateTo(location: string) {
     this.router.navigateByUrl(location);
   }
 
-  isUserLogged(): boolean{
+  isUserLogged(): boolean {
     return localStorage.getItem('token') ? true : false
   }
 
-  logout(){
+  logout() {
     localStorage.setItem('token', '')
-    localStorage.setItem('email', '')
     this.router.navigateByUrl("")
   }
 
