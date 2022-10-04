@@ -7,8 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ResultMessageComponent implements OnInit {
 
-  @Input() alertType!:string
-  @Input() message!:string
+  @Input() alertType!: string
+  @Input() message!: any
 
   constructor() { }
 

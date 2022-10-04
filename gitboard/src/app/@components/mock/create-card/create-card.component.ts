@@ -19,17 +19,9 @@ export class CreateCardComponent implements OnInit {
   isCallDone: boolean = false
 
 
-  subscription: Subscription;
-  messages: any[] = [];
+
   constructor(private cardMockService: CardService, private messageService: MessageService) {
-    this.subscription = this.messageService.getMessage().subscribe(message => {
-      if (message) {
-        this.messages.push(message);
-      } else {
-        // clear messages when empty message received
-        this.messages = [];
-      }
-    });
+
   }
 
   ngOnInit(): void {
@@ -41,28 +33,37 @@ export class CreateCardComponent implements OnInit {
     let task: TaskModelMock = new TaskModelMock(this.taskName)
     this.cardMockService.addTask(task).subscribe(() => {
       this.sendMessage('add ok')
-      this.aType = 'success'
-      this.mex = this.messages[0].text
+      this.setType('success')
+
     },
       () => {
         this.sendMessage('add not ok')
-        this.aType = 'danger'
-        this.mex = this.messages[0].text
+        this.setType('danger')
+
       },
       () => {
-        this.isCallDone = true
-        this.clearMessages()
+        setTimeout(() => {
+          this.clearMessages()
+          this.clearTypes()
+        }, 3 * 1000);
+
       })
   }
 
   sendMessage(message: string): void {
-    // send message to subscribers via observable subject
     this.messageService.sendMessage(message);
   }
 
+  setType(type: string) {
+    this.messageService.sendType(type)
+  }
+
   clearMessages(): void {
-    // clear messages
     this.messageService.clearMessages();
+  }
+
+  clearTypes() {
+    this.messageService.clearType()
   }
 
 }
