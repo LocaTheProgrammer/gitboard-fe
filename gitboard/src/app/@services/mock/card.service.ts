@@ -46,8 +46,8 @@ export class CardService {
     return this.http.post<any>(this.taskListUrl, newTask)
   }
 
-  deleteCardFromTaskList(taskSelected: TaskModelMock) {
-    return this.http.delete<any>(this.taskListUrl + taskSelected.id) 
+  deleteCardFromTaskList(taskSelectedId:number|undefined) {
+    return this.http.delete<any>(this.taskListUrl + taskSelectedId) 
 
   }
 

@@ -46,9 +46,15 @@ export class ManageCardsComponent implements OnInit {
   }
 
   delete() {
-    this.mockCardService.deleteCardFromTaskList(this.taskSelected).subscribe((r:any) => {
+    let taskSelectedId = this.taskSelected.id
+    if (taskSelectedId != undefined) {
+      taskSelectedId -= 1
+    }
+    this.mockCardService.deleteCardFromTaskList(taskSelectedId).subscribe((r: any) => {
       this.isCallDone = false
       console.log(r)
+
+
       this.mockCardService.deleteCard(this.taskSelected).subscribe(() => {
         this.aType = 'success'
         this.mex = 'delete ok'
@@ -60,9 +66,10 @@ export class ManageCardsComponent implements OnInit {
         () => {
           this.getAllTasks()
           this.isCallDone = true
-          debugger
-          // this.emitter.emit('ok')
+          this.emitter.emit('ok')
         })
+
+
     }
     )
 
