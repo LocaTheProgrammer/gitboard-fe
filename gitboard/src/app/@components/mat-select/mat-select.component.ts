@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/internal/Observable';
   templateUrl: './mat-select.component.html',
   styleUrls: ['./mat-select.component.scss']
 })
-export class MatSelectComponent implements OnInit, DoCheck {
+export class MatSelectComponent implements OnInit {
 
   @Input() label!: string
   @Input() objField!: string
@@ -17,28 +17,20 @@ export class MatSelectComponent implements OnInit, DoCheck {
   @Output() emitter = new EventEmitter<any>();
 
 
-  itemSelected: any=this.list[0];
+  itemSelected: any = this.list[0];
   differ: KeyValueDiffer<string, any>;
 
   constructor(private differs: KeyValueDiffers) {
     this.differ = this.differs.find({}).create();
   }
-  
-  ngDoCheck() {
-    this.check()
-  }
 
-  check(){
-    const change = this.differ.diff(this);
-    if (change) {
-      change.forEachChangedItem(() => {
-        this.emitter.emit(this.itemSelected)
-      });
-    }
+
+  onModelChange($event: any) {
+    this.emitter.emit($event)
   }
 
   ngOnInit(): void {
-    this.check()
+
   }
 
 

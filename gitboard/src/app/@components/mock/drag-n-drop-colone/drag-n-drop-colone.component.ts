@@ -70,12 +70,15 @@ export class DragNDropColoneComponent implements OnInit {
     let containerNumber = this.containerName.substring(this.containerName.lastIndexOf("-") + 1, this.containerName.length)
 
     this.containerNumber = +containerNumber - this.containerCounter
+    console.log(this.taskList)
 
-    listName = this.categoryList[catId - 1].description //ok
-    taskName = this.taskList[catId - 1].cards[event.currentIndex].description //ok
-    taskId = this.taskList[catId - 1].cards[event.currentIndex].taskId //ok
+    listName = this.categoryList[catId - 1].description
+    taskName = this.taskList[catId - 1].cards[event.currentIndex].description
+    taskId = this.taskList[catId - 1].cards[event.currentIndex].taskId
     taskListId = this.taskList[catId - 1].cards[event.currentIndex].taskListId
+    console.log(this.taskList[catId - 1].cards[event.currentIndex])
 
+    let id = this.taskList[catId - 1].cards[event.currentIndex].id
 
     //TODO dinamico
     let categoryID
@@ -87,7 +90,7 @@ export class DragNDropColoneComponent implements OnInit {
     }
 
 
-    task = new Task(listName, taskName, taskPosition, taskId, taskListId, undefined, categoryID)
+    task = new Task(listName, taskName, taskPosition, taskId, taskListId, undefined, categoryID, id)
 
     this.loadArrays(catId, task)
     //  this.result.emit(task)

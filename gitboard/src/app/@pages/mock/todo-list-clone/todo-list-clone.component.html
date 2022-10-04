@@ -22,7 +22,6 @@
     <div class="row mt-5" *ngIf="!isLoading && cardsArray.length==3 && inputCategoryList">
         <app-drag-n-drop-colone (result)="printTask($event)" [categoryList]="inputCategoryList" [taskList]="cardsArray">
         </app-drag-n-drop-colone>
-        <!---->
     </div>
 
     <div class="row mt-5" *ngIf="!isCreateVisible || !isManageVisible">

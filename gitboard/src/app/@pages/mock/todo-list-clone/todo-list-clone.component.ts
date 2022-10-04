@@ -50,7 +50,7 @@ export class TodoListCloneComponent implements OnInit {
   constructor(
     private taskService: TaskService,
     private _Activatedroute: ActivatedRoute,
-    private cardService: CardService
+    private cardService: CardService,
   ) { }
 
   ngOnInit() {
@@ -91,7 +91,7 @@ export class TodoListCloneComponent implements OnInit {
 
             //if (category != undefined) {
 
-            let card = new Card(description[0].taskName, position, category.description, task.taskListId, task.taskId);
+            let card = new Card(description[0].taskName, position, category.description, task.taskListId, task.taskId, task.id);
             this.cardList.push(card)
 
             //}
@@ -242,12 +242,16 @@ export class TodoListCloneComponent implements OnInit {
   }
 
   printTask($event: any) {
-    this.taskService.updateTaskList($event).subscribe(() => {
+    console.log($event)
+    
+    this.resetAll()
+    this.cardService.updateTaskList($event).subscribe(() => {
       this.updateError = false
       this.isFirstShifting = false
       this.taskList = [];
       this.getUserTaskListByUserEmail()
-    }, () => {
+    }, fail => {
+      console.log(fail)
       this.updateError = true
       this.isLoading = false
 

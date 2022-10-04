@@ -1,6 +1,6 @@
 <mat-form-field appearance="fill">
     <mat-label>{{label}}</mat-label>
-    <mat-select [(ngModel)]="itemSelected">
+    <mat-select [(ngModel)]="itemSelected" (ngModelChange)="onModelChange($event)">
         <mat-option *ngFor="let item of list" [value]="item">
             {{item[objField]}}
         </mat-option>

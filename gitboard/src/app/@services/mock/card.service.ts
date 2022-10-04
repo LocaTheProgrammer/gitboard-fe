@@ -48,6 +48,10 @@ export class CardService {
 
   deleteCardFromTaskList(taskSelectedId:number|undefined) {
     return this.http.delete<any>(this.taskListUrl + taskSelectedId) 
+  }
+
+  updateTaskList($event:any){
+    return this.http.put<any>(this.taskListUrl, $event) 
 
   }
 
