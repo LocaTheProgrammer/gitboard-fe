@@ -17,7 +17,7 @@ export class MatSelectComponent implements OnInit {
   @Output() emitter = new EventEmitter<any>();
 
 
-  itemSelected: any = this.list[0];
+  itemSelected: any
   differ: KeyValueDiffer<string, any>;
 
   constructor(private differs: KeyValueDiffers) {
