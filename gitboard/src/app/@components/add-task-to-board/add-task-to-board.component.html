@@ -5,39 +5,13 @@
         </div>
     </div>
 
-
-    <!-- TODO TEST -->
-
-    <!--todo convert-->
-    <!-- 
-        <mat-form-field appearance="fill">
-            <mat-label>task</mat-label>
-            <mat-select [(ngModel)]="taskSelected">
-                <mat-option *ngFor="let task of taskList" [value]="task">
-                    {{task.taskName}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field> -->
-    <!-- <app-mat-select label="task" objField="taskName" [list]="taskList" (emitter)="setTaskSelected($event)"></app-mat-select> -->
-
-
     <div class="row mt-5 justify-content-center">
         <div class="col-6 d-flex justify-content-center">
-
             <app-mat-select label="Projects" objField="name" [list]="projectList" (emitter)="setProject($event)">
             </app-mat-select>
-
-
-            <!-- <mat-form-field appearance="fill">
-                <mat-label>Projects</mat-label>
-                <mat-select [(ngModel)]="project">
-                    <mat-option *ngFor="let p of projectList" [value]="p">
-                        {{p.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field> -->
         </div>
     </div>
+
     <div class="row mt-5" *ngIf="isProjectListEmpty">
         <div class="col d-flex justify-content-center">
             <div class="alert alert-danger" role="alert">
@@ -45,55 +19,23 @@
             </div>
         </div>
     </div>
+
     <hr>
+
     <div class="row mt-3">
         <div class="col d-flex justify-content-center">
             <app-mat-select label="Select Category" objField="description" [list]="categoryList"
                 (emitter)="setCategory($event)"></app-mat-select>
-
-            <!-- <mat-form-field appearance="fill">
-                <mat-label>Select Category</mat-label>
-                <mat-select [(ngModel)]="category">
-                    <mat-option *ngFor="let cat of categoryList" [value]="cat">
-                        {{cat.description}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field> -->
         </div>
 
         <div class="col d-flex justify-content-center">
-    <!--TODO TEST-->
-                <app-mat-form-field-auto-complete 
-                title="Select task"
-                [myFormControl]="myControl"
-                [list]="tasksDescription"
-                matAutocompleteValue="auto"
-                placeholder="Pick One"
-                ></app-mat-form-field-auto-complete>
-            <!-- <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Select task</mat-label>
-                <input type="text" placeholder="Pick one" aria-label="Select task" matInput [formControl]="myControl"
-                    [matAutocomplete]="auto">
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let t of filteredOptions | async" [value]="t">
-                        {{t}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field> -->
+            <app-mat-form-field-auto-complete title="Select task" [myFormControl]="myControl" [list]="tasksDescription"
+                matAutocompleteValue="auto" placeholder="Pick One"></app-mat-form-field-auto-complete>
         </div>
 
         <div class="col d-flex justify-content-center">
             <app-mat-select label="Select a user" objField="email" [list]="userList" (emitter)="setUser($event)">
             </app-mat-select>
-
-            <!-- <mat-form-field appearance="fill">
-                <mat-label>Select a user</mat-label>
-                <mat-select [(ngModel)]="user">
-                    <mat-option *ngFor="let u of userList" [value]="u">
-                        {{u.firstName}} {{u.lastName}} - {{u.email}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field> -->
         </div>
     </div>
     <!--users-->
@@ -104,7 +46,6 @@
         </div>
     </div>
 
-
     <div class="row mt-5">
         <div class="col d-flex justify-content-center">
 
@@ -113,5 +54,4 @@
 
         </div>
     </div>
-
 </div>

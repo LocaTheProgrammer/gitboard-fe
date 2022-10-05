@@ -4,32 +4,33 @@ import { environment } from 'src/environments/environment';
 import { TaskListProject } from '../@models/DTO/TaskistProject';
 import { TaskDTO } from '../@models/DTO/TaskDTO';
 import { ProjectUserDTO } from '../@models/DTO/ProjectUserDTO';
+import { Task } from '../@models/DTO/Task';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  
-  endpoint:string=environment.apiURL+"/todolist/rest/task/";
+
+  endpoint: string = environment.apiURL + "/todolist/rest/task/";
 
 
   constructor(private httpClient: HttpClient) { }
 
-  create(task:TaskDTO){
+  create(task: TaskDTO) {
     return this.httpClient.post<any>(`${this.endpoint}create`, task)
   }
 
 
-  getUserTaskListByUserEmail(email:string){
-    return this.httpClient.post<any>(`${this.endpoint}getUserTaskList`, {email})
+  getUserTaskListByUserEmail(email: string) {
+    return this.httpClient.post<any>(`${this.endpoint}getUserTaskList`, { email })
   }
 
-  getDynamicUserTaskList(pu:ProjectUserDTO){
+  getDynamicUserTaskList(pu: ProjectUserDTO) {
     return this.httpClient.post<any>(`${this.endpoint}getDynamicUserTaskList`, pu)
   }
 
-  updateTaskList(task:Task){
+  updateTaskList(task: Task) {
     return this.httpClient.put<any>(`${this.endpoint}updateTaskList`, task)
   }
 
@@ -37,11 +38,15 @@ export class TaskService {
     return this.httpClient.get<any>(`${this.endpoint}findAllTaskList`)
   }
 
-  findAllTask(){
+  findAllTask() {
     return this.httpClient.get<any>(`${this.endpoint}findAllTask`)
   }
 
-  createTaskList(taskList:TaskListProject){
+  createTaskList(taskList: TaskListProject) {
     return this.httpClient.post<any>(`${this.endpoint}createTaskList`, taskList)
+  }
+
+  deleteTaskList(taskList: Task) {
+    return this.httpClient.delete<any>(`${this.endpoint}deleteTaskList`, { body: taskList })
   }
 }

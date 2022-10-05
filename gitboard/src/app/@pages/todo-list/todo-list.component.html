@@ -6,7 +6,7 @@
     </div>
 
 
-    <div class="mt-5" *ngIf="!isRenderable">
+    <div class="mt-5" *ngIf="!isRenderable && isIdValid">
         <app-result-message message="no tasks!" alertType="warning"></app-result-message>
     </div>
 

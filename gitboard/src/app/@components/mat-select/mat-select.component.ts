@@ -1,6 +1,4 @@
-import { ChangeDetectorRef, Component, DoCheck, EventEmitter, Input, KeyValueDiffer, KeyValueDiffers, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Observable } from 'rxjs/internal/Observable';
+import { Component, EventEmitter, Input, KeyValueDiffer, KeyValueDiffers, OnInit, Output, SimpleChanges } from '@angular/core';
 
 
 @Component({

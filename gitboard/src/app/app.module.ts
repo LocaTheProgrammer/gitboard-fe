@@ -51,6 +51,7 @@ import { AccordionComponent } from './@components/accordion/accordion.component'
 import { ManageCardsComponent } from './@components/mock/manage-cards/manage-cards.component';
 import { ButtonComponent } from './@components/button/button.component';
 import { MatSelectComponent } from './@components/mat-select/mat-select.component';
+import { DeleteTaskListComponent } from './@components/delete-task-list/delete-task-list.component';
 
 
 
@@ -85,7 +86,8 @@ import { MatSelectComponent } from './@components/mat-select/mat-select.componen
     AccordionComponent,
     ManageCardsComponent,
     ButtonComponent,
-    MatSelectComponent
+    MatSelectComponent,
+    DeleteTaskListComponent
   ],
   imports: [
     BrowserModule,

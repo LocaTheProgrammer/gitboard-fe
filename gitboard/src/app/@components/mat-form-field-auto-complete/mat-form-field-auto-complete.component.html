@@ -1,7 +1,7 @@
-<mat-form-field class="example-full-width" appearance="fill">
+<mat-form-field class="example-full-width" appearance="fill" (click)="enable()">
     <mat-label>{{title}}</mat-label>
-    <input type="text" [placeholder]="placeholder" aria-label="Select task" matInput
-        [formControl]="myFormControl" [matAutocomplete]="matAutocompleteValue">
+    <input type="text" [placeholder]="placeholder" aria-label="Select task" matInput [formControl]="myFormControl"
+        (ngModelChange)="onModelChange()" [matAutocomplete]="matAutocompleteValue">
     <mat-autocomplete #matAutocompleteValue="matAutocomplete">
         <mat-option *ngFor="let fp of filteredList | async" [value]="fp">
             {{fp}}

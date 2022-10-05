@@ -17,7 +17,8 @@ export class AdminControlPanelComponent {
   isCreateBoardVisible: boolean = false
   isAssignVisible: boolean = false
   isAssignUserToProjectVisible: boolean = false
-  isCreateUserVisible: boolean=false;
+  isCreateUserVisible: boolean = false;
+  isDeleteTaskListVisible: boolean = false;
 
   error: boolean = false
   isCreateCompanyAdminVisible: boolean = false;
@@ -29,9 +30,10 @@ export class AdminControlPanelComponent {
   assign: AdminPanelDiv = new AdminPanelDiv("Assign Task to Project Board", "assign")
   edit: AdminPanelDiv = new AdminPanelDiv("Edit Company", "edit")
   assignUserToProject: AdminPanelDiv = new AdminPanelDiv("Assign User To Project", "assignUserToProject")
-  createUser:AdminPanelDiv = new AdminPanelDiv("Create User", "createUser")
-  
-  divsArray: AdminPanelDiv[] = [this.createCompanyAdmin, this.createCompany, this.createTask, this.createBoard, this.assign, this.edit, this.assignUserToProject, this.createUser]
+  createUser: AdminPanelDiv = new AdminPanelDiv("Create User", "createUser")
+  deleteTaskList: AdminPanelDiv = new AdminPanelDiv("Delete Task List", "deleteTaskList")
+
+  divsArray: AdminPanelDiv[] = [this.createCompanyAdmin, this.createCompany, this.createTask, this.createBoard, this.assign, this.edit, this.assignUserToProject, this.createUser, this.deleteTaskList]
 
 
   divVisibilityArray: boolean[] =
@@ -42,7 +44,8 @@ export class AdminControlPanelComponent {
     this.isAssignVisible,
     this.isCreateCompanyAdminVisible,
     this.isAssignUserToProjectVisible,
-  this.isCreateUserVisible]
+    this.isCreateUserVisible,
+    this.isDeleteTaskListVisible]
 
   constructor() { }
 
@@ -76,8 +79,11 @@ export class AdminControlPanelComponent {
       case 'assignUserToProject':
         this.isAssignUserToProjectVisible = true;
         break;
-        case 'createUser':
+      case 'createUser':
         this.isCreateUserVisible = true;
+        break;
+      case 'deleteTaskList':
+        this.isDeleteTaskListVisible = true;
         break;
       default:
         this.error = true;
@@ -95,7 +101,8 @@ export class AdminControlPanelComponent {
     this.isAssignVisible = false
     this.isCreateCompanyAdminVisible = false;
     this.isAssignUserToProjectVisible = false;
-    this.isCreateUserVisible=false
+    this.isCreateUserVisible = false
+    this.isDeleteTaskListVisible = false
   }
 
 
@@ -108,7 +115,8 @@ export class AdminControlPanelComponent {
       this.isAssignVisible,
       this.isCreateCompanyAdminVisible,
       this.isAssignUserToProjectVisible,
-      this.isCreateUserVisible]
+      this.isCreateUserVisible,
+      this.isDeleteTaskListVisible]
   }
 
 }

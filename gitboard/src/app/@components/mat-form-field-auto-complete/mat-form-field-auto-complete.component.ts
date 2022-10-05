@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-mat-form-field-auto-complete',
@@ -10,12 +11,16 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class MatFormFieldAutoCompleteComponent implements OnInit {
 
-  @Input() title!:string
-  @Input() myFormControl=new FormControl('');
-  @Input() list:any[]=[]
-  @Input() matAutocompleteValue!:string
-  @Input() placeholder!:string
+  @Input() title!: string
+  @Input() myFormControl = new FormControl('');
+  @Input() list: any[] = []
+  @Input() matAutocompleteValue!: string
+  @Input() placeholder!: string
   @Input() filteredList!: Observable<string[]>;
+
+  @Output() emitter = new EventEmitter<any>();
+  fp: any
+  disabled: boolean = false
 
   constructor() { }
 
@@ -31,5 +36,17 @@ export class MatFormFieldAutoCompleteComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.list.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  onModelChange() {
+    if (!this.disabled)
+      this.filteredList.subscribe(list => {
+        this.disabled = true
+        this.emitter.emit(list)
+      })
+  }
+
+  enable() {
+    this.disabled = false
   }
 }

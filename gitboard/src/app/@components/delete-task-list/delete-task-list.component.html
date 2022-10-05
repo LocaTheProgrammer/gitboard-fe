@@ -1,0 +1,17 @@
+<div class="background-elements">
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <app-mat-form-field-auto-complete title="Select task" [myFormControl]="myControl" [list]="tasksDescription"
+                (emitter)="taskSelected($event)" matAutocompleteValue="auto" placeholder="Pick One">
+            </app-mat-form-field-auto-complete>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
+            <app-button btnType="danger" btnText="DELETE" [disabledCondition]="taskListSelected==undefined"
+                (click)="deleteTask()">
+            </app-button>
+        </div>
+    </div>
+</div>
