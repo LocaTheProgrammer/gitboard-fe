@@ -25,6 +25,12 @@
         </div>
     </div>
 
+    <div class="row mt-5">
+        <div class="col justify-content-center d-flex">
+            <h1>Auth: {{userAuth}}</h1>
+        </div>
+    </div>
+
     <div class="row mt-5" *ngIf="!isLoading && inputTaskList && inputCategoryList && isRenderable">
         <app-drag-n-drop [taskList]="inputTaskList" (result)="printTask($event)" [categoryList]="inputCategoryList"
             [auth]="userAuth" [id]="userId">

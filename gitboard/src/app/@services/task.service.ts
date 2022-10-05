@@ -49,4 +49,9 @@ export class TaskService {
   deleteTaskList(taskList: Task) {
     return this.httpClient.delete<any>(`${this.endpoint}deleteTaskList`, { body: taskList })
   }
+
+  findAllDeletedCards() {
+    return this.httpClient.get<any>(`${this.endpoint}findAllDeletedTaskList`)
+
+  }
 }

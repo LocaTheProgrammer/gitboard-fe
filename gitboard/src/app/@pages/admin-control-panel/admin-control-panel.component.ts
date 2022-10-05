@@ -19,6 +19,7 @@ export class AdminControlPanelComponent {
   isAssignUserToProjectVisible: boolean = false
   isCreateUserVisible: boolean = false;
   isDeleteTaskListVisible: boolean = false;
+  isDeletedCardVisible: boolean = false
 
   error: boolean = false
   isCreateCompanyAdminVisible: boolean = false;
@@ -32,8 +33,9 @@ export class AdminControlPanelComponent {
   assignUserToProject: AdminPanelDiv = new AdminPanelDiv("Assign User To Project", "assignUserToProject")
   createUser: AdminPanelDiv = new AdminPanelDiv("Create User", "createUser")
   deleteTaskList: AdminPanelDiv = new AdminPanelDiv("Delete Task List", "deleteTaskList")
+  deletedCards: AdminPanelDiv = new AdminPanelDiv("Deleted Cards", "deletedCards")
 
-  divsArray: AdminPanelDiv[] = [this.createCompanyAdmin, this.createCompany, this.createTask, this.createBoard, this.assign, this.edit, this.assignUserToProject, this.createUser, this.deleteTaskList]
+  divsArray: AdminPanelDiv[] = [this.createCompanyAdmin, this.createCompany, this.createTask, this.createBoard, this.assign, this.edit, this.assignUserToProject, this.createUser, this.deleteTaskList, this.deletedCards]
 
 
   divVisibilityArray: boolean[] =
@@ -45,7 +47,8 @@ export class AdminControlPanelComponent {
     this.isCreateCompanyAdminVisible,
     this.isAssignUserToProjectVisible,
     this.isCreateUserVisible,
-    this.isDeleteTaskListVisible]
+    this.isDeleteTaskListVisible,
+    this.isDeletedCardVisible]
 
   constructor() { }
 
@@ -85,6 +88,9 @@ export class AdminControlPanelComponent {
       case 'deleteTaskList':
         this.isDeleteTaskListVisible = true;
         break;
+      case 'deletedCards':
+        this.isDeletedCardVisible = true;
+        break;
       default:
         this.error = true;
     }
@@ -103,6 +109,7 @@ export class AdminControlPanelComponent {
     this.isAssignUserToProjectVisible = false;
     this.isCreateUserVisible = false
     this.isDeleteTaskListVisible = false
+    this.isDeletedCardVisible = false
   }
 
 
@@ -116,7 +123,8 @@ export class AdminControlPanelComponent {
       this.isCreateCompanyAdminVisible,
       this.isAssignUserToProjectVisible,
       this.isCreateUserVisible,
-      this.isDeleteTaskListVisible]
+      this.isDeleteTaskListVisible,
+      this.isDeletedCardVisible]
   }
 
 }
