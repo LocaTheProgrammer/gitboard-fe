@@ -7,14 +7,18 @@ export class AuthService {
     return localStorage.getItem('token') ? true : false
   }
 
-  getDecodedAccessToken(): any {
 
+  public getEmailFromToken() {
+    let token = this.getDecodedAccessToken()
+    return token.sub
+  }
+
+  private getDecodedAccessToken(): any {
     let token = null
     if (localStorage.getItem('token') != null) {
-      token = localStorage.getItem('token') + ''
-      console.log(jwt_decode(token));
+      token = localStorage.getItem('token')
+      token = jwt_decode(token + '')
     }
-
     return token
   }
 }

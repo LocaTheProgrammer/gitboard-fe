@@ -61,8 +61,7 @@ export class TodoListCloneComponent implements OnInit {
   }
 
   initialize() {
-    let token = this.authService.getDecodedAccessToken()
-    this.email = token.sub
+    this.email = this.authService.getEmailFromToken()
     this.getUserTaskListByUserEmail();
 
   }

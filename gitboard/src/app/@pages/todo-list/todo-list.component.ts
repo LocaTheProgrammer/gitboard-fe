@@ -35,7 +35,7 @@ export class TodoListComponent implements OnInit {
   inputTaskList!: TaskList[]
   inputCategoryList!: CategoryDTO[]
   message: string = '';
-
+  isRenderable: boolean = false
   constructor(private taskService: TaskService, private categoryService: CategoryService, private _Activatedroute: ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit() {
@@ -46,8 +46,7 @@ export class TodoListComponent implements OnInit {
     let id = this._Activatedroute.snapshot.paramMap.get("id");
     if (id != null && !isNaN(+id)) {
       this.id = +id;
-      let token = this.authService.getDecodedAccessToken()
-      this.email = token.sub
+      this.email = this.authService.getEmailFromToken()
       this.getUserTaskListByUserEmail();
     } else {
       this.message = "invalid project id"
@@ -56,15 +55,20 @@ export class TodoListComponent implements OnInit {
   }
 
   getUserTaskListByUserEmail() {
+    this.isRenderable = false;
     this.categoryService.getCategories().subscribe(response => {
       this.inputCategoryList = []
       this.inputCategoryList = response
+      let pu = new ProjectUserDTO(this.id, this.email)
+      this.taskService.getDynamicUserTaskList(pu).subscribe(tl => {
+        this.inputTaskList = []
+        if (tl.length > 0) {
+          this.inputTaskList = tl
+          this.isRenderable = true;
+        }
+      })
     })
-    let pu = new ProjectUserDTO(this.id, this.email)
-    this.taskService.getDynamicUserTaskList(pu).subscribe(tl => {
-      this.inputTaskList = []
-      this.inputTaskList = tl
-    })
+
   }
 
   drop(event: any) { // CdkDragDrop<string[]>
