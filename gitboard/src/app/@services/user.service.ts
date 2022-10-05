@@ -9,51 +9,51 @@ import { UserDTO } from '../@models/DTO/UserDTO';
   providedIn: 'root'
 })
 export class UserService {
-  
 
-  endpoint:string=environment.apiURL+"/todolist/";
-
+  endpoint: string = environment.apiURL + "/todolist/";
 
   constructor(private httpClient: HttpClient) { }
-
 
   getBearerToken(username: any, password: any): Observable<any> {
     return this.httpClient.post<any>(`${this.endpoint}rest/auth/authenticate`, { username, password })
   }
 
-  confirmAccount(token:string){
-    return this.httpClient.get<any>(`${this.endpoint}rest/user/confirm-account`, {params: {token: token}})
+  confirmAccount(token: string) {
+    return this.httpClient.get<any>(`${this.endpoint}rest/user/confirm-account`, { params: { token: token } })
   }
 
-  forgotPassword(email:string){
-    return this.httpClient.post<any>(`${this.endpoint}rest/user/forgot-password`, {email})
+  forgotPassword(email: string) {
+    return this.httpClient.post<any>(`${this.endpoint}rest/user/forgot-password`, { email })
   }
 
-  confirmResetPasswordToken(token:string){
-    return this.httpClient.get<any>(`${this.endpoint}rest/user/confirm-reset`, {params: {token: token}})
+  confirmResetPasswordToken(token: string) {
+    return this.httpClient.get<any>(`${this.endpoint}rest/user/confirm-reset`, { params: { token: token } })
   }
 
-  resetPassword(email:string, password:string){
+  resetPassword(email: string, password: string) {
     return this.httpClient.post<any>(`${this.endpoint}rest/user/reset-password`, { email, password })
-
   }
 
-  createAccount(name:string, surname:string, email:string, password:string){
-    let url=this.endpoint.concat('rest/user/create')
-    return this.httpClient.post<any>(url, {name, surname, email, password})
+  createAccount(name: string, surname: string, email: string, password: string) {
+    let url = this.endpoint.concat('rest/user/create')
+    return this.httpClient.post<any>(url, { name, surname, email, password })
   }
 
-  createAccountUser(user:UserDTO){
-    let url=this.endpoint.concat('rest/user/create')
+  createAccountUser(user: UserDTO) {
+    let url = this.endpoint.concat('rest/user/create')
     return this.httpClient.post<any>(url, user)
   }
 
-  findAllBasic(){
+  findAllBasic() {
     return this.httpClient.get<any>(`${this.endpoint}rest/user/findAllBasic`)
   }
 
-  getAllByCompany(company:CompanyDTO){
+  getAllByCompany(company: CompanyDTO) {
     return this.httpClient.post<any>(`${this.endpoint}rest/user/getAllByCompany`, company)
   }
 
+  getIdAndPermissionByEmail(email: string) {
+    return this.httpClient.post<any>(`${this.endpoint}rest/user/getIdAndPermissionByEmail`, { email })
+
+  }
 }

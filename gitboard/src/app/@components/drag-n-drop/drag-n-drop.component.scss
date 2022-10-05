@@ -1,12 +1,12 @@
-.cdk-drop-list.example-list{
+.cdk-drop-list.example-list {
     min-height: 50px;
 }
 
-.cdk-drop-list.example-list:hover{
+.cdk-drop-list.example-list:hover {
     cursor: move;
 }
 
-.cdk-drag.example-box{
+.cdk-drag.example-box {
     border: 1px solid;
     text-align: center;
     border-radius: 15px;
@@ -14,6 +14,15 @@
     margin-bottom: 10px;
 }
 
-.row.text-center{
-    text-align: center!important;
+.row.text-center {
+    text-align: center !important;
+}
+
+.userCard {
+    background-color: pink;
+}
+
+.card-disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
 }

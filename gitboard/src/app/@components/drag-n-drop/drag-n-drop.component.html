@@ -1,5 +1,4 @@
 <div class="row">
-
     <div class="col" *ngFor="let c of categoryList">
         <div class="row text-center">
             <h1>{{c.description}}</h1>
@@ -7,11 +6,14 @@
         <div class="row">
             <!-- {{dragDropDTO[CATEGORIA].list[TASK].taskName | json}} [c.id].list -->
             <!--workaround con i c.id perchè per qualche motivo facendo la insert gli id categoria partono da 1-->
-            <div *ngIf="taskList && categoryList" cdkDropList [cdkDropListData]="taskList[c.id-1].taskListDTOList" class="example-list" (cdkDropListDropped)="drop($event, c.id)">
-                <div class="example-box" *ngFor="let item of taskList[c.id-1].taskListDTOList" cdkDrag>{{item.taskName}}</div>
+            <div *ngIf="taskList && categoryList" cdkDropList [cdkDropListData]="taskList[c.id-1].taskListDTOList"
+                class="example-list" (cdkDropListDropped)="drop($event, c.id)">
+                <div [ngClass]="{'userCard':item.userId == id ,'card-disabled': auth!='write'}" class="example-box"
+                    *ngFor="let item of taskList[c.id-1].taskListDTOList" cdkDrag [cdkDragDisabled]="auth!='write'">
+                    {{item.taskName}}</div>
             </div>
         </div>
     </div>
-    
+
 
 </div>

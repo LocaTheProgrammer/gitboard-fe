@@ -8,6 +8,8 @@ import { CategoryService } from 'src/app/@services/category.service';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectUserDTO } from 'src/app/@models/DTO/ProjectUserDTO';
 import { AuthService } from 'src/app/@services/auth/AuthService';
+import { UserService } from 'src/app/@services/user.service';
+import { UserDragDropInfoDTO } from 'src/app/@models/DTO/UserDragDropInfoDTO';
 
 
 @Component({
@@ -36,7 +38,11 @@ export class TodoListComponent implements OnInit {
   inputCategoryList!: CategoryDTO[]
   message: string = '';
   isRenderable: boolean = false
-  constructor(private taskService: TaskService, private categoryService: CategoryService, private _Activatedroute: ActivatedRoute, private authService: AuthService) { }
+
+  userId!: number
+  userAuth!: string
+
+  constructor(private taskService: TaskService, private categoryService: CategoryService, private _Activatedroute: ActivatedRoute, private authService: AuthService, private userService: UserService) { }
 
   ngOnInit() {
     this.initialize()
@@ -55,20 +61,25 @@ export class TodoListComponent implements OnInit {
   }
 
   getUserTaskListByUserEmail() {
+
     this.isRenderable = false;
-    this.categoryService.getCategories().subscribe(response => {
-      this.inputCategoryList = []
-      this.inputCategoryList = response
-      let pu = new ProjectUserDTO(this.id, this.email)
-      this.taskService.getDynamicUserTaskList(pu).subscribe(tl => {
-        this.inputTaskList = []
-        if (tl.length > 0) {
-          this.inputTaskList = tl
-          this.isRenderable = true;
-        }
+    this.userService.getIdAndPermissionByEmail(this.email).subscribe((dndInfo: UserDragDropInfoDTO) => {
+      this.userId = dndInfo.id
+      this.userAuth = dndInfo.authority
+      console.log(this.userAuth)
+      this.categoryService.getCategories().subscribe(response => {
+        this.inputCategoryList = []
+        this.inputCategoryList = response
+        let pu = new ProjectUserDTO(this.id, this.email)
+        this.taskService.getDynamicUserTaskList(pu).subscribe(tl => {
+          this.inputTaskList = []
+          if (tl.length > 0) {
+            this.inputTaskList = tl
+            this.isRenderable = true;
+          }
+        })
       })
     })
-
   }
 
   drop(event: any) { // CdkDragDrop<string[]>
