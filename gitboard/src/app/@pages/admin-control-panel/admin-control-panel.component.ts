@@ -22,6 +22,7 @@ export class AdminControlPanelComponent {
   isDeletedCardVisible: boolean = false
   isDeleteProjectVisible: boolean = false
   isUpdateAuthVisible: boolean = false
+  isUpdateUserVisible: boolean = false
 
   error: boolean = false
   isCreateCompanyAdminVisible: boolean = false;
@@ -38,12 +39,13 @@ export class AdminControlPanelComponent {
   deletedCards: AdminPanelDiv = new AdminPanelDiv("Deleted Cards", "deletedCards")
   deleteProject: AdminPanelDiv = new AdminPanelDiv("Delete project", "deleteProject")
   updateAuth: AdminPanelDiv = new AdminPanelDiv("Aggiorna permessi utente", "updateAuth")
+  updateUser: AdminPanelDiv = new AdminPanelDiv("Aggiorna utente", "updateUser")
 
   divsArray: AdminPanelDiv[] =
     [this.createCompanyAdmin, this.createCompany, this.createTask, this.createBoard,
     this.assign, this.edit, this.assignUserToProject,
     this.createUser, this.deleteTaskList, this.deletedCards, this.deleteProject,
-    this.updateAuth]
+    this.updateAuth, this.updateUser]
 
 
   divVisibilityArray: boolean[] =
@@ -58,7 +60,8 @@ export class AdminControlPanelComponent {
     this.isDeleteTaskListVisible,
     this.isDeletedCardVisible,
     this.isDeleteProjectVisible,
-    this.isUpdateAuthVisible]
+    this.isUpdateAuthVisible,
+    this.isUpdateUserVisible]
 
   constructor() { }
 
@@ -107,6 +110,9 @@ export class AdminControlPanelComponent {
       case 'updateAuth':
         this.isUpdateAuthVisible = true;
         break;
+      case 'updateUser':
+        this.isUpdateUserVisible = true;
+        break;
       default:
         this.error = true;
     }
@@ -128,6 +134,7 @@ export class AdminControlPanelComponent {
     this.isDeletedCardVisible = false
     this.isDeleteProjectVisible = false
     this.isUpdateAuthVisible = false
+    this.isUpdateUserVisible = false
   }
 
 
@@ -144,7 +151,8 @@ export class AdminControlPanelComponent {
       this.isDeleteTaskListVisible,
       this.isDeletedCardVisible,
       this.isDeleteProjectVisible,
-      this.isUpdateAuthVisible]
+      this.isUpdateAuthVisible,
+      this.isUpdateUserVisible]
   }
 
 }

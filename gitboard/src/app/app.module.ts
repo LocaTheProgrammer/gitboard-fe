@@ -55,6 +55,7 @@ import { DeleteTaskListComponent } from './@components/delete-task-list/delete-t
 import { DeletedCardsComponent } from './@components/deleted-cards/deleted-cards.component';
 import { DeleteProjectComponent } from './@components/delete-project/delete-project.component';
 import { EditUserComponent } from './@components/edit-user/edit-user.component';
+import { EditProfileComponent } from './@components/edit-profile/edit-profile.component';
 
 
 
@@ -93,7 +94,8 @@ import { EditUserComponent } from './@components/edit-user/edit-user.component';
     DeleteTaskListComponent,
     DeletedCardsComponent,
     DeleteProjectComponent,
-    EditUserComponent
+    EditUserComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

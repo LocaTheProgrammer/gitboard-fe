@@ -6,6 +6,7 @@ import { CompanyDTO } from '../@models/DTO/CompanyDTO';
 import { ProjectUserDTO } from '../@models/DTO/ProjectUserDTO';
 import { UserDTO } from '../@models/DTO/UserDTO';
 import { UserAuth } from '../@models/DTO/UserAuth';
+import { BasicUserDTO } from '../@models/DTO/BasicUserDTO';
 @Injectable({
   providedIn: 'root'
 })
@@ -63,6 +64,14 @@ export class UserService {
 
   updateUserAuth(userAuth: UserAuth) {
     return this.httpClient.put<any>(`${this.endpoint}rest/user/updateAuthority`, userAuth)
+  }
+
+  findUserByEmail(email: BasicUserDTO) {
+    return this.httpClient.post<any>(`${this.endpoint}rest/user/findUserByEmail`, email)
+  }
+
+  updateUserInfo(updateUser: BasicUserDTO) {
+    return this.httpClient.put<any>(`${this.endpoint}rest/user/updateUser`, updateUser)
   }
 
 }
