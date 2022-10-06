@@ -54,6 +54,10 @@ export class UserService {
 
   getIdAndPermissionByEmail(email: string) {
     return this.httpClient.post<any>(`${this.endpoint}rest/user/getIdAndPermissionByEmail`, { email })
-
   }
+
+  findAuths() {
+    return this.httpClient.get<any>(`${this.endpoint}rest/user/findAuths`)
+  }
+
 }

@@ -54,6 +54,7 @@ import { MatSelectComponent } from './@components/mat-select/mat-select.componen
 import { DeleteTaskListComponent } from './@components/delete-task-list/delete-task-list.component';
 import { DeletedCardsComponent } from './@components/deleted-cards/deleted-cards.component';
 import { DeleteProjectComponent } from './@components/delete-project/delete-project.component';
+import { EditUserComponent } from './@components/edit-user/edit-user.component';
 
 
 
@@ -91,7 +92,8 @@ import { DeleteProjectComponent } from './@components/delete-project/delete-proj
     MatSelectComponent,
     DeleteTaskListComponent,
     DeletedCardsComponent,
-    DeleteProjectComponent
+    DeleteProjectComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

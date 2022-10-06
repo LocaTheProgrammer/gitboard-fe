@@ -1,0 +1,13 @@
+<div class="background-elements">
+    <div class="row">
+        <div class="d-flex justify-content-center col">
+            <app-mat-select label="Users" objField="email" [list]="userList" (emitter)="setUser($event)">
+            </app-mat-select>
+        </div>
+        <div class="d-flex justify-content-center col">
+            <app-mat-select label="Auths" objField="name" [list]="authList" (emitter)="setAuth($event)">
+            </app-mat-select>
+        </div>
+    </div>
+
+</div>
