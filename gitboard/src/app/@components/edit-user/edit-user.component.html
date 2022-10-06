@@ -9,5 +9,11 @@
             </app-mat-select>
         </div>
     </div>
-
+    <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
+            <app-button btnType="primary" btnText="Update Permissions" (click)="updatePermission()"
+                [disabledCondition]="selectedUser == undefined || selectedAuth == undefined">
+            </app-button>
+        </div>
+    </div>
 </div>

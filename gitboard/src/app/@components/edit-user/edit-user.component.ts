@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthDTO } from 'src/app/@models/DTO/AuthDTO';
 import { BasicUserDTO } from 'src/app/@models/DTO/BasicUserDTO';
+import { UserAuth } from 'src/app/@models/DTO/UserAuth';
 import { MessageService } from 'src/app/@services/message.service';
 import { UserService } from 'src/app/@services/user.service';
 
@@ -19,6 +20,7 @@ export class EditUserComponent implements OnInit {
   selectedAuth!: AuthDTO
   ngOnInit(): void {
     this.findAll()
+    this.findAuths()
   }
 
   findAll() {
@@ -55,5 +57,25 @@ export class EditUserComponent implements OnInit {
 
   setAuth($event: any) {
     this.selectedAuth = $event
+  }
+
+  updatePermission() {
+    let userAuth: UserAuth = new UserAuth(this.selectedUser.email, this.selectedAuth.id)
+    this.userService.updateUserAuth(userAuth).subscribe(
+      () => {
+        this.sendMessage('ok')
+        this.setType('success')
+      },
+      () => {
+        this.sendMessage('not ok')
+        this.setType('danger')
+      },
+      () => {
+        setTimeout(() => {
+          this.clearMessages()
+          this.clearTypes()
+        }, 3 * 1000);
+      },
+    )
   }
 }

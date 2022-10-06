@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { CompanyDTO } from '../@models/DTO/CompanyDTO';
 import { ProjectUserDTO } from '../@models/DTO/ProjectUserDTO';
 import { UserDTO } from '../@models/DTO/UserDTO';
+import { UserAuth } from '../@models/DTO/UserAuth';
 @Injectable({
   providedIn: 'root'
 })
@@ -58,6 +59,10 @@ export class UserService {
 
   findAuths() {
     return this.httpClient.get<any>(`${this.endpoint}rest/user/findAuths`)
+  }
+
+  updateUserAuth(userAuth: UserAuth) {
+    return this.httpClient.put<any>(`${this.endpoint}rest/user/updateAuthority`, userAuth)
   }
 
 }
