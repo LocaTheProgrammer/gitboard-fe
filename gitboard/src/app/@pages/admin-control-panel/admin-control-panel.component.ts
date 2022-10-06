@@ -21,6 +21,7 @@ export class AdminControlPanelComponent {
   isDeleteTaskListVisible: boolean = false;
   isDeletedCardVisible: boolean = false
   isDeleteProjectVisible: boolean = false
+  isUpdateAuthVisible: boolean = false
 
   error: boolean = false
   isCreateCompanyAdminVisible: boolean = false;
@@ -36,9 +37,13 @@ export class AdminControlPanelComponent {
   deleteTaskList: AdminPanelDiv = new AdminPanelDiv("Delete Task List", "deleteTaskList")
   deletedCards: AdminPanelDiv = new AdminPanelDiv("Deleted Cards", "deletedCards")
   deleteProject: AdminPanelDiv = new AdminPanelDiv("Delete project", "deleteProject")
+  updateAuth: AdminPanelDiv = new AdminPanelDiv("Aggiorna permessi utente", "updateAuth")
 
-  divsArray: AdminPanelDiv[] = [this.createCompanyAdmin, this.createCompany, this.createTask, this.createBoard,
-  this.assign, this.edit, this.assignUserToProject, this.createUser, this.deleteTaskList, this.deletedCards, this.deleteProject]
+  divsArray: AdminPanelDiv[] =
+    [this.createCompanyAdmin, this.createCompany, this.createTask, this.createBoard,
+    this.assign, this.edit, this.assignUserToProject,
+    this.createUser, this.deleteTaskList, this.deletedCards, this.deleteProject,
+    this.updateAuth]
 
 
   divVisibilityArray: boolean[] =
@@ -52,7 +57,8 @@ export class AdminControlPanelComponent {
     this.isCreateUserVisible,
     this.isDeleteTaskListVisible,
     this.isDeletedCardVisible,
-    this.isDeleteProjectVisible]
+    this.isDeleteProjectVisible,
+    this.isUpdateAuthVisible]
 
   constructor() { }
 
@@ -98,6 +104,9 @@ export class AdminControlPanelComponent {
       case 'deleteProject':
         this.isDeleteProjectVisible = true;
         break;
+      case 'updateAuth':
+        this.isUpdateAuthVisible = true;
+        break;
       default:
         this.error = true;
     }
@@ -118,6 +127,7 @@ export class AdminControlPanelComponent {
     this.isDeleteTaskListVisible = false
     this.isDeletedCardVisible = false
     this.isDeleteProjectVisible = false
+    this.isUpdateAuthVisible = false
   }
 
 
@@ -133,7 +143,8 @@ export class AdminControlPanelComponent {
       this.isCreateUserVisible,
       this.isDeleteTaskListVisible,
       this.isDeletedCardVisible,
-      this.isDeleteProjectVisible]
+      this.isDeleteProjectVisible,
+      this.isUpdateAuthVisible]
   }
 
 }
