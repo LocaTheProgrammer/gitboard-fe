@@ -22,7 +22,7 @@ export class EditCompanyComponent implements OnInit {
 
   companySelected!: CompanyDTO
   companyAdminSelected!: CompanyAdminDTO
-  adminNotInCompany!:CompanyAdminDTO
+  adminNotInCompany!: CompanyAdminDTO
   adminsNotInCompany: CompanyAdminDTO[] = []
 
   newCompanyName: string = ''
@@ -84,11 +84,24 @@ export class EditCompanyComponent implements OnInit {
     console.log(this.companyAdminSelected)
   }
 
-  updateCompanyAdmin(){
-    let companyNewAdmin = new CompanyNewAdminDTO(this.companySelected,this.companyAdminSelected)
+  updateCompanyAdmin() {
+    let companyNewAdmin = new CompanyNewAdminDTO(this.companySelected, this.companyAdminSelected)
+
+    console.log(companyNewAdmin)
+
     this.companyService.updateCompanyAdmin(companyNewAdmin).subscribe(response => {
       console.log(response)
     })
+  }
+
+  setCompany($event: any) {
+    console.log($event)
+    this.companySelected = $event
+  }
+
+  setAdmin($event: any) {
+    console.log($event)
+    this.companyAdminSelected = $event
   }
 
 }

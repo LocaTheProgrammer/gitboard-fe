@@ -8,44 +8,28 @@
 
     <div class="row mt-5 justify-content-center">
         <div class="col-6 d-flex justify-content-center">
-            <mat-form-field appearance="fill">
-                <mat-label>Select a company to edit or delete</mat-label>
-                <mat-select [(ngModel)]="companySelected">
-                    <mat-option *ngFor="let company of companyList" [value]="company">
-                        {{company.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+            <app-mat-select label="Company" objField="name" [list]="companyList" (emitter)="setCompany($event)">
+            </app-mat-select>
         </div>
-        <div class="col-6 d-flex justify-content-center" *ngIf="companySelected" (click)="getAllAdminsByCompany()">
-            <mat-form-field appearance="fill" disabled="true">
-                <mat-label>Admins</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let admin of companyAdminList">
-                        {{admin.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+        <div class="col-6 d-flex justify-content-center" (click)="getAllAdminsByCompany()">
+            <app-mat-select label="Company admins" objField="name" [list]="companyAdminList">
+            </app-mat-select>
         </div>
     </div>
 
-    <div class="row mt-3 justify-content-center" *ngIf="companySelected">
+    <div class="row mt-3 justify-content-center">
         <div class="col-6 d-flex justify-content-center" (click)="getAllAdminsNotInCompany()">
-            <mat-form-field appearance="fill">
-                <mat-label>Select a company to edit or delete</mat-label>
-                <mat-select [(ngModel)]="adminNotInCompany">
-                    <mat-option *ngFor="let a of adminsNotInCompany" [value]="a">
-                        {{a.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+            <app-mat-select label="Select an admin to add to the company" objField="name" [list]="adminsNotInCompany"
+                (emitter)="setAdmin($event)">
+            </app-mat-select>
         </div>
     </div>
 
     <div class="row mt-5">
         <div class="col  justify-content-center">
-            <app-button btnType="primary" btnText="save" (click)="updateCompanyAdmin()" [disabledCondition]="false"></app-button>
-<!--             
+            <app-button btnType="primary" btnText="save" (click)="updateCompanyAdmin()" [disabledCondition]="false">
+            </app-button>
+            <!--             
             <button class="btn btn-primary" (click)="updateCompanyAdmin()">
                 UPDATE
             </button> -->

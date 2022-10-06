@@ -1,12 +1,12 @@
 import { CompanyAdminDTO } from "./CompanyAdminDTO";
 import { CompanyDTO } from "./CompanyDTO";
 
-export class CompanyNewAdminDTO{
-    public company:CompanyDTO;
-    public newAdmin:CompanyAdminDTO
+export class CompanyNewAdminDTO {
+    public companyDTO: CompanyDTO;
+    public companyAdminDTO: CompanyAdminDTO
 
-    constructor(company:CompanyDTO, newAdmin:CompanyAdminDTO){
-        this.company=company
-        this.newAdmin=newAdmin
+    constructor(company: CompanyDTO, newAdmin: CompanyAdminDTO) {
+        this.companyDTO = company
+        this.companyAdminDTO = newAdmin
     }
 }
