@@ -14,7 +14,7 @@
 
     <span *ngIf="isMenuVisible">
         <div class="row">
-            <div *ngFor="let d of divsArray" class="col-4 d-flex justify-content-center mt-5">
+            <div *ngFor="let d of divsArray" class="col-12 col-md-4 d-flex justify-content-center mt-5">
                 <app-button btnType="primary" btnText="{{d.title}}" (click)="showDiv(d.divName)" minWidth="300px"
                     [disabledCondition]=false></app-button>
             </div>
@@ -40,6 +40,7 @@
             <app-create-user *ngSwitchCase="divVisibilityArray[7]"></app-create-user>
             <app-delete-task-list *ngSwitchCase="divVisibilityArray[8]"></app-delete-task-list>
             <app-deleted-cards *ngSwitchCase="divVisibilityArray[9]"></app-deleted-cards>
+            <app-delete-project *ngSwitchCase="divVisibilityArray[10]"></app-delete-project>
         </div>
     </div>
 

@@ -73,6 +73,7 @@ export class DeleteTaskListComponent implements OnInit {
     this.messageService.sendType(type)
   }
 
+
   clearMessages(): void {
     this.messageService.clearMessages();
   }

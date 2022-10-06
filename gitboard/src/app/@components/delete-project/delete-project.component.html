@@ -1,0 +1,17 @@
+<div class="background-elements">
+
+    <div class="row">
+        <div class="d-flex justify-content-center col">
+            <app-mat-select label="Projects" objField="name" [list]="projectList" (emitter)="setProject($event)">
+            </app-mat-select>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
+            <app-button btnType="danger" btnText="Delete Project" (click)="deleteProject()"
+                [disabledCondition]="selectedProject == undefined">
+            </app-button>
+        </div>
+    </div>
+</div>

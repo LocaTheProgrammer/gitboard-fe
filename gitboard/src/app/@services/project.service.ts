@@ -11,8 +11,8 @@ import { ProjectUserDTO } from '../@models/DTO/ProjectUserDTO';
   providedIn: 'root'
 })
 export class ProjectService {
- 
-  endpoint:string=environment.apiURL+"/todolist/rest/project/";
+
+  endpoint: string = environment.apiURL + "/todolist/rest/project/";
 
 
   constructor(private httpClient: HttpClient) { }
@@ -22,15 +22,15 @@ export class ProjectService {
     return this.httpClient.post<any>(`${this.endpoint}create`, project)
   }
 
-  findAll(){
+  findAll() {
     return this.httpClient.get<any>(`${this.endpoint}findAll`)
   }
 
-  getAllByCompany(company: CompanyDTO){
+  getAllByCompany(company: CompanyDTO) {
     return this.httpClient.post<any>(`${this.endpoint}getAllByCompany`, company)
   }
 
-  
+
   addUserToProject(puDTO: ProjectUserDTO) {
     return this.httpClient.post<any>(`${this.endpoint}addUserToProject`, puDTO)
   }
@@ -38,4 +38,9 @@ export class ProjectService {
   findByUser(user: BasicUserDTO) {
     return this.httpClient.post<any>(`${this.endpoint}findByUser`, user)
   }
+
+  deleteProject(project: ProjectDTO) {
+    return this.httpClient.delete<any>(`${this.endpoint}deleteProject`, { body: project })
+  }
+
 }

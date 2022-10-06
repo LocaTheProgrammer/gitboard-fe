@@ -53,6 +53,7 @@ import { ButtonComponent } from './@components/button/button.component';
 import { MatSelectComponent } from './@components/mat-select/mat-select.component';
 import { DeleteTaskListComponent } from './@components/delete-task-list/delete-task-list.component';
 import { DeletedCardsComponent } from './@components/deleted-cards/deleted-cards.component';
+import { DeleteProjectComponent } from './@components/delete-project/delete-project.component';
 
 
 
@@ -89,7 +90,8 @@ import { DeletedCardsComponent } from './@components/deleted-cards/deleted-cards
     ButtonComponent,
     MatSelectComponent,
     DeleteTaskListComponent,
-    DeletedCardsComponent
+    DeletedCardsComponent,
+    DeleteProjectComponent
   ],
   imports: [
     BrowserModule,
