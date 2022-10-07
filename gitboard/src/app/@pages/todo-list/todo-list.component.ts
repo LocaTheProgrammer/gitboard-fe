@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TaskService } from 'src/app/@services/task.service';
 import { CategoryDTO } from 'src/app/@models/DTO/CategoryDTO';
@@ -10,6 +10,9 @@ import { ProjectUserDTO } from 'src/app/@models/DTO/ProjectUserDTO';
 import { AuthService } from 'src/app/@services/auth/AuthService';
 import { UserService } from 'src/app/@services/user.service';
 import { UserDragDropInfoDTO } from 'src/app/@models/DTO/UserDragDropInfoDTO';
+import { MessageService } from 'src/app/@services/message.service';
+import { environment } from 'src/environments/environment';
+
 
 
 @Component({
@@ -26,6 +29,9 @@ export class TodoListComponent implements OnInit {
   email: string = ''
   isLoading: boolean = false;
 
+  @ViewChild('modalbtn') myDiv!: ElementRef<HTMLElement>;
+
+
   containerName: string = ''
   containerCounter: number = 0
   isFirstShifting = true;
@@ -41,10 +47,18 @@ export class TodoListComponent implements OnInit {
 
   userId!: number
   userAuth!: string
+  openModal: boolean = false
+  class: string = '';
+  style: string = '';
+  selectedTask!: Task;
 
-  constructor(private taskService: TaskService, private categoryService: CategoryService, private _Activatedroute: ActivatedRoute, private authService: AuthService, private userService: UserService) { }
+  image: string = ''
+
+  constructor(private messageService: MessageService, private taskService: TaskService, private categoryService: CategoryService, private _Activatedroute: ActivatedRoute, private authService: AuthService, private userService: UserService) { }
+
 
   ngOnInit() {
+    this.image = environment.vectorImage
     this.initialize()
   }
 
@@ -59,6 +73,7 @@ export class TodoListComponent implements OnInit {
       this.isIdValid = false
     }
   }
+
 
   getUserTaskListByUserEmail() {
 
@@ -170,18 +185,66 @@ export class TodoListComponent implements OnInit {
   }
 
   printTask($event: any) {
-    this.taskService.updateTaskList($event).subscribe(() => {
-      this.updateError = false
-      this.isFirstShifting = false
-      this.taskList = [];
-      this.getUserTaskListByUserEmail()
-    }, () => {
-      this.updateError = true
-      this.isLoading = false
+    console.log($event)
 
-    })
+    let task: Task = $event.task
+    this.selectedTask = task
+    this.containerCounter = $event.result
+
+    if (task.listName.toLowerCase() != 'delete') {
+      this.taskService.updateTaskList(task).subscribe(() => {
+        this.updateError = false
+        this.isFirstShifting = false
+        this.taskList = [];
+        this.getUserTaskListByUserEmail()
+      }, () => {
+        this.updateError = true
+        this.isLoading = false
+
+      })
+    } else {
+      let el: HTMLElement = this.myDiv.nativeElement;
+      el.click();
+    }
+
+  }
+
+  deleteTask() {
+    this.taskService.deleteTaskList(this.selectedTask).subscribe(() => {
+      this.sendMessage('deleted!')
+      this.setType('success')
+
+    },
+      () => {
+        this.sendMessage('smt went wrong!')
+        this.setType('danger')
+
+      },
+      () => {
+        setTimeout(() => {
+          this.clearMessages()
+          this.clearTypes()
+          this.getUserTaskListByUserEmail()
+        }, 3 * 1000);
+
+      })
+  }
+
+  sendMessage(message: string): void {
+    this.messageService.sendMessage(message);
+  }
+
+  setType(type: string) {
+    this.messageService.sendType(type)
   }
 
 
+  clearMessages(): void {
+    this.messageService.clearMessages();
+  }
+
+  clearTypes() {
+    this.messageService.clearType()
+  }
 
 }

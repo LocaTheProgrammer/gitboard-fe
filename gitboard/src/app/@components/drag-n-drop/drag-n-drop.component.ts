@@ -1,8 +1,10 @@
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 import { CategoryDTO } from 'src/app/@models/DTO/CategoryDTO';
 import { Task } from 'src/app/@models/DTO/Task';
 import { TaskList } from 'src/app/@models/DTO/TaskList';
+
 
 @Component({
   selector: 'app-drag-n-drop',
@@ -16,19 +18,25 @@ export class DragNDropComponent implements OnInit {
   @Input() id!: number
   @Input() auth!: string
 
+  @Input() containerCounter!: number;
+
   @Output() isLoading: boolean = false;
+
 
   @Output() result = new EventEmitter<any>();
 
   containerName: any;
-  containerCounter: number = 0;
   isFirstShifting: boolean = true;
   containerNumber!: number
-  constructor() { }
+
+
+  constructor() {
+  }
 
   ngOnInit(): void {
-    console.log(this.auth)
+
   }
+
 
   drop(event: any, catId: number) { // CdkDragDrop<string[]>
     if (event.previousContainer === event.container) {
@@ -45,14 +53,21 @@ export class DragNDropComponent implements OnInit {
   }
 
   loadArrays(catId: number, task: Task) {
+
+    let cloneCatListLength = this.categoryList.length
+    let containerCounterClone = this.containerCounter
+
     this.taskList[this.containerNumber].taskListDTOList.forEach(element => {
       element.listName = this.categoryList[catId - 1].description
     })
-    this.containerCounter += this.categoryList.length
+    let result = cloneCatListLength + containerCounterClone
+    this.containerCounter = result
+
+    console.log("clone counter: " + this.containerCounter)
 
     this.isLoading = false
 
-    this.result.emit(task)
+    this.result.emit({ task, result })
 
   }
 
@@ -71,6 +86,8 @@ export class DragNDropComponent implements OnInit {
     let containerNumber = this.containerName.substring(this.containerName.lastIndexOf("-") + 1, this.containerName.length)
 
     this.containerNumber = +containerNumber - this.containerCounter
+    console.log("number: " + this.containerNumber)
+    console.log("counter: " + this.containerCounter)
 
     listName = this.categoryList[catId - 1].description
     taskName = this.taskList[catId - 1].taskListDTOList[event.currentIndex].taskName
@@ -84,5 +101,7 @@ export class DragNDropComponent implements OnInit {
     //  this.result.emit(task)
 
   }
+
+
 
 }

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './@pages/home/home.component';
@@ -22,7 +22,7 @@ import { AuthGuardService } from './@services/auth/AuthGuardService';
 import { AuthInterceptor } from './@services/auth/AuthInterceptor';
 import { AuthService } from './@services/auth/AuthService';
 import { AdminControlPanelComponent } from './@pages/admin-control-panel/admin-control-panel.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -56,6 +56,7 @@ import { DeletedCardsComponent } from './@components/deleted-cards/deleted-cards
 import { DeleteProjectComponent } from './@components/delete-project/delete-project.component';
 import { EditUserComponent } from './@components/edit-user/edit-user.component';
 import { EditProfileComponent } from './@components/edit-profile/edit-profile.component';
+
 
 
 
@@ -95,7 +96,8 @@ import { EditProfileComponent } from './@components/edit-profile/edit-profile.co
     DeletedCardsComponent,
     DeleteProjectComponent,
     EditUserComponent,
-    EditProfileComponent
+    EditProfileComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -118,19 +120,19 @@ import { EditProfileComponent } from './@components/edit-profile/edit-profile.co
 
     //mock api
     ProductsModule,
-    HttpClientInMemoryWebApiModule.forRoot(DataService,{ 
+    HttpClientInMemoryWebApiModule.forRoot(DataService, {
       rootPath: 'api/',
       passThruUnknownUrl: true
-  })
+    })
   ],
-  providers: [ 
+  providers: [
     MatDatepickerModule,
-    AuthGuardService, 
-    AuthService, 
+    AuthGuardService,
+    AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi:true
+      multi: true
     }],
   bootstrap: [AppComponent]
 })

@@ -33,9 +33,66 @@
 
     <div class="row mt-5" *ngIf="!isLoading && inputTaskList && inputCategoryList && isRenderable">
         <app-drag-n-drop [taskList]="inputTaskList" (result)="printTask($event)" [categoryList]="inputCategoryList"
-            [auth]="userAuth" [id]="userId">
+            [auth]="userAuth" [id]="userId" [containerCounter]="containerCounter">
         </app-drag-n-drop>
     </div>
+
+
+    <!-- Button trigger modal -->
+    <button #modalbtn type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        style="display: none;">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="row">
+        <div class="col d-flex justofy-content-center">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="exampleModalLabel">Do you really want to delete the card?</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body d-flex justify-content-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="300" height="300" viewBox="0 0 300 300" xml:space="preserve">
+                                <desc>Created with Fabric.js 4.2.0</desc>
+                                <defs>
+                                </defs>
+                                <g transform="matrix(1 0 0 1 150 150)" id="809b3f71-3d27-42b9-a7f1-e74c74da2351">
+                                    <rect
+                                        style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"
+                                        vector-effect="non-scaling-stroke" x="-150" y="-150" rx="0" ry="0" width="300"
+                                        height="300" />
+                                </g>
+                                <g transform="matrix(Infinity NaN NaN Infinity 0 0)"
+                                    id="65878136-84a8-455d-a6e3-86ad46bdb4b1">
+                                </g>
+                                <g transform="matrix(0.38 0 0 0.67 150 149.41)"
+                                    id="d66c60be-2ad0-4123-947b-05aa830b1e40">
+                                    <image
+                                        style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                                        vector-effect="non-scaling-stroke" [attr.xlink:href]="image" x="-400" y="-224.5"
+                                        width="800" height="449"></image>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                (click)="getUserTaskListByUserEmail()">Close</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                (click)="deleteTask()">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
 
     <div class="row mt-5 text-center" *ngIf="updateError">
         <div class="p-3 mb-2 bg-danger text-white">Error in updating</div>

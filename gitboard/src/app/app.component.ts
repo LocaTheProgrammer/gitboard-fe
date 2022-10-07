@@ -4,6 +4,7 @@ import { AlertType } from './@models/components/AlertType';
 import { Message } from './@models/components/Message';
 import { MessageService } from './@services/message.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,10 +13,12 @@ import { MessageService } from './@services/message.service';
 export class AppComponent {
   title = 'gitboard';
 
+
   subscription: Subscription;
   typeSubscription: Subscription;
 
   messages: Message[] = [];
+  counter = 0
   types: AlertType[] = []
   constructor(private messageService: MessageService) {
     this.subscription = this.messageService.getMessage().subscribe(message => {
@@ -33,5 +36,7 @@ export class AppComponent {
         this.types = [];
       }
     })
+
+
   }
 }
