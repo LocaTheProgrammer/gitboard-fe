@@ -56,6 +56,7 @@ import { DeletedCardsComponent } from './@components/deleted-cards/deleted-cards
 import { DeleteProjectComponent } from './@components/delete-project/delete-project.component';
 import { EditUserComponent } from './@components/edit-user/edit-user.component';
 import { EditProfileComponent } from './@components/edit-profile/edit-profile.component';
+import { ChangePasswordComponent } from './@components/change-password/change-password.component';
 
 
 
@@ -97,6 +98,7 @@ import { EditProfileComponent } from './@components/edit-profile/edit-profile.co
     DeleteProjectComponent,
     EditUserComponent,
     EditProfileComponent,
+    ChangePasswordComponent,
 
   ],
   imports: [

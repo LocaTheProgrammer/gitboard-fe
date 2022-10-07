@@ -23,6 +23,7 @@ export class AdminControlPanelComponent {
   isDeleteProjectVisible: boolean = false
   isUpdateAuthVisible: boolean = false
   isUpdateUserVisible: boolean = false
+  isChangePasswordVisible: boolean = false
 
   error: boolean = false
   isCreateCompanyAdminVisible: boolean = false;
@@ -40,12 +41,13 @@ export class AdminControlPanelComponent {
   deleteProject: AdminPanelDiv = new AdminPanelDiv("Delete project", "deleteProject")
   updateAuth: AdminPanelDiv = new AdminPanelDiv("Aggiorna permessi utente", "updateAuth")
   updateUser: AdminPanelDiv = new AdminPanelDiv("Aggiorna utente", "updateUser")
+  changePassword: AdminPanelDiv = new AdminPanelDiv("Cambia password", "changePassword")
 
   divsArray: AdminPanelDiv[] =
     [this.createCompanyAdmin, this.createCompany, this.createTask, this.createBoard,
     this.assign, this.edit, this.assignUserToProject,
     this.createUser, this.deleteTaskList, this.deletedCards, this.deleteProject,
-    this.updateAuth, this.updateUser]
+    this.updateAuth, this.updateUser, this.changePassword]
 
 
   divVisibilityArray: boolean[] =
@@ -61,7 +63,8 @@ export class AdminControlPanelComponent {
     this.isDeletedCardVisible,
     this.isDeleteProjectVisible,
     this.isUpdateAuthVisible,
-    this.isUpdateUserVisible]
+    this.isUpdateUserVisible,
+    this.isChangePasswordVisible]
 
   constructor() { }
 
@@ -113,6 +116,9 @@ export class AdminControlPanelComponent {
       case 'updateUser':
         this.isUpdateUserVisible = true;
         break;
+      case 'changePassword':
+        this.isChangePasswordVisible = true;
+        break;
       default:
         this.error = true;
     }
@@ -135,6 +141,7 @@ export class AdminControlPanelComponent {
     this.isDeleteProjectVisible = false
     this.isUpdateAuthVisible = false
     this.isUpdateUserVisible = false
+    this.isChangePasswordVisible = false
   }
 
 
@@ -152,7 +159,8 @@ export class AdminControlPanelComponent {
       this.isDeletedCardVisible,
       this.isDeleteProjectVisible,
       this.isUpdateAuthVisible,
-      this.isUpdateUserVisible]
+      this.isUpdateUserVisible,
+      this.isChangePasswordVisible]
   }
 
 }

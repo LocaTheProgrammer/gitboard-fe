@@ -7,10 +7,12 @@ import { ProjectUserDTO } from '../@models/DTO/ProjectUserDTO';
 import { UserDTO } from '../@models/DTO/UserDTO';
 import { UserAuth } from '../@models/DTO/UserAuth';
 import { BasicUserDTO } from '../@models/DTO/BasicUserDTO';
+import { UserMailPassword } from '../@models/DTO/UserMailPassword';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
 
   endpoint: string = environment.apiURL + "/todolist/";
 
@@ -72,6 +74,10 @@ export class UserService {
 
   updateUserInfo(updateUser: BasicUserDTO) {
     return this.httpClient.put<any>(`${this.endpoint}rest/user/updateUser`, updateUser)
+  }
+
+  updatePassword(userPassword: UserMailPassword) {
+    return this.httpClient.put<any>(`${this.endpoint}rest/user/updatePassword`, userPassword)
   }
 
 }
