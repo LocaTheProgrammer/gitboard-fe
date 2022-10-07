@@ -81,7 +81,6 @@ export class TodoListComponent implements OnInit {
     this.userService.getIdAndPermissionByEmail(this.email).subscribe((dndInfo: UserDragDropInfoDTO) => {
       this.userId = dndInfo.id
       this.userAuth = dndInfo.authority
-      console.log(this.userAuth)
       this.categoryService.getCategories().subscribe(response => {
         this.inputCategoryList = []
         this.inputCategoryList = response
@@ -185,8 +184,6 @@ export class TodoListComponent implements OnInit {
   }
 
   printTask($event: any) {
-    console.log($event)
-
     let task: Task = $event.task
     this.selectedTask = task
     this.containerCounter = $event.result

@@ -34,12 +34,12 @@ export class AddTaskToBoardComponent implements OnInit {
   isBoardUpdated: boolean = false
 
   task!: TaskDescription
-  tasksDescription : string [] = []
+  tasksDescription: string[] = []
   tasks!: TaskDescription[]
   message: string = '';
   alertType!: string;
 
-  taskAny:any
+  taskAny: any
 
   myControl = new FormControl('');
   filteredOptions!: Observable<string[]>;
@@ -60,7 +60,7 @@ export class AddTaskToBoardComponent implements OnInit {
       map(value => this._filter(value || '')),
     );
   }
-  
+
   private _filter(value: string): any[] {
     const filterValue = value;
     return this.tasksDescription.filter(t => t.toLocaleLowerCase().includes(filterValue))
@@ -90,12 +90,10 @@ export class AddTaskToBoardComponent implements OnInit {
 
   findAllTask() {
     return this.taskService.findAllTask().subscribe(tasks => {
-      console.log(tasks)
       this.tasks = tasks;
-      for(let t of tasks){
+      for (let t of tasks) {
         this.tasksDescription.push(t.description)
       }
-      console.log(this.tasksDescription)
 
     })
   }
@@ -107,12 +105,10 @@ export class AddTaskToBoardComponent implements OnInit {
 
   //componente al posto della visualizzazione isBoard
   submitForm() {
-    console.log(this.myControl.value)
     this.isBoardUpdated = false
 
-    console.log(this.tasks.filter(task => task.description == this.myControl.value))
     // (listName:string, taskName:string, taskPosition:number, taskId:number, taskListId:number)
-    let tFound:any = this.tasks.filter(task => task.description == this.myControl.value)
+    let tFound: any = this.tasks.filter(task => task.description == this.myControl.value)
 
     let task = new Task(this.category.description, tFound[0].description, 0, tFound[0].id, 0, this.project.id)
     let tlp = new TaskListProject(this.user.email, task);
@@ -126,15 +122,15 @@ export class AddTaskToBoardComponent implements OnInit {
       }, () => this.isBoardUpdated = true)
   }
 
-  setProject($event:any){
-    this.project=$event
+  setProject($event: any) {
+    this.project = $event
   }
 
-  setCategory($event:any){
-    this.category=$event
+  setCategory($event: any) {
+    this.category = $event
   }
 
-  setUser($event:any){
-    this.user=$event
+  setUser($event: any) {
+    this.user = $event
   }
 }

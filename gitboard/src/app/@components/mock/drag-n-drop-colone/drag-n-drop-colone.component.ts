@@ -26,7 +26,6 @@ export class DragNDropColoneComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.taskList)
   }
 
   drop(event: any, catId: number) { // CdkDragDrop<string[]>
@@ -70,13 +69,13 @@ export class DragNDropColoneComponent implements OnInit {
     let containerNumber = this.containerName.substring(this.containerName.lastIndexOf("-") + 1, this.containerName.length)
 
     this.containerNumber = +containerNumber - this.containerCounter
-    console.log(this.taskList)
+
 
     listName = this.categoryList[catId - 1].description
     taskName = this.taskList[catId - 1].cards[event.currentIndex].description
     taskId = this.taskList[catId - 1].cards[event.currentIndex].taskId
     taskListId = this.taskList[catId - 1].cards[event.currentIndex].taskListId
-    console.log(this.taskList[catId - 1].cards[event.currentIndex])
+
 
     let id = this.taskList[catId - 1].cards[event.currentIndex].id
 

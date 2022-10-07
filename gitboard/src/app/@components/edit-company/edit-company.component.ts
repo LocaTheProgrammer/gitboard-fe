@@ -56,7 +56,7 @@ export class EditCompanyComponent implements OnInit {
   }
 
   editCompany() {
-    console.log("company to edit: " + this.companySelected)
+
   }
 
 
@@ -69,7 +69,7 @@ export class EditCompanyComponent implements OnInit {
   }
 
   deleteCompany() {
-    console.log("company to delete: " + this.companySelected)
+
   }
 
   isFormValid() {
@@ -78,29 +78,26 @@ export class EditCompanyComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.startDate)
-    console.log(this.endDate)
-    console.log(this.newCompanyName)
-    console.log(this.companyAdminSelected)
+
   }
 
   updateCompanyAdmin() {
     let companyNewAdmin = new CompanyNewAdminDTO(this.companySelected, this.companyAdminSelected)
 
-    console.log(companyNewAdmin)
+
 
     this.companyService.updateCompanyAdmin(companyNewAdmin).subscribe(response => {
-      console.log(response)
+
     })
   }
 
   setCompany($event: any) {
-    console.log($event)
+
     this.companySelected = $event
   }
 
   setAdmin($event: any) {
-    console.log($event)
+
     this.companyAdminSelected = $event
   }
 

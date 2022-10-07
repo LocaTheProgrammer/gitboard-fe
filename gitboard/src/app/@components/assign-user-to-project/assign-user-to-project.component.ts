@@ -38,20 +38,20 @@ export class AssignUserToProjectComponent implements OnInit {
   filteredProjects!: Observable<string[]>;
   filteredUsers!: Observable<string[]>;
 
-  matFormFieldCompany!:MatFormField
-  matFormFieldArrayProject!:MatFormField
-  matFormFieldArrayUser!:MatFormField
+  matFormFieldCompany!: MatFormField
+  matFormFieldArrayProject!: MatFormField
+  matFormFieldArrayUser!: MatFormField
 
-  isMatFormCompanyLoaded:boolean=false
-  isMatFormProjectLoaded:boolean=false
-  isMatFormUserLoaded:boolean=false
-  
-  isAdded: boolean=false;
-  alertType: string='';
-  message: string='';
+  isMatFormCompanyLoaded: boolean = false
+  isMatFormProjectLoaded: boolean = false
+  isMatFormUserLoaded: boolean = false
+
+  isAdded: boolean = false;
+  alertType: string = '';
+  message: string = '';
 
   constructor(private projectService: ProjectService, private companyService: CompanyService, private userService: UserService) { }
-  
+
   ngOnInit(): void {
     this.loadCompanies()
     this.filteredCompanies = this.myControlCompany.valueChanges.pipe(
@@ -77,7 +77,7 @@ export class AssignUserToProjectComponent implements OnInit {
         this.companyNameList.push(c.name)
       })
 
-      this.matFormFieldCompany=new MatFormField('select company', this.myControlCompany, companies, this.filteredCompanies, 'autoC', 'Pick Me')
+      this.matFormFieldCompany = new MatFormField('select company', this.myControlCompany, companies, this.filteredCompanies, 'autoC', 'Pick Me')
 
     })
   }
@@ -110,21 +110,20 @@ export class AssignUserToProjectComponent implements OnInit {
   }
 
   save() {
-    let proj=this.projectList.filter(proj => proj.name=this.myControlProjets.value)
+    let proj = this.projectList.filter(proj => proj.name = this.myControlProjets.value)
 
-    if(proj[0].id!=undefined){
-    console.log(proj[0])
+    if (proj[0].id != undefined) {
 
       let puDTO = new ProjectUserDTO(proj[0].id, this.myControlUsers.value);
-      this.projectService.addUserToProject(puDTO).subscribe(()=>{
-        this.alertType='success'
-        this.message='user added to proj'
+      this.projectService.addUserToProject(puDTO).subscribe(() => {
+        this.alertType = 'success'
+        this.message = 'user added to proj'
       },
-      ()=>{
-        this.alertType='danger'
-        this.message='user NOT added to proj'
-      }, () => this.isAdded=true)
-      
+        () => {
+          this.alertType = 'danger'
+          this.message = 'user NOT added to proj'
+        }, () => this.isAdded = true)
+
     }
   }
 

@@ -63,7 +63,6 @@ export class DragNDropComponent implements OnInit {
     let result = cloneCatListLength + containerCounterClone
     this.containerCounter = result
 
-    console.log("clone counter: " + this.containerCounter)
 
     this.isLoading = false
 
@@ -86,8 +85,6 @@ export class DragNDropComponent implements OnInit {
     let containerNumber = this.containerName.substring(this.containerName.lastIndexOf("-") + 1, this.containerName.length)
 
     this.containerNumber = +containerNumber - this.containerCounter
-    console.log("number: " + this.containerNumber)
-    console.log("counter: " + this.containerCounter)
 
     listName = this.categoryList[catId - 1].description
     taskName = this.taskList[catId - 1].taskListDTOList[event.currentIndex].taskName

@@ -15,12 +15,10 @@ export class DeletedCardsComponent implements OnInit {
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
-    console.log('mmmm ok')
     this.findAllDeleted()
   }
 
   findAllDeleted() {
-    console.log('ok')
     this.taskService.findAllDeletedCards().subscribe((deletedCardListResponse: DeletedCard[]) => this.deletedTaskList = deletedCardListResponse)
   }
 

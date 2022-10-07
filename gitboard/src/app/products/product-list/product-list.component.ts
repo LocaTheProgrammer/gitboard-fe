@@ -9,14 +9,14 @@ import { ProductService } from '../@service/product.service';
 })
 export class ProductListComponent implements OnInit {
 
-  productName!:string
+  productName!: string
 
   product !: ProductDTO
   edit = true;
   add = false;
   products!: ProductDTO[];
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
     this.getProducts()
@@ -25,21 +25,19 @@ export class ProductListComponent implements OnInit {
   private getProducts() {
     this.productService.getProducts().subscribe(products => {
       this.products = products
-      console.log(this.products)
     });
   }
 
   addProduct() {
     const data = new ProductDTO(null, this.productName);
     this.productService.createProduct(data).subscribe(response => {
-      console.log(response)
       this.getProducts();
     });
   }
 
   setProductEdit(product: ProductDTO) {
     this.product.name = product.name;
-    if(product.id){
+    if (product.id) {
       this.product.id = product.id;
     }
     this.edit = false;
@@ -47,19 +45,18 @@ export class ProductListComponent implements OnInit {
   }
 
   resetValues() {
-    this.product= new ProductDTO(null, '')
+    this.product = new ProductDTO(null, '')
     this.edit = true;
     this.add = false;
   }
 
   removeProduct(product: ProductDTO) {
     const id = product.id;
-    console.log(product)
     this.productService.deleteProduct(id).subscribe(product => console.log(product));
     this.getProducts()
   }
 
-  updateProduct(){
+  updateProduct() {
     this.productService.editProduct(this.product).subscribe(response => console.log(response));
     this.getProducts()
     this.resetValues()

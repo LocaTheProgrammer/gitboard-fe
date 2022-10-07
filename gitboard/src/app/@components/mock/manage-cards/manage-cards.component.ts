@@ -52,8 +52,6 @@ export class ManageCardsComponent implements OnInit {
     }
     this.mockCardService.deleteCardFromTaskList(taskSelectedId).subscribe((r: any) => {
       this.isCallDone = false
-      console.log(r)
-
 
       this.mockCardService.deleteCard(this.taskSelected).subscribe(() => {
         this.aType = 'success'
@@ -90,15 +88,12 @@ export class ManageCardsComponent implements OnInit {
   addTaskToList() {
     this.isCallDone = false
 
-    console.log(this.taskSelected)
-    console.log(this.catSelected)
 
     this.mockCardService.getDynamicUserTaskList().subscribe(taskListResponse => {
       let todoList: Task[] = []
       let progressList: Task[] = []
       let doneList: Task[] = []
 
-      console.log(taskListResponse)
       taskListResponse.forEach(task => {
         switch (task.taskListCategoryId) {
           case 1:
@@ -156,13 +151,11 @@ export class ManageCardsComponent implements OnInit {
       }
 
       this.mockCardService.addTaskToTaskList(newTask).subscribe(okr => {
-        console.log(okr)
         this.aType = 'success'
         this.mex = 'add ok'
 
       },
         failr => {
-          console.log(failr)
           this.aType = 'danger'
           this.mex = 'add NOT ok'
 

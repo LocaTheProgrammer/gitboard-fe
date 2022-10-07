@@ -26,12 +26,10 @@ export class DeleteTaskListComponent implements OnInit {
 
   findAllTaskList() {
     return this.taskService.findAllTaskList().subscribe(tasks => {
-      console.log(tasks)
       this.tasks = tasks;
       for (let t of tasks) {
         this.tasksDescription.push(t.taskName)
       }
-      console.log(this.tasksDescription)
     })
   }
 
@@ -43,8 +41,6 @@ export class DeleteTaskListComponent implements OnInit {
   }
 
   deleteTask() {
-    console.log('deleting2')
-    console.log(this.taskListSelected)
     this.taskService.deleteTaskList(this.taskListSelected).subscribe(() => {
       this.sendMessage('add ok')
       this.setType('success')

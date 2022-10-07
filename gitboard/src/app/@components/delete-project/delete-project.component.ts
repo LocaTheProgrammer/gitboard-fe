@@ -31,7 +31,6 @@ export class DeleteProjectComponent implements OnInit {
   }
 
   deleteProject() {
-    console.log(this.selectedProject)
     this.projectService.deleteProject(this.selectedProject).subscribe(
       () => {
         this.sendMessage('ok')

@@ -28,7 +28,6 @@ export class EditProfileComponent implements OnInit {
 
   loadUserInfo() {
     let userEmail = new BasicUserDTO(this.email)
-    console.log(userEmail)
     this.userService.findUserByEmail(userEmail).subscribe((userFound: BasicUserDTO) => {
       if (userFound.firstName)
         this.name = userFound.firstName
@@ -49,7 +48,6 @@ export class EditProfileComponent implements OnInit {
       password: this.password
     }
     // let update: UserDTO = new UserDTO(this.name, this.surname, this.email, this.password)
-    console.log(update)
     this.userService.updateUserInfo(update).subscribe(
       () => {
         this.sendMessage('ok')
