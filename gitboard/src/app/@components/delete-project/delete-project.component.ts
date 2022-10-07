@@ -37,8 +37,8 @@ export class DeleteProjectComponent implements OnInit {
         this.setType('success')
       },
       () => {
-        this.sendMessage('ok')
-        this.setType('success')
+        this.sendMessage('not ok')
+        this.setType('danger')
       },
       () => {
         setTimeout(() => {

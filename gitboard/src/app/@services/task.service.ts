@@ -5,6 +5,7 @@ import { TaskListProject } from '../@models/DTO/TaskistProject';
 import { TaskDTO } from '../@models/DTO/TaskDTO';
 import { ProjectUserDTO } from '../@models/DTO/ProjectUserDTO';
 import { Task } from '../@models/DTO/Task';
+import { DeletedCard } from '../@models/DTO/DeletedCard';
 
 
 @Injectable({
@@ -52,6 +53,10 @@ export class TaskService {
 
   findAllDeletedCards() {
     return this.httpClient.get<any>(`${this.endpoint}findAllDeletedTaskList`)
-
   }
+
+  restoreCard(card: DeletedCard) {
+    return this.httpClient.post<any>(`${this.endpoint}restoreCard`, card)
+  }
+
 }

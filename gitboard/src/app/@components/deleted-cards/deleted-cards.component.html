@@ -2,17 +2,21 @@
 
     <span class="card mb-5" *ngFor="let c of deletedTaskList">
         <div class="row row-height">
-            <div class="col-3 d-flex justify-content-center">
+            <div class="col d-flex justify-content-center">
                 List: {{c.category}}
             </div>
-            <div class="col-3 d-flex justify-content-center">
+            <div class="col d-flex justify-content-center">
                 Task Name: {{c.taskName}}
             </div>
-            <div class="col-3 d-flex justify-content-center">
+            <div class="col d-flex justify-content-center">
                 Project Name: {{c.projectName}}
             </div>
-            <div class="col-3 d-flex justify-content-center">
+            <div class="col d-flex justify-content-center">
                 User Assigned: {{c.userAssigned}}
+            </div>
+            <div class="col d-flex justify-content-center">
+                <app-button btnType="primary" btnText="Restore" (click)="restore(c)" [disabledCondition]="false">
+                </app-button>
             </div>
 
         </div>

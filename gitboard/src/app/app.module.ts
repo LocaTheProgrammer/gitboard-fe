@@ -43,7 +43,6 @@ import { ProjectListComponent } from './@pages/project-list/project-list.compone
 import { CreateUserComponent } from './@components/create-user/create-user.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './data.service';
-import { ProductsModule } from './products/products.module';
 import { DragNDropColoneComponent } from './@components/mock/drag-n-drop-colone/drag-n-drop-colone.component';
 import { TodoListCloneComponent } from './@pages/mock/todo-list-clone/todo-list-clone.component';
 import { CreateCardComponent } from './@components/mock/create-card/create-card.component';
@@ -121,7 +120,6 @@ import { ChangePasswordComponent } from './@components/change-password/change-pa
     MatAutocompleteModule,
 
     //mock api
-    ProductsModule,
     HttpClientInMemoryWebApiModule.forRoot(DataService, {
       rootPath: 'api/',
       passThruUnknownUrl: true
