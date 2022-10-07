@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div class="row mt-5" *ngIf="!isLoading && inputTaskList && inputCategoryList && isRenderable">
+    <div class="row mt-5" *ngIf="!isLoading && inputTaskList && inputCategoryList && isRenderable && userId!=undefined">
         <app-drag-n-drop [taskList]="inputTaskList" (result)="printTask($event)" [categoryList]="inputCategoryList"
             [auth]="userAuth" [id]="userId" [containerCounter]="containerCounter">
         </app-drag-n-drop>

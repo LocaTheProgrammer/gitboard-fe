@@ -1,5 +1,5 @@
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { CategoryDTO } from 'src/app/@models/DTO/CategoryDTO';
 import { Task } from 'src/app/@models/DTO/Task';
@@ -15,7 +15,7 @@ export class DragNDropComponent implements OnInit {
 
   @Input() taskList!: TaskList[]
   @Input() categoryList!: CategoryDTO[]
-  @Input() id!: number
+  @Input() id: number | undefined
   @Input() auth!: string
 
   @Input() containerCounter!: number;
@@ -32,6 +32,7 @@ export class DragNDropComponent implements OnInit {
 
   constructor() {
   }
+
 
   ngOnInit(): void {
 
@@ -56,7 +57,7 @@ export class DragNDropComponent implements OnInit {
 
     let cloneCatListLength = this.categoryList.length
     let containerCounterClone = this.containerCounter
-
+    console.log(this.containerNumber)
     this.taskList[this.containerNumber].taskListDTOList.forEach(element => {
       element.listName = this.categoryList[catId - 1].description
     })
@@ -98,6 +99,7 @@ export class DragNDropComponent implements OnInit {
     //  this.result.emit(task)
 
   }
+
 
 
 
