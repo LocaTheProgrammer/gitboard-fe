@@ -26,3 +26,10 @@
     cursor: not-allowed;
     pointer-events: all !important;
 }
+
+.border-col {
+    border: 2px solid;
+    border-radius: 0.25rem;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+}
