@@ -43,12 +43,12 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   isFormSubmittable() {
-    return this.strRegex.test(this.repeatPassword) && this.strRegex.test(this.newPassword) && this.newPassword == this.repeatPassword && this.email != ''
+    return this.strRegex.test(this.repeatPassword) && this.strRegex.test(this.newPassword) && this.newPassword == this.repeatPassword && this.email != '' && this.oldPassword != ''
   }
 
 
   save() {
-    let userPassword: UserMailPassword = new UserMailPassword(this.email, this.repeatPassword)
+    let userPassword: UserMailPassword = new UserMailPassword(this.email, this.repeatPassword, this.oldPassword)
     this.userService.updatePassword(userPassword).subscribe(
       () => {
         this.sendMessage('add ok')
