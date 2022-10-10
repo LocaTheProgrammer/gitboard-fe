@@ -43,4 +43,8 @@ export class ProjectService {
     return this.httpClient.delete<any>(`${this.endpoint}deleteProject`, { body: project })
   }
 
+  findAllCompanyProjectsByCompanyAdminEmail(user: BasicUserDTO) {
+    return this.httpClient.post<any>(`${this.endpoint}findAllCompanyProjectsByCompanyAdminEmail`, user)
+  }
+
 }
