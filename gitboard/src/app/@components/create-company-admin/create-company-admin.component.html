@@ -7,21 +7,81 @@
         </div>
     </div>
 
-    <div class="row justify-content-center mt-5">
-        <div class="col justify-content-center">
+    <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                      </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg>
                 </span>
-                <input type="text" class="form-control" placeholder="Company Admin name" [(ngModel)]="newCompanyAdmin"
+                <input type="text" class="form-control" placeholder="Company Admin name"
+                    [(ngModel)]="newCompanyAdminName" aria-describedby="basic-addon1">
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg>
+                </span>
+                <input type="text" class="form-control" placeholder="Company Admin surname"
+                    [(ngModel)]="newCompanyAdminSurname" aria-describedby="basic-addon1">
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg>
+                </span>
+                <input type="text" class="form-control" placeholder="email" [(ngModel)]="email"
                     aria-describedby="basic-addon1">
             </div>
         </div>
-        
     </div>
+
+    <div class="row mt-5">
+        <div class="col-2 d-flex justify-content-end">
+            <app-button btnType="secondary" [btnText]="isPasswordVisible? 'hide password':'show password'"
+                (click)="showPassword()"></app-button>
+
+        </div>
+        <div class="col d-flex justify-content-start">
+            <input [type]="isPasswordVisible ? 'text' : 'password' " class="form-control" [(ngModel)]="password"
+                placeholder="Password" aria-describedby="button-addon1">
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-2 d-flex justify-content-end">
+            <app-button btnType="secondary" [btnText]="isRepeatPasswordVisible? 'hide password':'show password'"
+                (click)="showRepeatPassword()"></app-button>
+        </div>
+        <div class="col d-flex justify-content-start">
+            <input [type]="isRepeatPasswordVisible ? 'text' : 'password' " class="form-control"
+                [(ngModel)]="repeatPassword" placeholder="Password" aria-describedby="button-addon1">
+        </div>
+    </div>
+
+
     <div *ngIf="isCreated" class="row mt-5">
         <div class="col d-flex justify-content-center">
             <app-result-message [alertType]="alertType" [message]="creationMessage"></app-result-message>
@@ -30,8 +90,9 @@
 
     <div class="row mt-5">
         <div class="col d-flex justify-content-center">
-            <app-button btnType="primary" btnText="save" (click)="submitForm()" [disabledCondition]="!isFormValid()"></app-button>
-            
+            <app-button btnType="primary" btnText="save" (click)="submitForm()" [disabledCondition]="!isFormValid()">
+            </app-button>
+
             <!-- <button class="btn btn-primary" (click)="submitForm()" [disabled]="!isFormValid()">
                 SAVE
             </button> -->

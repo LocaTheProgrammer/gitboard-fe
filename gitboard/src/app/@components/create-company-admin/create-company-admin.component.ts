@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthDTO } from 'src/app/@models/DTO/AuthDTO';
 import { CompanyAdminNameDTO } from 'src/app/@models/DTO/CompanyAdminNameDTO';
+import { SignUpDTO } from 'src/app/@models/DTO/SignUpDTO';
+import { AuthorityService } from 'src/app/@services/authority.service';
 import { CompanyAdminService } from 'src/app/@services/company-admin.service';
 
 @Component({
@@ -9,31 +12,62 @@ import { CompanyAdminService } from 'src/app/@services/company-admin.service';
 })
 export class CreateCompanyAdminComponent implements OnInit {
 
-  newCompanyAdmin: string = ''
+  newCompanyAdminName: string = ''
+  newCompanyAdminSurname: string = ''
+  email: string = ''
   isCreated: boolean = false
   creationMessage: string = ''
   alertType!: string;
-  constructor(private companyAdminService: CompanyAdminService) { }
+
+  password: string = ''
+  repeatPassword: string = ''
+
+  isPasswordVisible: boolean = false
+  isRepeatPasswordVisible: boolean = false
+  strRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+
+  constructor(private companyAdminService: CompanyAdminService, private authorityService: AuthorityService) { }
 
   ngOnInit(): void {
   }
 
+
   isFormValid() {
-    return this.newCompanyAdmin != ''
+    return this.strRegex.test(this.repeatPassword) && this.strRegex.test(this.password) && this.password == this.repeatPassword && this.email != ''
   }
 
-  //TODO fare messaggio componente
-  submitForm() {
-    let admin: CompanyAdminNameDTO = new CompanyAdminNameDTO(this.newCompanyAdmin)
-    this.companyAdminService.createCompanyAdmin(admin).subscribe(() => {
-      this.creationMessage = 'ok'
-      this.alertType = 'success'
-    },
-    () => {
-      this.alertType = 'danger'
-      this.creationMessage = 'smth went wrong'
-    },
-    () => this.isCreated = true)
+  showPassword() {
+    this.isPasswordVisible = !this.isPasswordVisible
   }
-  
+
+  showRepeatPassword() {
+    this.isRepeatPasswordVisible = !this.isRepeatPasswordVisible
+  }
+
+  submitForm() {
+    let authName = 'write'
+
+    //TODO FIXME
+    this.authorityService.getAuthname(authName).subscribe({
+      next: (gottenAuth: AuthDTO) => {
+        let auth: AuthDTO = new AuthDTO(gottenAuth.id, gottenAuth.name)
+        let cAdmin: SignUpDTO = new SignUpDTO(this.newCompanyAdminName, this.newCompanyAdminSurname, this.email, this.password, auth)
+
+        this.companyAdminService.createCompanyAdmin(cAdmin).subscribe(() => {
+          this.creationMessage = 'ok'
+          this.alertType = 'success'
+        },
+          () => {
+            this.alertType = 'danger'
+            this.creationMessage = 'smth went wrong'
+          },
+          () => this.isCreated = true)
+      },
+      error: (err) => {
+
+      }
+    })
+
+  }
+
 }
