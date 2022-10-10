@@ -18,6 +18,7 @@ export class ProjectListComponent implements OnInit {
 
   ngOnInit(): void {
     this.email = this.authService.getEmailFromToken()
+    console.log(this.email)
     if (this.email != '') {
       let user = new BasicUserDTO(this.email)
       this.projectService.findByUser(user).subscribe(projs => {

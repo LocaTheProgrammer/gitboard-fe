@@ -7,6 +7,10 @@ export class AuthService {
     return localStorage.getItem('token') ? true : false
   }
 
+  public getAuthFromToken() {
+    let token = this.getDecodedAccessToken()
+    return token.auths[0].authority
+  }
 
   public getEmailFromToken() {
     let token = this.getDecodedAccessToken()

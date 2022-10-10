@@ -11,8 +11,8 @@
                     <a class="nav-link active" aria-current="page" (click)="navigateTo('home')">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         Reserved Area
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -20,20 +20,23 @@
                             <li><a class="dropdown-item" (click)="navigateTo('login')">Login</a></li>
                             <li><a class="dropdown-item" (click)="navigateTo('signup')">Sign Up</a></li>
                         </span>
-                        
+
 
                         <span *ngIf="isUserLogged()">
                             <li><a class="dropdown-item" (click)="navigateTo('projects')">Projects</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" (click)="navigateTo('control-panel')">Control Panel</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
-                        </span>    
-                        
+                            <span *ngIf="getRole() === 'ROLE_company-admin'">
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" (click)="navigateTo('control-panel')">Control
+                                        Panel</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                            </span>
+                            <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+                        </span>
+
                     </ul>
                 </li>
             </ul>
