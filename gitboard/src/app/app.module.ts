@@ -17,7 +17,6 @@ import { TodoListComponent } from './@pages/todo-list/todo-list.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SignUpSuccessfulComponent } from './@pages/sign-up-successful/sign-up-successful.component';
 import { ConfirmResetComponent } from './@pages/confirm-reset/confirm-reset.component';
-import { SpinnerComponent } from './@components/spinner/spinner.component';
 import { AuthGuardService } from './@services/auth/AuthGuardService';
 import { AuthInterceptor } from './@services/auth/AuthInterceptor';
 import { AuthService } from './@services/auth/AuthService';
@@ -27,34 +26,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import { DragNDropComponent } from './@components/drag-n-drop/drag-n-drop.component';
 import { CommonModule } from '@angular/common';
-import { CreateCompanyComponent } from './@components/create-company/create-company.component';
-import { CreateTaskComponent } from './@components/create-task/create-task.component';
-import { CreateBoardComponent } from './@components/create-board/create-board.component';
-import { AddTaskToBoardComponent } from './@components/add-task-to-board/add-task-to-board.component';
-import { CreateCompanyAdminComponent } from './@components/create-company-admin/create-company-admin.component';
-import { ResultMessageComponent } from './@components/result-message/result-message.component';
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
-import { AssignUserToProjectComponent } from './@components/assign-user-to-project/assign-user-to-project.component';
-import { MatFormFieldAutoCompleteComponent } from './@components/mat-form-field-auto-complete/mat-form-field-auto-complete.component';
 import { ProjectListComponent } from './@pages/project-list/project-list.component';
-import { CreateUserComponent } from './@components/create-user/create-user.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './data.service';
-import { DragNDropColoneComponent } from './@components/mock/drag-n-drop-colone/drag-n-drop-colone.component';
 import { TodoListCloneComponent } from './@pages/mock/todo-list-clone/todo-list-clone.component';
-import { CreateCardComponent } from './@components/mock/create-card/create-card.component';
-import { ManageCardsComponent } from './@components/mock/manage-cards/manage-cards.component';
-import { ButtonComponent } from './@components/button/button.component';
-import { MatSelectComponent } from './@components/mat-select/mat-select.component';
-import { DeleteTaskListComponent } from './@components/delete-task-list/delete-task-list.component';
-import { DeletedCardsComponent } from './@components/deleted-cards/deleted-cards.component';
-import { DeleteProjectComponent } from './@components/delete-project/delete-project.component';
-import { EditUserComponent } from './@components/edit-user/edit-user.component';
-import { EditProfileComponent } from './@components/edit-profile/edit-profile.component';
-import { ChangePasswordComponent } from './@components/change-password/change-password.component';
-
+import { ComponentPagesShared } from './@components/component-pages-shared.module';
 
 
 
@@ -69,52 +47,19 @@ import { ChangePasswordComponent } from './@components/change-password/change-pa
     TodoListComponent,
     SignUpSuccessfulComponent,
     ConfirmResetComponent,
-    SpinnerComponent,
-    AdminControlPanelComponent,
-    DragNDropComponent,
-    CreateCompanyComponent,
-    CreateTaskComponent,
-    CreateBoardComponent,
-    AddTaskToBoardComponent,
-    CreateCompanyAdminComponent,
-    ResultMessageComponent,
-    AssignUserToProjectComponent,
-    MatFormFieldAutoCompleteComponent,
-    ProjectListComponent,
-    CreateUserComponent,
-    DragNDropColoneComponent,
     TodoListCloneComponent,
-    CreateCardComponent,
-    ManageCardsComponent,
-    ButtonComponent,
-    MatSelectComponent,
-    DeleteTaskListComponent,
-    DeletedCardsComponent,
-    DeleteProjectComponent,
-    EditUserComponent,
-    EditProfileComponent,
-    ChangePasswordComponent,
-
+    AdminControlPanelComponent,
+    ProjectListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSliderModule,
-    MatGridListModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    DragDropModule,
-    MatDatepickerModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSelectModule,
     CommonModule,
-    MatAutocompleteModule,
-
+    ComponentPagesShared,
     //mock api
     HttpClientInMemoryWebApiModule.forRoot(DataService, {
       rootPath: 'api/',
@@ -122,7 +67,7 @@ import { ChangePasswordComponent } from './@components/change-password/change-pa
     })
   ],
   providers: [
-    MatDatepickerModule,
+
     AuthGuardService,
     AuthService,
     {
