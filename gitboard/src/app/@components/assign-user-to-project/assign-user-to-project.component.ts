@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { MatFormField } from 'src/app/@models/components/MatFormField';
-import { BasicUserDTO } from 'src/app/@models/DTO/BasicUserDTO';
 import { CompanyDTO } from 'src/app/@models/DTO/CompanyDTO';
 import { ProjectDTO } from 'src/app/@models/DTO/ProjectDTO';
 import { ProjectUserDTO } from 'src/app/@models/DTO/ProjectUserDTO';
@@ -17,7 +13,7 @@ import { UserService } from 'src/app/@services/user.service';
   templateUrl: './assign-user-to-project.component.html',
   styleUrls: ['./assign-user-to-project.component.scss']
 })
-//TODO refactor mat-select related stuff
+
 export class AssignUserToProjectComponent implements OnInit {
 
   companySelected!: CompanyDTO

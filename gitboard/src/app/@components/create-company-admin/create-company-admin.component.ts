@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthDTO } from 'src/app/@models/DTO/AuthDTO';
-import { CompanyAdminNameDTO } from 'src/app/@models/DTO/CompanyAdminNameDTO';
 import { SignUpDTO } from 'src/app/@models/DTO/SignUpDTO';
 import { AuthorityService } from 'src/app/@services/authority.service';
 import { CompanyAdminService } from 'src/app/@services/company-admin.service';
+import { MessageService } from 'src/app/@services/message.service';
 
 @Component({
   selector: 'app-create-company-admin',
   templateUrl: './create-company-admin.component.html',
   styleUrls: ['./create-company-admin.component.scss']
 })
-export class CreateCompanyAdminComponent implements OnInit {
+export class CreateCompanyAdminComponent {
 
   newCompanyAdminName: string = ''
   newCompanyAdminSurname: string = ''
@@ -26,11 +26,7 @@ export class CreateCompanyAdminComponent implements OnInit {
   isRepeatPasswordVisible: boolean = false
   strRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
 
-  constructor(private companyAdminService: CompanyAdminService, private authorityService: AuthorityService) { }
-
-  ngOnInit(): void {
-  }
-
+  constructor(private companyAdminService: CompanyAdminService, private authorityService: AuthorityService, private messageService: MessageService) { }
 
   isFormValid() {
     return this.strRegex.test(this.repeatPassword) && this.strRegex.test(this.password) && this.password == this.repeatPassword && this.email != ''
@@ -47,27 +43,51 @@ export class CreateCompanyAdminComponent implements OnInit {
   submitForm() {
     let authName = 'write'
 
-    //TODO FIXME
     this.authorityService.getAuthname(authName).subscribe({
       next: (gottenAuth: AuthDTO) => {
         let auth: AuthDTO = new AuthDTO(gottenAuth.id, gottenAuth.name)
         let cAdmin: SignUpDTO = new SignUpDTO(this.newCompanyAdminName, this.newCompanyAdminSurname, this.email, this.password, auth)
-
-        this.companyAdminService.createCompanyAdmin(cAdmin).subscribe(() => {
-          this.creationMessage = 'ok'
-          this.alertType = 'success'
-        },
-          () => {
-            this.alertType = 'danger'
-            this.creationMessage = 'smth went wrong'
+        this.companyAdminService.createCompanyAdmin(cAdmin).subscribe({
+          next: () => {
+            this.sendMessage("company admin created")
+            this.setType("success")
           },
-          () => this.isCreated = true)
+          error: () => this.sendErrorMessage(),
+          complete: () => this.clearMessageAndType()
+        })
       },
-      error: (err) => {
-
-      }
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessageAndType()
     })
 
+  }
+
+  clearMessageAndType() {
+    setTimeout(() => {
+      this.clearMessages()
+      this.clearTypes()
+    }, 3 * 1000);
+  }
+
+  sendErrorMessage() {
+    this.sendMessage("something went wrong")
+    this.setType("danger")
+  }
+
+  sendMessage(message: string): void {
+    this.messageService.sendMessage(message);
+  }
+
+  setType(type: string) {
+    this.messageService.sendType(type)
+  }
+
+  clearMessages(): void {
+    this.messageService.clearMessages();
+  }
+
+  clearTypes() {
+    this.messageService.clearType()
   }
 
 }
