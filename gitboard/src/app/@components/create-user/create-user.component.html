@@ -1,11 +1,17 @@
 <div class="background-elements">
 
+    <div class="row mb-5">
+        <div class="col d-flex justify-content-center">
+            <h1>Create User</h1>
+        </div>
+    </div>
+
+
     <div class="row">
         <div class="col d-flex justify-content-center">
             <input type="text" class="form-control" placeholder="Name" [(ngModel)]="name"
                 aria-describedby="basic-addon1">
         </div>
-
         <div class="col d-flex justify-content-center">
             <input type="text" class="form-control" placeholder="Surname" [(ngModel)]="surname"
                 aria-describedby="basic-addon1">
@@ -17,8 +23,7 @@
             <input type="text" class="form-control" placeholder="Email" [(ngModel)]="email"
                 aria-describedby="basic-addon1">
         </div>
-
-        <div class="col d-flex justify-content-center">
+        <div class="col d-flex justify-content-center input-group">
             <button *ngIf="isPasswordVisible" class="btn btn-outline-secondary" type="button" id="button-addon1"
                 (click)="showPassword()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -38,6 +43,7 @@
                         d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
                 </svg>
             </button>
+
             <input [type]="isPasswordVisible ? 'text' : 'password' " class="form-control" [(ngModel)]="password"
                 placeholder="Password" aria-describedby="button-addon1">
         </div>
@@ -45,13 +51,8 @@
 
     <div class="row mt-5">
         <div class="col d-flex justify-content-center">
-
             <app-button btnType="primary" btnText="save" (click)="save()" [disabledCondition]="isUserSubmittable()">
             </app-button>
-
-            <!-- <button class="btn btn-primary" (click)="save()" [disabled]="isUserSubmittable()">
-                Save
-            </button> -->
         </div>
     </div>
 
