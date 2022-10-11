@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AdminPanelComponent } from 'src/app/@models/components/AdminPanelComponent';
 import { AdminPanelDiv } from 'src/app/@models/components/AdminPanelDiv';
+import { MessageService } from 'src/app/@services/message.service';
 
 @Component({
   selector: 'app-admin-control-panel',
@@ -66,10 +67,15 @@ export class AdminControlPanelComponent {
     this.isUpdateUserVisible,
     this.isChangePasswordVisible]
 
-  constructor() { }
+  constructor(private messageService: MessageService) { }
 
+  clear() {
+    this.messageService.clearMessages()
+    this.messageService.clearType()
+  }
 
   showMenu() {
+    this.clear()
     this.initializeView()
     this.isMenuVisible = true
   }

@@ -79,7 +79,6 @@ export class DragNDropColoneComponent implements OnInit {
 
     let id = this.taskList[catId - 1].cards[event.currentIndex].id
 
-    //TODO dinamico
     let categoryID
     switch (this.taskList[catId - 1].cards[event.currentIndex].category) {
       case 'todo': categoryID = 1; break;

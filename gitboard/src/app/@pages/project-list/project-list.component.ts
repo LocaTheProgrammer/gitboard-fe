@@ -23,8 +23,6 @@ export class ProjectListComponent implements OnInit {
   ngOnInit(): void {
     this.email = this.authService.getEmailFromToken()
     this.role = this.authService.getAuthFromToken()
-    console.log(this.email)
-    console.log(this.role)
 
     if (this.email != '') {
 

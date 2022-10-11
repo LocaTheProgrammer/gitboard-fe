@@ -21,12 +21,9 @@ import { UserService } from 'src/app/@services/user.service';
 export class AssignUserToProjectComponent implements OnInit {
 
   companySelected!: CompanyDTO
-  projectSelected!: ProjectDTO
-  userSelected!: BasicUserDTO
 
   companyList: CompanyDTO[] = []
   projectList: ProjectDTO[] = []
-  userList: BasicUserDTO[] = []
 
   projectNameList: string[] = [];
   companyNameList: string[] = [];
@@ -36,38 +33,12 @@ export class AssignUserToProjectComponent implements OnInit {
   myControlProjets = new FormControl('');
   myControlUsers = new FormControl('');
 
-  filteredCompanies!: Observable<string[]>;
-  filteredProjects!: Observable<string[]>;
-  filteredUsers!: Observable<string[]>;
-
-  matFormFieldCompany!: MatFormField
-  matFormFieldArrayProject!: MatFormField
-  matFormFieldArrayUser!: MatFormField
-
-  isMatFormCompanyLoaded: boolean = false
-  isMatFormProjectLoaded: boolean = false
-  isMatFormUserLoaded: boolean = false
-
-  isAdded: boolean = false;
-  alertType: string = '';
-  message: string = '';
 
   constructor(private messageService: MessageService, private projectService: ProjectService, private companyService: CompanyService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.loadCompanies()
-    this.filteredCompanies = this.myControlCompany.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterCompany(value || '')),
-    );
-    this.filteredProjects = this.myControlProjets.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterProject(value || '')),
-    );
-    this.filteredUsers = this.myControlUsers.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterUser(value || '')),
-    );
+
   }
 
   loadCompanies() {
@@ -79,7 +50,6 @@ export class AssignUserToProjectComponent implements OnInit {
         this.companyList.forEach(c => {
           this.companyNameList.push(c.name)
         })
-        this.matFormFieldCompany = new MatFormField('select company', this.myControlCompany, companies, this.filteredCompanies, 'autoC', 'Pick Me')
       },
       error: () => this.sendErrorMessage(),
       complete: () => this.clearMessageAndType()
@@ -100,8 +70,7 @@ export class AssignUserToProjectComponent implements OnInit {
 
   loadProjectByCompany() {
     this.projectNameList = []
-    this.companySelected = this.companyList.filter(company => company.name = this.myControlCompany.value)[0]
-
+    this.companySelected = this.companyList.filter(company => company.name == this.myControlCompany.value)[0]
     this.projectService.getAllByCompany(this.companySelected).subscribe({
       next: (projs) => {
         this.projectList = projs
@@ -120,8 +89,10 @@ export class AssignUserToProjectComponent implements OnInit {
 
     this.userService.getAllByCompany(this.companySelected).subscribe({
       next: (users) => {
-        this.userList = users
-
+        if (users.length == 0) {
+          this.sendMessage("no user found for given company!")
+          this.setType("warning")
+        }
         users.forEach((u: any) => {
           this.userEmailList.push(u.email)
         })
@@ -137,11 +108,10 @@ export class AssignUserToProjectComponent implements OnInit {
   }
 
   save() {
-    let proj = this.projectList.filter(proj => proj.name = this.myControlProjets.value)
+    let proj = this.projectList.filter(proj => proj.name == this.myControlProjets.value)[0]
 
-    if (proj[0].id != undefined) {
-
-      let puDTO = new ProjectUserDTO(proj[0].id, this.myControlUsers.value);
+    if (proj.id != undefined) {
+      let puDTO = new ProjectUserDTO(proj.id, this.myControlUsers.value);
 
       this.projectService.addUserToProject(puDTO).subscribe({
         next: () => {
@@ -151,29 +121,9 @@ export class AssignUserToProjectComponent implements OnInit {
         error: () => this.sendErrorMessage(),
         complete: () => this.clearMessages
       })
-
-
     }
   }
 
-  private _filterCompany(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.companyNameList.filter(option => option.toLowerCase().includes(filterValue));
-  }
-
-
-  private _filterProject(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.projectNameList.filter(option => option.toLowerCase().includes(filterValue));
-  }
-
-  private _filterUser(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.userEmailList.filter(option => option.toLowerCase().includes(filterValue));
-  }
 
   sendMessage(message: string): void {
     this.messageService.sendMessage(message);

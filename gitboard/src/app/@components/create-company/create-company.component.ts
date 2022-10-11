@@ -64,7 +64,6 @@ export class CreateCompanyComponent implements OnInit {
     return false;
   }
 
-  //TODO CHANGE MESSAGE
   submitForm() {
     this.isCompanySaved = false
     if (this.companyAdminSelected) {

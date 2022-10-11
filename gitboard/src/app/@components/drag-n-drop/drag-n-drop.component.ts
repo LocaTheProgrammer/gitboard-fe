@@ -57,7 +57,6 @@ export class DragNDropComponent implements OnInit {
 
     let cloneCatListLength = this.categoryList.length
     let containerCounterClone = this.containerCounter
-    console.log(this.containerNumber)
     this.taskList[this.containerNumber].taskListDTOList.forEach(element => {
       element.listName = this.categoryList[catId - 1].description
     })
