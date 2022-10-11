@@ -45,7 +45,6 @@ import { DataService } from './data.service';
 import { DragNDropColoneComponent } from './@components/mock/drag-n-drop-colone/drag-n-drop-colone.component';
 import { TodoListCloneComponent } from './@pages/mock/todo-list-clone/todo-list-clone.component';
 import { CreateCardComponent } from './@components/mock/create-card/create-card.component';
-import { AccordionComponent } from './@components/accordion/accordion.component';
 import { ManageCardsComponent } from './@components/mock/manage-cards/manage-cards.component';
 import { ButtonComponent } from './@components/button/button.component';
 import { MatSelectComponent } from './@components/mat-select/mat-select.component';
@@ -86,7 +85,6 @@ import { ChangePasswordComponent } from './@components/change-password/change-pa
     DragNDropColoneComponent,
     TodoListCloneComponent,
     CreateCardComponent,
-    AccordionComponent,
     ManageCardsComponent,
     ButtonComponent,
     MatSelectComponent,
