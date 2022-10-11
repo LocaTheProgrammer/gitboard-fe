@@ -11,6 +11,7 @@ import { CompanyService } from 'src/app/@services/company.service';
   templateUrl: './edit-company.component.html',
   styleUrls: ['./edit-company.component.scss']
 })
+//TODO capire cosa fare con questo
 export class EditCompanyComponent implements OnInit {
 
 

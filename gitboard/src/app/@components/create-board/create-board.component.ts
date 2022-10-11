@@ -4,6 +4,7 @@ import { CompanyDTO } from 'src/app/@models/DTO/CompanyDTO';
 import { ProjectDTO } from 'src/app/@models/DTO/ProjectDTO';
 import { CompanyAdminService } from 'src/app/@services/company-admin.service';
 import { CompanyService } from 'src/app/@services/company.service';
+import { MessageService } from 'src/app/@services/message.service';
 import { ProjectService } from 'src/app/@services/project.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class CreateBoardComponent implements OnInit {
   noAvailableAdmin: boolean = false;
   alertType!: string;
 
-  constructor(private companyService: CompanyService, private companyAdminService: CompanyAdminService, private projectService: ProjectService) { }
+  constructor(private messageService: MessageService, private companyService: CompanyService, private companyAdminService: CompanyAdminService, private projectService: ProjectService) { }
 
   ngOnInit(): void {
     this.getCompanyLists()
@@ -40,15 +41,14 @@ export class CreateBoardComponent implements OnInit {
     let admins: CompanyAdminFullDTO[] = [this.adminSelected]
     let project: ProjectDTO = new ProjectDTO(this.newBoardName, admins)
 
-    this.projectService.create(project).subscribe(() => {
-      this.message = "oook"
-      this.alertType="success"
-    },
-    () => {
-      this.alertType="danger"
-        this.message = "opsssss"
-    },
-    ()=>this.isProjectSaved=true)
+    this.projectService.create(project).subscribe({
+      next: () => {
+        this.sendMessage("project created")
+        this.setType("success")
+      },
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessageAndType()
+    })
   }
 
   isFormValid() {
@@ -61,28 +61,71 @@ export class CreateBoardComponent implements OnInit {
 
   getCompanyLists() {
     this.companyAdminList = []
-    this.companyService.getAll().subscribe(companies => {
-      this.companyList = companies
+    this.companyService.getAll().subscribe({
+      next: (companies) => this.companyList = companies,
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessageAndType()
     })
+
   }
 
   getAllCompanyAdmins() {
     this.noAvailableAdmin = false
-    this.companyAdminService.getAllCompanyAdmins(this.companySelected).subscribe(companyAdmins => {
-      this.companyAdminList = companyAdmins
-      if (this.companyAdminList.length == 0) {
-        this.noAvailableAdmin = true;
-      }
+
+    this.companyAdminService.getAllCompanyAdmins(this.companySelected).subscribe({
+      next: (companyAdmins) => {
+        this.companyAdminList = companyAdmins
+        if (this.companyAdminList.length == 0) {
+          this.sendMessage("no admins available!")
+          this.setType("warning")
+        }
+      },
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessageAndType()
     })
+
+
   }
 
 
-  setCompany($event:any){
-    this.companySelected=$event
+  setCompany($event: any) {
+    this.companySelected = $event
   }
 
-  setCompanyAdmin($event:any){
-    this.adminSelected=$event
+  setCompanyAdmin($event: any) {
+    this.adminSelected = $event
   }
+
+
+
+  sendErrorMessage() {
+    this.sendMessage("something went wrong")
+    this.setType("danger")
+  }
+
+  clearMessageAndType() {
+    setTimeout(() => {
+      this.clearMessages()
+      this.clearTypes()
+    }, 3 * 1000);
+  }
+
+  sendMessage(message: string): void {
+    this.messageService.sendMessage(message);
+  }
+
+  setType(type: string) {
+    this.messageService.sendType(type)
+  }
+
+  clearMessages(): void {
+    this.messageService.clearMessages();
+  }
+
+  clearTypes() {
+    this.messageService.clearType()
+  }
+
+
 
 }

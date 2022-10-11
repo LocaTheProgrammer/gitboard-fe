@@ -25,11 +25,17 @@ export class DeleteTaskListComponent implements OnInit {
   }
 
   findAllTaskList() {
-    return this.taskService.findAllTaskList().subscribe(tasks => {
-      this.tasks = tasks;
-      for (let t of tasks) {
-        this.tasksDescription.push(t.taskName)
-      }
+
+    return this.taskService.findAllTaskList().subscribe({
+      next: (tasks) => {
+        this.tasks = tasks;
+        for (let t of tasks) {
+          this.tasksDescription.push(t.taskName)
+        }
+      },
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessageAndType()
+
     })
   }
 
@@ -41,24 +47,29 @@ export class DeleteTaskListComponent implements OnInit {
   }
 
   deleteTask() {
-    this.taskService.deleteTaskList(this.taskListSelected).subscribe(() => {
-      this.sendMessage('add ok')
-      this.setType('success')
 
-    },
-      () => {
-        this.sendMessage('add not ok')
-        this.setType('danger')
-
+    this.taskService.deleteTaskList(this.taskListSelected).subscribe({
+      next: () => {
+        this.sendMessage('delete ok')
+        this.setType('success')
       },
-      () => {
-        setTimeout(() => {
-          this.clearMessages()
-          this.clearTypes()
-        }, 3 * 1000);
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessageAndType()
+    })
 
-      })
 
+  }
+
+  sendErrorMessage() {
+    this.sendMessage("something went wrong")
+    this.setType("danger")
+  }
+
+  clearMessageAndType() {
+    setTimeout(() => {
+      this.clearMessages()
+      this.clearTypes()
+    }, 3 * 1000);
   }
 
   sendMessage(message: string): void {

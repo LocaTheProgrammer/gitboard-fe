@@ -28,42 +28,37 @@ export class EditProfileComponent implements OnInit {
 
   loadUserInfo() {
     let userEmail = new BasicUserDTO(this.email)
-    this.userService.findUserByEmail(userEmail).subscribe((userFound: BasicUserDTO) => {
-      if (userFound.firstName)
-        this.name = userFound.firstName
-      if (userFound.lastName)
-        this.surname = userFound.lastName
+
+    this.userService.findUserByEmail(userEmail).subscribe({
+      next: (userFound: BasicUserDTO) => {
+        if (userFound.firstName)
+          this.name = userFound.firstName
+        if (userFound.lastName)
+          this.surname = userFound.lastName
+      },
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessageAndType()
     })
+
   }
 
   save() {
-    // private String firstName;
-    // private String lastName;
-    // private String email;
-    // private String password;
     let update = {
       firstName: this.name,
       lastName: this.surname,
       email: this.email,
       password: this.password
     }
-    // let update: UserDTO = new UserDTO(this.name, this.surname, this.email, this.password)
-    this.userService.updateUserInfo(update).subscribe(
-      () => {
-        this.sendMessage('ok')
+
+    this.userService.updateUserInfo(update).subscribe({
+      next: () => {
+        this.sendMessage('user updated')
         this.setType('success')
       },
-      () => {
-        this.sendMessage('not ok')
-        this.setType('danger')
-      },
-      () => {
-        setTimeout(() => {
-          this.clearMessages()
-          this.clearTypes()
-        }, 3 * 1000);
-      }
-    )
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessageAndType()
+    })
+
   }
 
   showPassword() {
@@ -85,5 +80,18 @@ export class EditProfileComponent implements OnInit {
   clearTypes() {
     this.messageService.clearType()
   }
+
+  sendErrorMessage() {
+    this.sendMessage("something went wrong")
+    this.setType("danger")
+  }
+
+  clearMessageAndType() {
+    setTimeout(() => {
+      this.clearMessages()
+      this.clearTypes()
+    }, 3 * 1000);
+  }
+
 
 }

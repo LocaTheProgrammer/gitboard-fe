@@ -8,17 +8,17 @@ import { UserService } from 'src/app/@services/user.service';
   styleUrls: ['./confirm-reset.component.scss']
 })
 export class ConfirmResetComponent implements OnInit {
-  isPasswordVisible: boolean=false;
-  passwordNotMatching:boolean=false
+  isPasswordVisible: boolean = false;
+  passwordNotMatching: boolean = false
 
-  password:string=""
-  passwordRepeat:string=""
+  password: string = ""
+  passwordRepeat: string = ""
   token: any;
-  email:string=""
+  email: string = ""
 
-  isPasswordReset:number=0
-  
-  constructor(private aRoute: ActivatedRoute, private userService: UserService, private router:Router) { }
+  isPasswordReset: number = 0
+
+  constructor(private aRoute: ActivatedRoute, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.aRoute.queryParams
@@ -27,25 +27,22 @@ export class ConfirmResetComponent implements OnInit {
         this.email = params['email'];
         this.userService.confirmResetPasswordToken(this.token).subscribe()
       }
-    );
+      );
   }
 
 
-  showPassword(){
-    this.isPasswordVisible=!this.isPasswordVisible;
+  showPassword() {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  changeForgottenPassword(){
-    this.userService.resetPassword(this.email, this.password).subscribe(response=>{
-      if(response.status === 200){
-        this.isPasswordReset=1
-      }else{
-        this.isPasswordReset=2
-      }
+  changeForgottenPassword() {
+    this.userService.resetPassword(this.email, this.password).subscribe({
+      next: () => this.isPasswordReset = 1,
+      error: () => this.isPasswordReset = 2
     })
   }
 
-  goToLogin(){
+  goToLogin() {
     this.router.navigateByUrl('login')
   }
 

@@ -24,17 +24,41 @@ export class EditUserComponent implements OnInit {
   }
 
   findAll() {
-    this.userService.findAllBasic().subscribe(userListResponse => {
-      this.userList = userListResponse
+    this.userService.findAllBasic().subscribe({
+      next: (userListResponse) => {
+        this.userList = userListResponse
+      },
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessageAndType()
     })
   }
+
+
 
   findAuths() {
     this.userService.findAuths().subscribe(auths => {
       this.authList = auths
     })
+
+    this.userService.findAuths().subscribe({
+      next: (auths) => this.authList = auths,
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessageAndType
+    })
+
   }
 
+  sendErrorMessage() {
+    this.sendMessage("something went wrong")
+    this.setType("danger")
+  }
+
+  clearMessageAndType() {
+    setTimeout(() => {
+      this.clearMessages()
+      this.clearTypes()
+    }, 3 * 1000);
+  }
   sendMessage(message: string): void {
     this.messageService.sendMessage(message);
   }

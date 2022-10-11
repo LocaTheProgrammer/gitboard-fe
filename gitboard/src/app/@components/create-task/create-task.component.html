@@ -24,16 +24,12 @@
         </div>
     </div>
 
-    <div *ngIf="isTaskSaved" class="row mt-5">
-        <div class="col d-flex justify-content-center">
-            <app-result-message [alertType]="alertType" [message]="message"></app-result-message>
-        </div>
-    </div>
 
     <div class="row mt-5">
         <div class="col d-flex justify-content-center">
-            <app-button btnType="primary" btnText="save" (click)="submitForm()" [disabledCondition]="!isFormValid()"></app-button>
-<!-- 
+            <app-button btnType="primary" btnText="save" (click)="submitForm()" [disabledCondition]="!isFormValid()">
+            </app-button>
+            <!-- 
             <button class="btn btn-primary" (click)="submitForm()" [disabled]="!isFormValid()">
                 SAVE
             </button> -->

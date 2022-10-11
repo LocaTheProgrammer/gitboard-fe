@@ -24,6 +24,13 @@ export class DeleteProjectComponent implements OnInit {
     this.projectService.findAll().subscribe(responseProjects => {
       this.projectList = responseProjects
     })
+
+    this.projectService.findAll().subscribe({
+      next: (responseProjects) => this.projectList = responseProjects,
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessageAndType()
+    })
+
   }
 
   setProject($event: any) {
@@ -32,21 +39,27 @@ export class DeleteProjectComponent implements OnInit {
 
   deleteProject() {
     this.projectService.deleteProject(this.selectedProject).subscribe(
-      () => {
-        this.sendMessage('ok')
-        this.setType('success')
-      },
-      () => {
-        this.sendMessage('not ok')
-        this.setType('danger')
-      },
-      () => {
-        setTimeout(() => {
-          this.clearMessages()
-          this.clearTypes()
-        }, 3 * 1000);
-      },
+      {
+        next: () => {
+          this.sendMessage('ok')
+          this.setType('success')
+        },
+        error: () => this.sendErrorMessage(),
+        complete: () => this.clearMessageAndType()
+      }
     )
+  }
+
+  sendErrorMessage() {
+    this.sendMessage("something went wrong")
+    this.setType("danger")
+  }
+
+  clearMessageAndType() {
+    setTimeout(() => {
+      this.clearMessages()
+      this.clearTypes()
+    }, 3 * 1000);
   }
 
   sendMessage(message: string): void {

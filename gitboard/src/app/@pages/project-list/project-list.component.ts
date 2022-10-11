@@ -41,7 +41,7 @@ export class ProjectListComponent implements OnInit {
               next: (projects) => {
                 this.projectList = projects
               },
-              error: (err) => {
+              error: () => {
                 this.sendMessage("something went wrong")
                 this.setType("danger")
               },
@@ -59,9 +59,6 @@ export class ProjectListComponent implements OnInit {
             })
         }
       }
-
-
-
     }
   }
 

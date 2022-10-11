@@ -16,9 +16,6 @@
     </div>
 </div>
 
-<app-result-message *ngIf="isCallDone" [alertType]="aType" [message]="mex"></app-result-message>
-
-
 <div class="row">
     <div class="col d-flex justify-content-center">
         <app-button btnType="primary" btnText="add task" (click)="addTask()" [disabledCondition]="false"></app-button>

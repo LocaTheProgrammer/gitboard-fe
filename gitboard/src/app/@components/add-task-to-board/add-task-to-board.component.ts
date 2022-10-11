@@ -14,6 +14,7 @@ import { ProjectService } from 'src/app/@services/project.service';
 import { TaskService } from 'src/app/@services/task.service';
 import { UserService } from 'src/app/@services/user.service';
 import { map, startWith } from 'rxjs/operators';
+import { MessageService } from 'src/app/@services/message.service';
 @Component({
   selector: 'app-add-task-to-board',
   templateUrl: './add-task-to-board.component.html',
@@ -48,7 +49,8 @@ export class AddTaskToBoardComponent implements OnInit {
     private userService: UserService,
     private projectService: ProjectService,
     private taskService: TaskService,
-    private categoryService: CategoryService) { }
+    private categoryService: CategoryService,
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.findAllProjects()
@@ -67,35 +69,83 @@ export class AddTaskToBoardComponent implements OnInit {
   }
 
   findAllCategories() {
-    this.categoryService.getCategories().subscribe(categories => {
-      this.categoryList = categories
+    this.categoryService.getCategories().subscribe({
+      next: (categories) => this.categoryList = categories,
+      error: () => {
+        this.sendMessage("something went wrong")
+        this.setType("danger")
+      },
+      complete: () => {
+        setTimeout(() => {
+          this.clearMessages()
+          this.clearTypes()
+        }, 3 * 1000);
+      }
     })
+
+
   }
 
   findAllProjects() {
     this.isProjectListEmpty = false;
-    this.projectService.findAll().subscribe(allProjects => {
-      this.projectList = allProjects
-      if (this.projectList.length == 0) {
-        this.isProjectListEmpty = true;
+
+    this.projectService.findAll().subscribe({
+      next: (allProjects) => {
+        this.projectList = allProjects
+        if (this.projectList.length == 0) {
+          this.isProjectListEmpty = true;
+        }
+      },
+      error: () => {
+        this.sendMessage("something went wrong loading projects")
+        this.setType("danger")
+      },
+      complete: () => {
+        setTimeout(() => {
+          this.clearMessages()
+          this.clearTypes()
+        }, 3 * 1000);
       }
     })
   }
 
   findAllUsers() {
-    this.userService.findAllBasic().subscribe(users => {
-      this.userList = users
+    this.userService.findAllBasic().subscribe({
+      next: (users) => this.userList = users,
+      error: () => {
+        this.sendMessage("something went wrong loading users")
+        this.setType("danger")
+      },
+      complete: () => {
+        setTimeout(() => {
+          this.clearMessages()
+          this.clearTypes()
+        }, 3 * 1000);
+      }
     })
+
   }
 
   findAllTask() {
-    return this.taskService.findAllTask().subscribe(tasks => {
-      this.tasks = tasks;
-      for (let t of tasks) {
-        this.tasksDescription.push(t.description)
+    return this.taskService.findAllTask().subscribe({
+      next: (tasks) => {
+        this.tasks = tasks;
+        for (let t of tasks) {
+          this.tasksDescription.push(t.description)
+        }
+      },
+      error: () => {
+        this.sendMessage("something went wrong loading finding all task")
+        this.setType("danger")
+      },
+      complete: () => {
+        setTimeout(() => {
+          this.clearMessages()
+          this.clearTypes()
+        }, 3 * 1000);
       }
-
     })
+
   }
 
   isFormValid() {
@@ -112,15 +162,24 @@ export class AddTaskToBoardComponent implements OnInit {
 
     let task = new Task(this.category.description, tFound[0].description, 0, tFound[0].id, 0, this.project.id)
     let tlp = new TaskListProject(this.user.email, task);
-    this.taskService.createTaskList(tlp).subscribe(() => {
-      this.alertType = 'success'
-      this.message = 'ok'
-    },
-      () => {
+
+
+    this.taskService.createTaskList(tlp).subscribe({
+      next: () => {
+        this.alertType = 'success'
+        this.message = 'ok'
+      },
+      error: () => {
         this.alertType = 'danger'
         this.message = 'ooops'
-      }, () => this.isBoardUpdated = true)
+      },
+      complete: () => this.isBoardUpdated = true
+    })
+
+
   }
+
+
 
   setProject($event: any) {
     this.project = $event
@@ -132,5 +191,21 @@ export class AddTaskToBoardComponent implements OnInit {
 
   setUser($event: any) {
     this.user = $event
+  }
+
+  sendMessage(message: string): void {
+    this.messageService.sendMessage(message);
+  }
+
+  setType(type: string) {
+    this.messageService.sendType(type)
+  }
+
+  clearMessages(): void {
+    this.messageService.clearMessages();
+  }
+
+  clearTypes() {
+    this.messageService.clearType()
   }
 }

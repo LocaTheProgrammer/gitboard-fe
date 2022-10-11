@@ -2,28 +2,31 @@
 <!--TODO test-->
 <div class="row">
     <div class="col d-flex justify-content-center">
-        <app-mat-select label="task" objField="taskName" [list]="taskList" (emitter)="setTaskSelected($event)"></app-mat-select>
+        <app-mat-select label="task" objField="taskName" [list]="taskList" (emitter)="setTaskSelected($event)">
+        </app-mat-select>
     </div>
     <div class="col d-flex justify-content-center">
 
-        <app-mat-select label="category" objField="description" [list]="categoryList" (emitter)="setCategorySelected($event)"></app-mat-select>
+        <app-mat-select label="category" objField="description" [list]="categoryList"
+            (emitter)="setCategorySelected($event)"></app-mat-select>
     </div>
 </div>
 
-<app-result-message *ngIf="isCallDone" [alertType]="aType" [message]="mex"></app-result-message>
 
 <hr>
 
 <div class="row">
     <div class="col d-flex justify-content-center">
         <div class="col d-flex justify-content-center">
-        <app-button btnType="primary" btnText="add task to list" (click)="addTaskToList()" [disabledCondition]=false></app-button>
-            
+            <app-button btnType="primary" btnText="add task to list" (click)="addTaskToList()"
+                [disabledCondition]=false></app-button>
+
         </div>
     </div>
     <div class="col d-flex justify-content-center">
         <div class="col d-flex justify-content-center">
-        <app-button btnType="danger" btnText="delete selected task" (click)="delete()" [disabledCondition]="false"></app-button>
+            <app-button btnType="danger" btnText="delete selected task" (click)="delete()" [disabledCondition]="false">
+            </app-button>
         </div>
     </div>
 

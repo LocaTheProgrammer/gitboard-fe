@@ -8,48 +8,32 @@
 
         <!--non sono riuscito a fargli fare il ciclo for perchè il caricamento dei progetti dipende dalla company selezionata-->
         <div class="col-4 d-flex justify-content-center">
-                <app-mat-form-field-auto-complete 
-                title="Choose Company"
-                [myFormControl]="myControlCompany"
-                [list]="companyNameList"
-                matAutocompleteValue="autoC"
-                placeholder="Pick One"
-                ></app-mat-form-field-auto-complete>
+            <app-mat-form-field-auto-complete title="Choose Company" [myFormControl]="myControlCompany"
+                [list]="companyNameList" matAutocompleteValue="autoC" placeholder="Pick One">
+            </app-mat-form-field-auto-complete>
         </div>
 
         <div class="col-4 d-flex justify-content-center" (click)="loadProjectByCompany()">
-            
-            <app-mat-form-field-auto-complete 
-                title="Choose Project"
-                [myFormControl]="myControlProjets"
-                [list]="projectNameList"
-                matAutocompleteValue="autoP"
-                placeholder="Pick One"
-                ></app-mat-form-field-auto-complete>
+
+            <app-mat-form-field-auto-complete title="Choose Project" [myFormControl]="myControlProjets"
+                [list]="projectNameList" matAutocompleteValue="autoP" placeholder="Pick One">
+            </app-mat-form-field-auto-complete>
         </div>
         <div class="col-4 d-flex justify-content-center" (click)="loadUsersByCompany()">
-            
-            <app-mat-form-field-auto-complete 
-            title="Choose User"
-            [myFormControl]="myControlUsers"
-            [list]="userEmailList"
-            matAutocompleteValue="autoU"
-            placeholder="Pick One"
-            ></app-mat-form-field-auto-complete>
-        
+
+            <app-mat-form-field-auto-complete title="Choose User" [myFormControl]="myControlUsers"
+                [list]="userEmailList" matAutocompleteValue="autoU" placeholder="Pick One">
+            </app-mat-form-field-auto-complete>
+
         </div>
     </div>
 
-    <div *ngIf="isAdded" class="row mt-5">
-        <div class="col d-flex justify-content-center">
-            <app-result-message [alertType]="alertType" [message]="message"></app-result-message>
-        </div>
-    </div>
 
     <div class="row mt-5">
         <div class="col d-flex justify-content-center">
-            <app-button btnType="primary" btnText="save" (click)="save()" [disabledCondition]="!isFormSubmittable()"></app-button>
-<!-- 
+            <app-button btnType="primary" btnText="save" (click)="save()" [disabledCondition]="!isFormSubmittable()">
+            </app-button>
+            <!-- 
             <button class="btn btn-primary" (click)="save()" [disabled]="!isFormSubmittable()">
                 SAVE
             </button> -->

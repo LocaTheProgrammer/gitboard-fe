@@ -78,24 +78,48 @@ export class TodoListComponent implements OnInit {
   getUserTaskListByUserEmail() {
 
     this.isRenderable = false;
-    this.userService.getIdAndPermissionByEmail(this.email).subscribe((dndInfo: UserDragDropInfoDTO) => {
-      this.userId = dndInfo.id
-      this.userAuth = dndInfo.authority
-      this.categoryService.getCategories().subscribe(response => {
-        this.inputCategoryList = []
-        this.inputCategoryList = response
-        if (this.id != undefined) {
-          let pu = new ProjectUserDTO(this.id, this.email)
-          this.taskService.getDynamicUserTaskList(pu).subscribe(tl => {
-            this.inputTaskList = []
-            if (tl.length > 0) {
-              this.inputTaskList = tl
-              this.isRenderable = true;
-            }
+
+
+    this.userService.getIdAndPermissionByEmail(this.email).subscribe({
+      next: (dndInfo: UserDragDropInfoDTO) => {
+        this.userId = dndInfo.id
+        this.userAuth = dndInfo.authority
+        //2nd block
+        this.categoryService.getCategories().subscribe(response => {
+          this.categoryService.getCategories().subscribe({
+            next: (response) => {
+              this.inputCategoryList = []
+              this.inputCategoryList = response
+              if (this.id != undefined) {
+                let pu = new ProjectUserDTO(this.id, this.email)
+                //3rd block
+                this.taskService.getDynamicUserTaskList(pu).subscribe({
+                  next: (tl) => {
+                    this.inputTaskList = []
+                    if (tl.length > 0) {
+                      this.inputTaskList = tl
+                      this.isRenderable = true;
+                    }
+                  },
+                  error: () => this.sendErrorMessage(),
+                  complete: () => this.clearMessageAndType()
+                })
+              }
+            },
+            error: () => this.sendErrorMessage(),
+            complete: () => this.clearMessageAndType()
           })
-        }
-      })
+        })
+      },
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessageAndType()
     })
+
+
+
+
+
+
   }
 
   drop(event: any) { // CdkDragDrop<string[]>
@@ -109,7 +133,6 @@ export class TodoListComponent implements OnInit {
         event.currentIndex,
       );
     }
-    this.updateTaskList(event)
   }
 
   loadArrays() {
@@ -142,49 +165,6 @@ export class TodoListComponent implements OnInit {
   //IN PROGRESS: cdk-drop-list-1
   //DONE: cdk-drop-list-2
 
-  updateTaskList(event: any) {
-    this.isLoading = true;
-    let task: Task;
-    let listName = '';
-    let taskName = '';
-    let taskPosition: number;
-    let taskId: any;
-    let taskListId: any;
-
-    taskPosition = event.currentIndex
-
-    this.containerName = event.container.id
-    let containerNumber = this.containerName.substring(this.containerName.lastIndexOf("-") + 1, this.containerName.length)
-    let switchCondition = +containerNumber - this.containerCounter
-
-    switch (switchCondition) {
-      case 0:
-        listName = 'todo'
-        taskName = this.todo[event.currentIndex]
-        break;
-      case 1:
-        listName = 'progress'
-        taskName = this.inProgress[event.currentIndex]
-        break;
-      case 2:
-        listName = 'done'
-        taskName = this.done[event.currentIndex]
-        break;
-      default:
-        this.updateError = true
-    }
-
-
-    taskId = this.taskList.find(task => (task.taskName == taskName))?.taskId
-    taskListId = this.taskList.find(task => task.taskId == taskId)?.taskListId
-
-
-    task = new Task(listName, taskName, taskPosition, taskId, taskListId)
-
-
-
-  }
-
   printTask($event: any) {
     let task: Task = $event.task
     this.selectedTask = task
@@ -210,24 +190,14 @@ export class TodoListComponent implements OnInit {
 
   deleteTask() {
     if (this.selectedTask != undefined) {
-      this.taskService.deleteTaskList(this.selectedTask).subscribe(() => {
-        this.sendMessage('deleted!')
-        this.setType('success')
-
-      },
-        () => {
-          this.sendMessage('smt went wrong!')
-          this.setType('danger')
-
+      this.taskService.deleteTaskList(this.selectedTask).subscribe({
+        next: () => {
+          this.sendMessage('deleted!')
+          this.setType('success')
         },
-        () => {
-          setTimeout(() => {
-            this.clearMessages()
-            this.clearTypes()
-            this.getUserTaskListByUserEmail()
-          }, 3 * 1000);
-
-        })
+        error: () => this.sendErrorMessage(),
+        complete: () => this.clearMessageAndType()
+      })
     }
   }
 
@@ -248,6 +218,16 @@ export class TodoListComponent implements OnInit {
     this.messageService.clearType()
   }
 
+  sendErrorMessage() {
+    this.sendMessage("something went wrong")
+    this.setType("danger")
+  }
 
+  clearMessageAndType() {
+    setTimeout(() => {
+      this.clearMessages()
+      this.clearTypes()
+    }, 3 * 1000);
+  }
 
 }

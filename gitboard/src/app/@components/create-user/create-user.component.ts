@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserDTO } from 'src/app/@models/DTO/UserDTO';
+import { MessageService } from 'src/app/@services/message.service';
 import { UserService } from 'src/app/@services/user.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { UserService } from 'src/app/@services/user.service';
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.scss']
 })
-export class CreateUserComponent implements OnInit {
+export class CreateUserComponent {
 
   name: string = ''
   surname: string = ''
@@ -19,10 +20,7 @@ export class CreateUserComponent implements OnInit {
   alertType: string = ''
   isUserSaved: boolean = false;
 
-  constructor(private userService: UserService) { }
-
-  ngOnInit(): void {
-  }
+  constructor(private userService: UserService, private messageService: MessageService) { }
 
 
   isUserSubmittable() {
@@ -36,14 +34,42 @@ export class CreateUserComponent implements OnInit {
     this.isUserSaved = false;
     let user: UserDTO = new UserDTO(this.name, this.surname, this.email, this.password)
 
-    this.userService.createAccountUser(user).subscribe(() => {
-      this.message = 'ok'
-      this.alertType = "success"
-    },
-      () => {
-        this.message = 'no ok'
-        this.alertType = "danger"
-      }, () => this.isUserSaved = true)
+    this.userService.createAccountUser(user).subscribe({
+      next: () => {
+        this.sendMessage("user created")
+        this.setType("success")
+      },
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessageAndType()
+    })
 
+  }
+
+  sendErrorMessage() {
+    this.sendMessage("something went wrong")
+    this.setType("danger")
+  }
+
+  clearMessageAndType() {
+    setTimeout(() => {
+      this.clearMessages()
+      this.clearTypes()
+    }, 3 * 1000);
+  }
+
+  sendMessage(message: string): void {
+    this.messageService.sendMessage(message);
+  }
+
+  setType(type: string) {
+    this.messageService.sendType(type)
+  }
+
+  clearMessages(): void {
+    this.messageService.clearMessages();
+  }
+
+  clearTypes() {
+    this.messageService.clearType()
   }
 }

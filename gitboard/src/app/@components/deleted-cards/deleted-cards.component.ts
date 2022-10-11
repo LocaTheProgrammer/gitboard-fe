@@ -20,26 +20,42 @@ export class DeletedCardsComponent implements OnInit {
   }
 
   findAllDeleted() {
-    this.taskService.findAllDeletedCards().subscribe((deletedCardListResponse: DeletedCard[]) => this.deletedTaskList = deletedCardListResponse)
+    this.taskService.findAllDeletedCards().subscribe(
+      {
+        next: (deletedCardListResponse: DeletedCard[]) => this.deletedTaskList = deletedCardListResponse,
+        error: () => this.sendErrorMessage(),
+        complete: () => this.clearMessageAndType()
+      }
+    )
+
   }
 
   restore(card: DeletedCard) {
-    this.taskService.restoreCard(card).subscribe(() => {
-      this.sendMessage('ok')
-      this.setType('success')
-    },
-      () => {
-        this.sendMessage('not ok')
-        this.setType('danger')
+
+    this.taskService.restoreCard(card).subscribe({
+      next: () => {
+        this.sendMessage('ok')
+        this.setType('success')
       },
-      () => {
-        setTimeout(() => {
-          this.clearMessages()
-          this.clearTypes()
-        }, 3 * 1000);
-      },
-    )
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessageAndType()
+    })
+
   }
+
+
+  sendErrorMessage() {
+    this.sendMessage("something went wrong")
+    this.setType("danger")
+  }
+
+  clearMessageAndType() {
+    setTimeout(() => {
+      this.clearMessages()
+      this.clearTypes()
+    }, 3 * 1000);
+  }
+
 
   sendMessage(message: string): void {
     this.messageService.sendMessage(message);

@@ -1,5 +1,6 @@
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'src/app/@services/message.service';
 import { UserService } from '../../@services/user.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class SignupComponent implements OnInit, AfterContentChecked {
   isLoading: boolean = false;
 
   constructor(private fb: FormBuilder,
-    private userService: UserService) { }
+    private userService: UserService,
+    private messageService: MessageService) { }
 
   ngAfterContentChecked(): void {
     this.checkEmail()
@@ -51,12 +53,14 @@ export class SignupComponent implements OnInit, AfterContentChecked {
 
   signup() {
     this.isLoading = true;
-    this.userService.createAccount(this.userSignupForm.value.name, this.userSignupForm.value.surname, this.userSignupForm.value.mail, this.userSignupForm.value.password).subscribe(() => {
-      this.successMessage = 1;
-    },
-      () => {
-        this.successMessage = 2;
-      }, () => this.isLoading = false)
+    this.userService.createAccount(this.userSignupForm.value.name, this.userSignupForm.value.surname, this.userSignupForm.value.mail, this.userSignupForm.value.password).subscribe({
+      next: () => {
+        this.sendMessage("accont created")
+        this.setType("successful")
+      },
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessageAndType()
+    })
   }
 
 
@@ -97,5 +101,32 @@ export class SignupComponent implements OnInit, AfterContentChecked {
     this.incorrectMail = false;
     let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
     this.incorrectMail = regex.test(this.userSignupForm.value.mail);
+  }
+
+  sendErrorMessage() {
+    this.sendMessage("something went wrong")
+    this.setType("danger")
+  }
+
+  clearMessageAndType() {
+    setTimeout(() => {
+      this.clearMessages()
+      this.clearTypes()
+    }, 3 * 1000);
+  }
+  sendMessage(message: string): void {
+    this.messageService.sendMessage(message);
+  }
+
+  setType(type: string) {
+    this.messageService.sendType(type)
+  }
+
+  clearMessages(): void {
+    this.messageService.clearMessages();
+  }
+
+  clearTypes() {
+    this.messageService.clearType()
   }
 }

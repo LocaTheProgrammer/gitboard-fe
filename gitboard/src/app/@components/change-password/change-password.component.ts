@@ -49,24 +49,28 @@ export class ChangePasswordComponent implements OnInit {
 
   save() {
     let userPassword: UserMailPassword = new UserMailPassword(this.email, this.repeatPassword, this.oldPassword)
-    this.userService.updatePassword(userPassword).subscribe(
-      () => {
+
+    this.userService.updatePassword(userPassword).subscribe({
+      next: () => {
         this.sendMessage('add ok')
         this.setType('success')
-
       },
-      () => {
-        this.sendMessage('add not ok')
-        this.setType('danger')
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessages()
+    })
 
-      },
-      () => {
-        setTimeout(() => {
-          this.clearMessages()
-          this.clearTypes()
-        }, 3 * 1000);
+  }
 
-      })
+  sendErrorMessage() {
+    this.sendMessage("something went wrong")
+    this.setType("danger")
+  }
+
+  clearMessageAndType() {
+    setTimeout(() => {
+      this.clearMessages()
+      this.clearTypes()
+    }, 3 * 1000);
   }
 
   sendMessage(message: string): void {

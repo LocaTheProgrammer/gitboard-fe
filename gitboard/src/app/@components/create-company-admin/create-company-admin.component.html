@@ -81,13 +81,6 @@
         </div>
     </div>
 
-
-    <div *ngIf="isCreated" class="row mt-5">
-        <div class="col d-flex justify-content-center">
-            <app-result-message [alertType]="alertType" [message]="creationMessage"></app-result-message>
-        </div>
-    </div>
-
     <div class="row mt-5">
         <div class="col d-flex justify-content-center">
             <app-button btnType="primary" btnText="save" (click)="submitForm()" [disabledCondition]="!isFormValid()">

@@ -8,6 +8,7 @@ import { CompanyDTO } from 'src/app/@models/DTO/CompanyDTO';
 import { ProjectDTO } from 'src/app/@models/DTO/ProjectDTO';
 import { ProjectUserDTO } from 'src/app/@models/DTO/ProjectUserDTO';
 import { CompanyService } from 'src/app/@services/company.service';
+import { MessageService } from 'src/app/@services/message.service';
 import { ProjectService } from 'src/app/@services/project.service';
 import { UserService } from 'src/app/@services/user.service';
 
@@ -16,6 +17,7 @@ import { UserService } from 'src/app/@services/user.service';
   templateUrl: './assign-user-to-project.component.html',
   styleUrls: ['./assign-user-to-project.component.scss']
 })
+//TODO refactor mat-select related stuff
 export class AssignUserToProjectComponent implements OnInit {
 
   companySelected!: CompanyDTO
@@ -50,7 +52,7 @@ export class AssignUserToProjectComponent implements OnInit {
   alertType: string = '';
   message: string = '';
 
-  constructor(private projectService: ProjectService, private companyService: CompanyService, private userService: UserService) { }
+  constructor(private messageService: MessageService, private projectService: ProjectService, private companyService: CompanyService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.loadCompanies()
@@ -70,39 +72,64 @@ export class AssignUserToProjectComponent implements OnInit {
 
   loadCompanies() {
     this.companyNameList = []
-    this.companyService.getAll().subscribe(companies => {
-      this.companyList = companies
 
-      this.companyList.forEach(c => {
-        this.companyNameList.push(c.name)
-      })
-
-      this.matFormFieldCompany = new MatFormField('select company', this.myControlCompany, companies, this.filteredCompanies, 'autoC', 'Pick Me')
-
+    this.companyService.getAll().subscribe({
+      next: (companies) => {
+        this.companyList = companies
+        this.companyList.forEach(c => {
+          this.companyNameList.push(c.name)
+        })
+        this.matFormFieldCompany = new MatFormField('select company', this.myControlCompany, companies, this.filteredCompanies, 'autoC', 'Pick Me')
+      },
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessageAndType()
     })
+  }
+
+  sendErrorMessage() {
+    this.sendMessage("something went wrong")
+    this.setType("danger")
+  }
+
+  clearMessageAndType() {
+    setTimeout(() => {
+      this.clearMessages()
+      this.clearTypes()
+    }, 3 * 1000);
   }
 
   loadProjectByCompany() {
     this.projectNameList = []
     this.companySelected = this.companyList.filter(company => company.name = this.myControlCompany.value)[0]
-    this.projectService.getAllByCompany(this.companySelected).subscribe(projs => {
-      this.projectList = projs
 
-      projs.forEach((p: any) => {
-        this.projectNameList.push(p.name)
-      })
+    this.projectService.getAllByCompany(this.companySelected).subscribe({
+      next: (projs) => {
+        this.projectList = projs
+        projs.forEach((p: any) => {
+          this.projectNameList.push(p.name)
+        })
+      },
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessages
     })
+
   }
 
   loadUsersByCompany() {
     this.userEmailList = []
-    this.userService.getAllByCompany(this.companySelected).subscribe(users => {
-      this.userList = users
 
-      users.forEach((u: any) => {
-        this.userEmailList.push(u.email)
-      })
+    this.userService.getAllByCompany(this.companySelected).subscribe({
+      next: (users) => {
+        this.userList = users
+
+        users.forEach((u: any) => {
+          this.userEmailList.push(u.email)
+        })
+      },
+      error: () => this.sendErrorMessage(),
+      complete: () => this.clearMessages
     })
+
   }
 
   isFormSubmittable() {
@@ -115,14 +142,16 @@ export class AssignUserToProjectComponent implements OnInit {
     if (proj[0].id != undefined) {
 
       let puDTO = new ProjectUserDTO(proj[0].id, this.myControlUsers.value);
-      this.projectService.addUserToProject(puDTO).subscribe(() => {
-        this.alertType = 'success'
-        this.message = 'user added to proj'
-      },
-        () => {
-          this.alertType = 'danger'
-          this.message = 'user NOT added to proj'
-        }, () => this.isAdded = true)
+
+      this.projectService.addUserToProject(puDTO).subscribe({
+        next: () => {
+          this.sendMessage("user added to project")
+          this.setType("success")
+        },
+        error: () => this.sendErrorMessage(),
+        complete: () => this.clearMessages
+      })
+
 
     }
   }
@@ -146,5 +175,20 @@ export class AssignUserToProjectComponent implements OnInit {
     return this.userEmailList.filter(option => option.toLowerCase().includes(filterValue));
   }
 
+  sendMessage(message: string): void {
+    this.messageService.sendMessage(message);
+  }
+
+  setType(type: string) {
+    this.messageService.sendType(type)
+  }
+
+  clearMessages(): void {
+    this.messageService.clearMessages();
+  }
+
+  clearTypes() {
+    this.messageService.clearType()
+  }
 
 }
