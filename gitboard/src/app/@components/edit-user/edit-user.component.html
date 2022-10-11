@@ -1,4 +1,11 @@
 <div class="background-elements">
+
+    <div class="row mb-5">
+        <div class="col d-flex justify-content-center">
+            <h1>Update User Permission</h1>
+        </div>
+    </div>
+
     <div class="row">
         <div class="d-flex justify-content-center col">
             <app-mat-select label="Users" objField="email" [list]="userList" (emitter)="setUser($event)">
