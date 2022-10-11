@@ -11,7 +11,7 @@ import { UserService } from 'src/app/@services/user.service';
 @Component({
   selector: 'app-assign-user-to-project',
   templateUrl: './assign-user-to-project.component.html',
-  styleUrls: ['./assign-user-to-project.component.scss']
+  styleUrls: ['./../admin-panel-control.component.scss']
 })
 
 export class AssignUserToProjectComponent implements OnInit {

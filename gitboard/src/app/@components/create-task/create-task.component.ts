@@ -6,7 +6,7 @@ import { MessageService } from 'src/app/@services/message.service';
 @Component({
   selector: 'app-create-task',
   templateUrl: './create-task.component.html',
-  styleUrls: ['./create-task.component.scss']
+  styleUrls: ['./../admin-panel-control.component.scss']
 })
 export class CreateTaskComponent implements OnInit {
 

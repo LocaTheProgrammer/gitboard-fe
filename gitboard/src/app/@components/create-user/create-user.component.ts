@@ -6,7 +6,7 @@ import { UserService } from 'src/app/@services/user.service';
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
-  styleUrls: ['./create-user.component.scss']
+  styleUrls: ['./../admin-panel-control.component.scss']
 })
 export class CreateUserComponent {
 

@@ -18,7 +18,7 @@ import { MessageService } from 'src/app/@services/message.service';
 @Component({
   selector: 'app-add-task-to-board',
   templateUrl: './add-task-to-board.component.html',
-  styleUrls: ['./add-task-to-board.component.scss']
+  styleUrls: ['./../admin-panel-control.component.scss']
 })
 export class AddTaskToBoardComponent implements OnInit {
 

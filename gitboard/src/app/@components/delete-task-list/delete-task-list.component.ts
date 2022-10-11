@@ -7,7 +7,7 @@ import { TaskService } from 'src/app/@services/task.service';
 @Component({
   selector: 'app-delete-task-list',
   templateUrl: './delete-task-list.component.html',
-  styleUrls: ['./delete-task-list.component.scss']
+  styleUrls: ['./../admin-panel-control.component.scss']
 })
 export class DeleteTaskListComponent implements OnInit {
 

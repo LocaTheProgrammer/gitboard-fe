@@ -8,7 +8,7 @@ import { MessageService } from 'src/app/@services/message.service';
 @Component({
   selector: 'app-create-company-admin',
   templateUrl: './create-company-admin.component.html',
-  styleUrls: ['./create-company-admin.component.scss']
+  styleUrls: ['./../admin-panel-control.component.scss']
 })
 export class CreateCompanyAdminComponent {
 

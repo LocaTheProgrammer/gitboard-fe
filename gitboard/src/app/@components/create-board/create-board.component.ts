@@ -10,7 +10,7 @@ import { ProjectService } from 'src/app/@services/project.service';
 @Component({
   selector: 'app-create-board',
   templateUrl: './create-board.component.html',
-  styleUrls: ['./create-board.component.scss']
+  styleUrls: ['./../admin-panel-control.component.scss']
 })
 export class CreateBoardComponent implements OnInit {
 

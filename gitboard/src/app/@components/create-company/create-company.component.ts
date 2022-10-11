@@ -9,7 +9,7 @@ import { MessageService } from 'src/app/@services/message.service';
 @Component({
   selector: 'app-create-company',
   templateUrl: './create-company.component.html',
-  styleUrls: ['./create-company.component.scss']
+  styleUrls: ['./../admin-panel-control.component.scss']
 })
 export class CreateCompanyComponent implements OnInit {
 
