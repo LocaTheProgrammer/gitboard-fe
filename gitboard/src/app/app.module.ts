@@ -30,7 +30,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { DragNDropComponent } from './@components/drag-n-drop/drag-n-drop.component';
 import { CommonModule } from '@angular/common';
 import { CreateCompanyComponent } from './@components/create-company/create-company.component';
-import { EditCompanyComponent } from './@components/edit-company/edit-company.component';
 import { CreateTaskComponent } from './@components/create-task/create-task.component';
 import { CreateBoardComponent } from './@components/create-board/create-board.component';
 import { AddTaskToBoardComponent } from './@components/add-task-to-board/add-task-to-board.component';
@@ -75,7 +74,6 @@ import { ChangePasswordComponent } from './@components/change-password/change-pa
     AdminControlPanelComponent,
     DragNDropComponent,
     CreateCompanyComponent,
-    EditCompanyComponent,
     CreateTaskComponent,
     CreateBoardComponent,
     AddTaskToBoardComponent,

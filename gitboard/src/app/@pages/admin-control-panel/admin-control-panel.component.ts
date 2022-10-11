@@ -34,7 +34,6 @@ export class AdminControlPanelComponent {
   createTask: AdminPanelDiv = new AdminPanelDiv("Create Task", "createTask")
   createBoard: AdminPanelDiv = new AdminPanelDiv("Create Project Board", "createBoard")
   assign: AdminPanelDiv = new AdminPanelDiv("Assign Task to Project Board", "assign")
-  edit: AdminPanelDiv = new AdminPanelDiv("Edit Company", "edit")
   assignUserToProject: AdminPanelDiv = new AdminPanelDiv("Assign User To Project", "assignUserToProject")
   createUser: AdminPanelDiv = new AdminPanelDiv("Create User", "createUser")
   deleteTaskList: AdminPanelDiv = new AdminPanelDiv("Delete Task List", "deleteTaskList")
@@ -46,14 +45,13 @@ export class AdminControlPanelComponent {
 
   divsArray: AdminPanelDiv[] =
     [this.createCompanyAdmin, this.createCompany, this.createTask, this.createBoard,
-    this.assign, this.edit, this.assignUserToProject,
+    this.assign, this.assignUserToProject,
     this.createUser, this.deleteTaskList, this.deletedCards, this.deleteProject,
     this.updateAuth, this.updateUser, this.changePassword]
 
 
   divVisibilityArray: boolean[] =
     [this.isCreateCompanyVisible,
-    this.isEditVisible,
     this.isCreateTaskVisible,
     this.isCreateBoardVisible,
     this.isAssignVisible,
@@ -85,9 +83,6 @@ export class AdminControlPanelComponent {
     switch (div) {
       case 'createCompany':
         this.isCreateCompanyVisible = true;
-        break;
-      case 'edit':
-        this.isEditVisible = true;
         break;
       case 'createTask':
         this.isCreateTaskVisible = true;
@@ -134,7 +129,6 @@ export class AdminControlPanelComponent {
   initializeView() {
     this.isMenuVisible = false;
     this.isCreateCompanyVisible = false;
-    this.isEditVisible = false;
     this.isCreateTaskVisible = false;
     this.error = false;
     this.isCreateBoardVisible = false;
@@ -154,7 +148,6 @@ export class AdminControlPanelComponent {
   loadArray() {
     this.divVisibilityArray =
       [this.isCreateCompanyVisible,
-      this.isEditVisible,
       this.isCreateTaskVisible,
       this.isCreateBoardVisible,
       this.isAssignVisible,
