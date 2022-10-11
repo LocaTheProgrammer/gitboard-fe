@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/@services/auth/AuthService';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +10,9 @@ import { AuthService } from 'src/app/@services/auth/AuthService';
 })
 export class NavbarComponent {
 
+
+  companyAdminRole = environment.adminRole
+  siteAdminRole = environment.siteAdminRole
 
   constructor(private router: Router, private authService: AuthService) { }
 

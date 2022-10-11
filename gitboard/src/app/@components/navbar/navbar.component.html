@@ -24,7 +24,7 @@
 
                         <span *ngIf="isUserLogged()">
                             <li><a class="dropdown-item" (click)="navigateTo('projects')">Projects</a></li>
-                            <span *ngIf="getRole() === 'ROLE_company-admin'">
+                            <span *ngIf="getRole() === companyAdminRole || getRole() === siteAdminRole">
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

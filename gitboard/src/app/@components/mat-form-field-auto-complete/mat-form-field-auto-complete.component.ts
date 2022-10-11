@@ -25,20 +25,26 @@ export class MatFormFieldAutoCompleteComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.setFilteredList()
+  }
+
+  setFilteredList() {
+    console.log("called")
     this.filteredList = this.myFormControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
   }
 
-
   private _filter(value: string): string[] {
+    console.log(value)
     const filterValue = value.toLowerCase();
 
     return this.list.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   onModelChange() {
+    console.log(this.myFormControl.valueChanges)
     if (!this.disabled)
       this.filteredList.subscribe(list => {
         this.disabled = true
