@@ -85,31 +85,30 @@ export class TodoListComponent implements OnInit {
         this.userId = dndInfo.id
         this.userAuth = dndInfo.authority
         //2nd block
-        this.categoryService.getCategories().subscribe(response => {
-          this.categoryService.getCategories().subscribe({
-            next: (response) => {
-              this.inputCategoryList = []
-              this.inputCategoryList = response
-              if (this.id != undefined) {
-                let pu = new ProjectUserDTO(this.id, this.email)
-                //3rd block
-                this.taskService.getDynamicUserTaskList(pu).subscribe({
-                  next: (tl) => {
-                    this.inputTaskList = []
-                    if (tl.length > 0) {
-                      this.inputTaskList = tl
-                      this.isRenderable = true;
-                    }
-                  },
-                  error: () => this.messageService.sendErrorMessage(),
-                  complete: () => this.messageService.clearMessageAndType()
-                })
-              }
-            },
-            error: () => this.messageService.sendErrorMessage(),
-            complete: () => this.messageService.clearMessageAndType()
-          })
+        this.categoryService.getCategories().subscribe({
+          next: (response) => {
+            this.inputCategoryList = []
+            this.inputCategoryList = response
+            if (this.id != undefined) {
+              let pu = new ProjectUserDTO(this.id, this.email)
+              //3rd block
+              this.taskService.getDynamicUserTaskList(pu).subscribe({
+                next: (tl) => {
+                  this.inputTaskList = []
+                  if (tl.length > 0) {
+                    this.inputTaskList = tl
+                    this.isRenderable = true;
+                  }
+                },
+                error: () => this.messageService.sendErrorMessage(),
+                complete: () => this.messageService.clearMessageAndType()
+              })
+            }
+          },
+          error: () => this.messageService.sendErrorMessage(),
+          complete: () => this.messageService.clearMessageAndType()
         })
+
       },
       error: () => this.messageService.sendErrorMessage(),
       complete: () => this.messageService.clearMessageAndType()
