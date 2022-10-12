@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './@pages/home/home.component';
-import { NavbarComponent } from './@components/navbar/navbar.component';
 import { LoginComponent } from './@pages/login/login.component';
 import { PasswordForgottenComponent } from './@pages/password-forgotten/password-forgotten.component';
 import { SignupComponent } from './@pages/signup/signup.component';
@@ -25,13 +24,17 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './data.service';
 import { TodoListCloneComponent } from './@pages/mock/todo-list-clone/todo-list-clone.component';
 import { ComponentPagesShared } from './@components/component-pages-shared.module';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DragNDropComponent } from './@components/drag-n-drop/drag-n-drop.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DragNDropColoneComponent } from './@components/mock/drag-n-drop-colone/drag-n-drop-colone.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
+
     LoginComponent,
     HomeComponent,
     SignupComponent,
@@ -42,8 +45,11 @@ import { ComponentPagesShared } from './@components/component-pages-shared.modul
     TodoListCloneComponent,
     AdminControlPanelComponent,
     ProjectListComponent,
+    DragNDropComponent,
+    DragNDropColoneComponent
   ],
   imports: [
+    DragDropModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -59,7 +65,7 @@ import { ComponentPagesShared } from './@components/component-pages-shared.modul
     })
   ],
   providers: [
-
+    MatDatepickerModule,
     AuthGuardService,
     AuthService,
     {

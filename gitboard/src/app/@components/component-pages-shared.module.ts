@@ -1,5 +1,6 @@
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
 
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -11,7 +12,9 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { MatSliderModule } from "@angular/material/slider";
+import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AppRoutingModule } from "../app-routing.module";
 import { AddTaskToBoardComponent } from "./add-task-to-board/add-task-to-board.component";
 import { AssignUserToProjectComponent } from "./assign-user-to-project/assign-user-to-project.component";
 import { ButtonComponent } from "./button/button.component";
@@ -32,13 +35,9 @@ import { MatSelectComponent } from "./mat-select/mat-select.component";
 import { CreateCardComponent } from "./mock/create-card/create-card.component";
 import { DragNDropColoneComponent } from "./mock/drag-n-drop-colone/drag-n-drop-colone.component";
 import { ManageCardsComponent } from "./mock/manage-cards/manage-cards.component";
+import { NavbarComponent } from "./navbar/navbar.component";
 import { ResultMessageComponent } from "./result-message/result-message.component";
 import { SpinnerComponent } from "./spinner/spinner.component";
-
-
-export const providers = [
-    MatDatepickerModule,
-]
 
 
 export const imports = [
@@ -47,21 +46,24 @@ export const imports = [
     MatGridListModule,
     FormsModule,
     ReactiveFormsModule,
-    DragDropModule,
     MatDatepickerModule,
     MatInputModule,
     MatFormFieldModule,
-    MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
     CommonModule,
     MatAutocompleteModule,
+
+    BrowserModule,
+    AppRoutingModule,
+
+    HttpClientModule,
+
 ]
 
 export const declarations = [
     SpinnerComponent,
-
-    DragNDropComponent,
+    NavbarComponent,
     CreateCompanyComponent,
     CreateTaskComponent,
     CreateBoardComponent,
@@ -71,7 +73,6 @@ export const declarations = [
     AssignUserToProjectComponent,
     MatFormFieldAutoCompleteComponent,
     CreateUserComponent,
-    DragNDropColoneComponent,
     CreateCardComponent,
     ManageCardsComponent,
     ButtonComponent,
@@ -85,9 +86,8 @@ export const declarations = [
 ];
 
 @NgModule({
-    providers: [...providers],
     imports: [...imports],
     exports: [...declarations],
-    declarations
+    declarations: [...declarations],
 })
 export class ComponentPagesShared { }
