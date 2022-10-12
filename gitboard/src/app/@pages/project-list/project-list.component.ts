@@ -40,13 +40,13 @@ export class ProjectListComponent implements OnInit {
                 this.projectList = projects
               },
               error: () => {
-                this.sendMessage("something went wrong")
-                this.setType("danger")
+                this.messageService.sendMessage("something went wrong")
+                this.messageService.sendType("danger")
               },
               complete: () => {
                 setTimeout(() => {
-                  this.clearMessages()
-                  this.clearTypes()
+                  this.messageService.clearMessages()
+                  this.messageService.clearType()
                 }, 3 * 1000);
               }
             })
@@ -61,21 +61,5 @@ export class ProjectListComponent implements OnInit {
   }
 
 
-
-  sendMessage(message: string): void {
-    this.messageService.sendMessage(message);
-  }
-
-  setType(type: string) {
-    this.messageService.sendType(type)
-  }
-
-  clearMessages(): void {
-    this.messageService.clearMessages();
-  }
-
-  clearTypes() {
-    this.messageService.clearType()
-  }
 
 }

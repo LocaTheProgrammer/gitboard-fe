@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TaskService } from 'src/app/@services/task.service';
 import { CategoryDTO } from 'src/app/@models/DTO/CategoryDTO';
@@ -101,18 +101,18 @@ export class TodoListComponent implements OnInit {
                       this.isRenderable = true;
                     }
                   },
-                  error: () => this.sendErrorMessage(),
-                  complete: () => this.clearMessageAndType()
+                  error: () => this.messageService.sendErrorMessage(),
+                  complete: () => this.messageService.clearMessageAndType()
                 })
               }
             },
-            error: () => this.sendErrorMessage(),
-            complete: () => this.clearMessageAndType()
+            error: () => this.messageService.sendErrorMessage(),
+            complete: () => this.messageService.clearMessageAndType()
           })
         })
       },
-      error: () => this.sendErrorMessage(),
-      complete: () => this.clearMessageAndType()
+      error: () => this.messageService.sendErrorMessage(),
+      complete: () => this.messageService.clearMessageAndType()
     })
 
 
@@ -192,42 +192,15 @@ export class TodoListComponent implements OnInit {
     if (this.selectedTask != undefined) {
       this.taskService.deleteTaskList(this.selectedTask).subscribe({
         next: () => {
-          this.sendMessage('deleted!')
-          this.setType('success')
+          this.messageService.sendMessage('deleted!')
+          this.messageService.sendType('success')
         },
-        error: () => this.sendErrorMessage(),
-        complete: () => this.clearMessageAndType()
+        error: () => this.messageService.sendErrorMessage(),
+        complete: () => this.messageService.clearMessageAndType()
       })
     }
   }
 
-  sendMessage(message: string): void {
-    this.messageService.sendMessage(message);
-  }
 
-  setType(type: string) {
-    this.messageService.sendType(type)
-  }
-
-
-  clearMessages(): void {
-    this.messageService.clearMessages();
-  }
-
-  clearTypes() {
-    this.messageService.clearType()
-  }
-
-  sendErrorMessage() {
-    this.sendMessage("something went wrong")
-    this.setType("danger")
-  }
-
-  clearMessageAndType() {
-    setTimeout(() => {
-      this.clearMessages()
-      this.clearTypes()
-    }, 3 * 1000);
-  }
 
 }

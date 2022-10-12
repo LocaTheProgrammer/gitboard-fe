@@ -49,45 +49,18 @@ export class CreateCompanyAdminComponent {
         let cAdmin: SignUpDTO = new SignUpDTO(this.newCompanyAdminName, this.newCompanyAdminSurname, this.email, this.password, auth)
         this.companyAdminService.createCompanyAdmin(cAdmin).subscribe({
           next: () => {
-            this.sendMessage("company admin created")
-            this.setType("success")
+            this.messageService.sendMessage("company admin created")
+            this.messageService.sendType("success")
           },
-          error: () => this.sendErrorMessage(),
-          complete: () => this.clearMessageAndType()
+          error: () => this.messageService.sendErrorMessage(),
+          complete: () => this.messageService.clearMessageAndType()
         })
       },
-      error: () => this.sendErrorMessage(),
-      complete: () => this.clearMessageAndType()
+      error: () => this.messageService.sendErrorMessage(),
+      complete: () => this.messageService.clearMessageAndType()
     })
 
   }
 
-  clearMessageAndType() {
-    setTimeout(() => {
-      this.clearMessages()
-      this.clearTypes()
-    }, 3 * 1000);
-  }
-
-  sendErrorMessage() {
-    this.sendMessage("something went wrong")
-    this.setType("danger")
-  }
-
-  sendMessage(message: string): void {
-    this.messageService.sendMessage(message);
-  }
-
-  setType(type: string) {
-    this.messageService.sendType(type)
-  }
-
-  clearMessages(): void {
-    this.messageService.clearMessages();
-  }
-
-  clearTypes() {
-    this.messageService.clearType()
-  }
 
 }

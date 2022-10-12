@@ -55,11 +55,11 @@ export class SignupComponent implements OnInit, AfterContentChecked {
     this.isLoading = true;
     this.userService.createAccount(this.userSignupForm.value.name, this.userSignupForm.value.surname, this.userSignupForm.value.mail, this.userSignupForm.value.password).subscribe({
       next: () => {
-        this.sendMessage("accont created")
-        this.setType("successful")
+        this.messageService.sendMessage("accont created")
+        this.messageService.sendType("successful")
       },
-      error: () => this.sendErrorMessage(),
-      complete: () => this.clearMessageAndType()
+      error: () => this.messageService.sendErrorMessage(),
+      complete: () => this.messageService.clearMessageAndType()
     })
   }
 
@@ -103,30 +103,5 @@ export class SignupComponent implements OnInit, AfterContentChecked {
     this.incorrectMail = regex.test(this.userSignupForm.value.mail);
   }
 
-  sendErrorMessage() {
-    this.sendMessage("something went wrong")
-    this.setType("danger")
-  }
 
-  clearMessageAndType() {
-    setTimeout(() => {
-      this.clearMessages()
-      this.clearTypes()
-    }, 3 * 1000);
-  }
-  sendMessage(message: string): void {
-    this.messageService.sendMessage(message);
-  }
-
-  setType(type: string) {
-    this.messageService.sendType(type)
-  }
-
-  clearMessages(): void {
-    this.messageService.clearMessages();
-  }
-
-  clearTypes() {
-    this.messageService.clearType()
-  }
 }

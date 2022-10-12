@@ -32,38 +32,24 @@ export class CreateCardComponent implements OnInit {
 
     let task: TaskModelMock = new TaskModelMock(this.taskName)
     this.cardMockService.addTask(task).subscribe(() => {
-      this.sendMessage('add ok')
-      this.setType('success')
+      this.messageService.sendMessage('add ok')
+      this.messageService.sendType('success')
 
     },
       () => {
-        this.sendMessage('add not ok')
-        this.setType('danger')
+        this.messageService.sendMessage('add not ok')
+        this.messageService.sendType('danger')
 
       },
       () => {
         setTimeout(() => {
-          this.clearMessages()
-          this.clearTypes()
+          this.messageService.clearMessages()
+          this.messageService.clearType()
         }, 3 * 1000);
 
       })
   }
 
-  sendMessage(message: string): void {
-    this.messageService.sendMessage(message);
-  }
 
-  setType(type: string) {
-    this.messageService.sendType(type)
-  }
-
-  clearMessages(): void {
-    this.messageService.clearMessages();
-  }
-
-  clearTypes() {
-    this.messageService.clearType()
-  }
 
 }

@@ -36,8 +36,8 @@ export class EditProfileComponent implements OnInit {
         if (userFound.lastName)
           this.surname = userFound.lastName
       },
-      error: () => this.sendErrorMessage(),
-      complete: () => this.clearMessageAndType()
+      error: () => this.messageService.sendErrorMessage(),
+      complete: () => this.messageService.clearMessageAndType()
     })
 
   }
@@ -52,45 +52,17 @@ export class EditProfileComponent implements OnInit {
 
     this.userService.updateUserInfo(update).subscribe({
       next: () => {
-        this.sendMessage('user updated')
-        this.setType('success')
+        this.messageService.sendMessage('user updated')
+        this.messageService.sendType('success')
       },
-      error: () => this.sendErrorMessage(),
-      complete: () => this.clearMessageAndType()
+      error: () => this.messageService.sendErrorMessage(),
+      complete: () => this.messageService.clearMessageAndType()
     })
 
   }
 
   showPassword() {
     this.isPasswordVisible = !this.isPasswordVisible
-  }
-
-  sendMessage(message: string): void {
-    this.messageService.sendMessage(message);
-  }
-
-  setType(type: string) {
-    this.messageService.sendType(type)
-  }
-
-  clearMessages(): void {
-    this.messageService.clearMessages();
-  }
-
-  clearTypes() {
-    this.messageService.clearType()
-  }
-
-  sendErrorMessage() {
-    this.sendMessage("something went wrong")
-    this.setType("danger")
-  }
-
-  clearMessageAndType() {
-    setTimeout(() => {
-      this.clearMessages()
-      this.clearTypes()
-    }, 3 * 1000);
   }
 
 

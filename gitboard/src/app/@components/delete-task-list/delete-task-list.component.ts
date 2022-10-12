@@ -33,8 +33,8 @@ export class DeleteTaskListComponent implements OnInit {
           this.tasksDescription.push(t.taskName)
         }
       },
-      error: () => this.sendErrorMessage(),
-      complete: () => this.clearMessageAndType()
+      error: () => this.messageService.sendErrorMessage(),
+      complete: () => this.messageService.clearMessageAndType()
 
     })
   }
@@ -50,43 +50,14 @@ export class DeleteTaskListComponent implements OnInit {
 
     this.taskService.deleteTaskList(this.taskListSelected).subscribe({
       next: () => {
-        this.sendMessage('delete ok')
-        this.setType('success')
+        this.messageService.sendMessage('delete ok')
+        this.messageService.sendType('success')
       },
-      error: () => this.sendErrorMessage(),
-      complete: () => this.clearMessageAndType()
+      error: () => this.messageService.sendErrorMessage(),
+      complete: () => this.messageService.clearMessageAndType()
     })
 
 
-  }
-
-  sendErrorMessage() {
-    this.sendMessage("something went wrong")
-    this.setType("danger")
-  }
-
-  clearMessageAndType() {
-    setTimeout(() => {
-      this.clearMessages()
-      this.clearTypes()
-    }, 3 * 1000);
-  }
-
-  sendMessage(message: string): void {
-    this.messageService.sendMessage(message);
-  }
-
-  setType(type: string) {
-    this.messageService.sendType(type)
-  }
-
-
-  clearMessages(): void {
-    this.messageService.clearMessages();
-  }
-
-  clearTypes() {
-    this.messageService.clearType()
   }
 
 }

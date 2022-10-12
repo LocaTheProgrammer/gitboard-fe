@@ -50,7 +50,7 @@ export class AddTaskToBoardComponent implements OnInit {
     private projectService: ProjectService,
     private taskService: TaskService,
     private categoryService: CategoryService,
-    private messageService: MessageService) { }
+    private ms: MessageService) { }
 
   ngOnInit(): void {
     this.findAllProjects()
@@ -72,13 +72,13 @@ export class AddTaskToBoardComponent implements OnInit {
     this.categoryService.getCategories().subscribe({
       next: (categories) => this.categoryList = categories,
       error: () => {
-        this.sendMessage("something went wrong")
-        this.setType("danger")
+        this.ms.sendMessage("something went wrong")
+        this.ms.sendType("danger")
       },
       complete: () => {
         setTimeout(() => {
-          this.clearMessages()
-          this.clearTypes()
+          this.ms.clearMessages()
+          this.ms.clearType()
         }, 3 * 1000);
       }
     })
@@ -97,13 +97,13 @@ export class AddTaskToBoardComponent implements OnInit {
         }
       },
       error: () => {
-        this.sendMessage("something went wrong loading projects")
-        this.setType("danger")
+        this.ms.sendMessage("something went wrong loading projects")
+        this.ms.sendType("danger")
       },
       complete: () => {
         setTimeout(() => {
-          this.clearMessages()
-          this.clearTypes()
+          this.ms.clearMessages()
+          this.ms.clearType()
         }, 3 * 1000);
       }
     })
@@ -113,13 +113,13 @@ export class AddTaskToBoardComponent implements OnInit {
     this.userService.findAllBasic().subscribe({
       next: (users) => this.userList = users,
       error: () => {
-        this.sendMessage("something went wrong loading users")
-        this.setType("danger")
+        this.ms.sendMessage("something went wrong loading users")
+        this.ms.sendType("danger")
       },
       complete: () => {
         setTimeout(() => {
-          this.clearMessages()
-          this.clearTypes()
+          this.ms.clearMessages()
+          this.ms.clearType()
         }, 3 * 1000);
       }
     })
@@ -135,13 +135,13 @@ export class AddTaskToBoardComponent implements OnInit {
         }
       },
       error: () => {
-        this.sendMessage("something went wrong loading finding all task")
-        this.setType("danger")
+        this.ms.sendMessage("something went wrong loading finding all task")
+        this.ms.sendType("danger")
       },
       complete: () => {
         setTimeout(() => {
-          this.clearMessages()
-          this.clearTypes()
+          this.ms.clearMessages()
+          this.ms.clearType()
         }, 3 * 1000);
       }
     })
@@ -166,14 +166,13 @@ export class AddTaskToBoardComponent implements OnInit {
 
     this.taskService.createTaskList(tlp).subscribe({
       next: () => {
-        this.alertType = 'success'
-        this.message = 'ok'
+        this.ms.sendMessage("ok")
+        this.ms.sendType("success")
       },
       error: () => {
-        this.alertType = 'danger'
-        this.message = 'ooops'
+        this.ms.sendErrorMessage()
       },
-      complete: () => this.isBoardUpdated = true
+      complete: () => this.ms.clearMessageAndType()
     })
 
 
@@ -193,19 +192,5 @@ export class AddTaskToBoardComponent implements OnInit {
     this.user = $event
   }
 
-  sendMessage(message: string): void {
-    this.messageService.sendMessage(message);
-  }
 
-  setType(type: string) {
-    this.messageService.sendType(type)
-  }
-
-  clearMessages(): void {
-    this.messageService.clearMessages();
-  }
-
-  clearTypes() {
-    this.messageService.clearType()
-  }
 }

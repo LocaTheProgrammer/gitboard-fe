@@ -33,4 +33,16 @@ export class MessageService {
   getTypeSubject(): Observable<any> {
     return this.typeSubject.asObservable();
   }
+  public sendErrorMessage() {
+    this.sendMessage("something went wrong")
+    this.sendType("danger")
+  }
+
+  public clearMessageAndType() {
+    setTimeout(() => {
+      this.clearMessages()
+      this.clearType()
+    }, 3 * 1000);
+  }
+
 }

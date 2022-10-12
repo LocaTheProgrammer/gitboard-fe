@@ -8,6 +8,7 @@ import { MessageService } from 'src/app/@services/message.service';
 import { ProjectService } from 'src/app/@services/project.service';
 import { UserService } from 'src/app/@services/user.service';
 
+
 @Component({
   selector: 'app-assign-user-to-project',
   templateUrl: './assign-user-to-project.component.html',
@@ -30,7 +31,7 @@ export class AssignUserToProjectComponent implements OnInit {
   myControlUsers = new FormControl('');
 
 
-  constructor(private messageService: MessageService, private projectService: ProjectService, private companyService: CompanyService, private userService: UserService) { }
+  constructor(private ms: MessageService, private projectService: ProjectService, private companyService: CompanyService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.loadCompanies()
@@ -47,22 +48,12 @@ export class AssignUserToProjectComponent implements OnInit {
           this.companyNameList.push(c.name)
         })
       },
-      error: () => this.sendErrorMessage(),
-      complete: () => this.clearMessageAndType()
+      error: () => this.ms.sendErrorMessage(),
+      complete: () => this.ms.clearMessageAndType()
     })
   }
 
-  sendErrorMessage() {
-    this.sendMessage("something went wrong")
-    this.setType("danger")
-  }
 
-  clearMessageAndType() {
-    setTimeout(() => {
-      this.clearMessages()
-      this.clearTypes()
-    }, 3 * 1000);
-  }
 
   loadProjectByCompany() {
     this.projectNameList = []
@@ -74,8 +65,8 @@ export class AssignUserToProjectComponent implements OnInit {
           this.projectNameList.push(p.name)
         })
       },
-      error: () => this.sendErrorMessage(),
-      complete: () => this.clearMessages
+      error: () => this.ms.sendErrorMessage(),
+      complete: () => this.ms.clearMessages()
     })
 
   }
@@ -86,15 +77,15 @@ export class AssignUserToProjectComponent implements OnInit {
     this.userService.getAllByCompany(this.companySelected).subscribe({
       next: (users) => {
         if (users.length == 0) {
-          this.sendMessage("no user found for given company!")
-          this.setType("warning")
+          this.ms.sendMessage("no user found for given company!")
+          this.ms.sendType("warning")
         }
         users.forEach((u: any) => {
           this.userEmailList.push(u.email)
         })
       },
-      error: () => this.sendErrorMessage(),
-      complete: () => this.clearMessages
+      error: () => this.ms.sendErrorMessage(),
+      complete: () => this.ms.clearMessages()
     })
 
   }
@@ -111,30 +102,16 @@ export class AssignUserToProjectComponent implements OnInit {
 
       this.projectService.addUserToProject(puDTO).subscribe({
         next: () => {
-          this.sendMessage("user added to project")
-          this.setType("success")
+          this.ms.sendMessage("user added to project")
+          this.ms.sendType("success")
         },
-        error: () => this.sendErrorMessage(),
-        complete: () => this.clearMessages
+        error: () => this.ms.sendErrorMessage(),
+        complete: () => this.ms.clearMessages()
       })
     }
   }
 
 
-  sendMessage(message: string): void {
-    this.messageService.sendMessage(message);
-  }
 
-  setType(type: string) {
-    this.messageService.sendType(type)
-  }
-
-  clearMessages(): void {
-    this.messageService.clearMessages();
-  }
-
-  clearTypes() {
-    this.messageService.clearType()
-  }
 
 }

@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/@services/auth/AuthService';
 import { MessageService } from 'src/app/@services/message.service';
 import { UserService } from 'src/app/@services/user.service';
 
+
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
@@ -24,7 +25,7 @@ export class ChangePasswordComponent implements OnInit {
 
   strRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
 
-  constructor(private userService: UserService, private authService: AuthService, private messageService: MessageService) { }
+  constructor(private userService: UserService, private authService: AuthService, private ms: MessageService) { }
 
   ngOnInit(): void {
     this.email = this.authService.getEmailFromToken()
@@ -52,43 +53,15 @@ export class ChangePasswordComponent implements OnInit {
 
     this.userService.updatePassword(userPassword).subscribe({
       next: () => {
-        this.sendMessage('add ok')
-        this.setType('success')
+        this.ms.sendMessage('add ok')
+        this.ms.sendType('success')
       },
-      error: () => this.sendErrorMessage(),
-      complete: () => this.clearMessages()
+      error: () => this.ms.sendErrorMessage(),
+      complete: () => this.ms.clearMessageAndType()
     })
 
   }
 
-  sendErrorMessage() {
-    this.sendMessage("something went wrong")
-    this.setType("danger")
-  }
-
-  clearMessageAndType() {
-    setTimeout(() => {
-      this.clearMessages()
-      this.clearTypes()
-    }, 3 * 1000);
-  }
-
-  sendMessage(message: string): void {
-    this.messageService.sendMessage(message);
-  }
-
-  setType(type: string) {
-    this.messageService.sendType(type)
-  }
-
-
-  clearMessages(): void {
-    this.messageService.clearMessages();
-  }
-
-  clearTypes() {
-    this.messageService.clearType()
-  }
 
 
 }
