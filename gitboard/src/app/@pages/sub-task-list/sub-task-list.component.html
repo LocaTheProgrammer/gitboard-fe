@@ -1,55 +1,24 @@
-<div class="container" cdkDropListGroup>
-
-
-    <div class="mt-5" *ngIf="!isIdValid">
-        <app-result-message [message]="message" alertType="danger"></app-result-message>
-    </div>
-
-
-    <div class="mt-5" *ngIf="!isRenderable && isIdValid">
-        <app-result-message message="no tasks!" alertType="warning"></app-result-message>
-    </div>
-
-
-    <div *ngIf="isLoading" class="mt-5">
-        <div class="row mt-3">
-            <div class="col d-flex justify-content-center">
-                <h1>Updating, please wait...</h1>
-            </div>
-        </div>
-
-        <div class="row mt-3">
-            <div class="col d-flex justify-content-center">
-                <app-spinner></app-spinner>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <h1>
+                SUB TASK LIST
+            </h1>
         </div>
     </div>
 
-    <div class="row mt-5">
-        <div class="col justify-content-center d-flex">
-            <h1>Auth: {{userAuth}}</h1>
-        </div>
-    </div>
-
-    <div class="row mt-5" *ngIf="!isLoading && inputTaskList && inputCategoryList && isRenderable && userId!=undefined">
-        <app-drag-n-drop [taskList]="inputTaskList" (result)="printTask($event)"
-            (detailEmitter)="navigeteToSubTask($event)" [categoryList]="inputCategoryList" [auth]="userAuth"
-            [id]="userId" [containerCounter]="containerCounter">
+    <div class="row mt-5" *ngIf="inputTaskList && inputCategoryList && isSubTaskPresent && !isLoading">
+        <app-drag-n-drop (result)="printTask($event)" [taskList]="inputTaskList" [categoryList]="inputCategoryList"
+            auth="write" [isSubTask]="true" [containerCounter]="containerCounter">
         </app-drag-n-drop>
     </div>
 
-    <div class="row mt-5" *ngIf="subId">
-        <app-sub-task-list [id]="subId"></app-sub-task-list>
-    </div>
 
-
-    <!-- Button trigger modal -->
     <button #modalbtn type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
         style="display: none;">
         Launch demo modal
     </button>
 
-    <!-- Modal -->
     <div class="row">
         <div class="col d-flex justofy-content-center">
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -86,7 +55,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                (click)="getUserTaskListByUserEmail()">Close</button>
+                                (click)="initialize()">Close</button>
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
                                 (click)="deleteTask()">Save changes</button>
                         </div>
@@ -96,12 +65,5 @@
         </div>
 
     </div>
-
-
-
-    <div class="row mt-5 text-center" *ngIf="updateError">
-        <div class="p-3 mb-2 bg-danger text-white">Error in updating</div>
-    </div>
-
 
 </div>

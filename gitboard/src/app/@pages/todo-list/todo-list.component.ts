@@ -1,11 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TaskService } from 'src/app/@services/task.service';
 import { CategoryDTO } from 'src/app/@models/DTO/CategoryDTO';
 import { Task } from 'src/app/@models/DTO/Task';
 import { TaskList } from 'src/app/@models/DTO/TaskList';
 import { CategoryService } from 'src/app/@services/category.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectUserDTO } from 'src/app/@models/DTO/ProjectUserDTO';
 import { AuthService } from 'src/app/@services/auth/AuthService';
 import { UserService } from 'src/app/@services/user.service';
@@ -54,7 +53,9 @@ export class TodoListComponent implements OnInit {
 
   image: string = ''
 
-  constructor(private messageService: MessageService, private taskService: TaskService, private categoryService: CategoryService, private _Activatedroute: ActivatedRoute, private authService: AuthService, private userService: UserService) { }
+  subId!: number
+
+  constructor(private router: Router, private messageService: MessageService, private taskService: TaskService, private categoryService: CategoryService, private _Activatedroute: ActivatedRoute, private authService: AuthService, private userService: UserService) { }
 
 
   ngOnInit() {
@@ -74,6 +75,10 @@ export class TodoListComponent implements OnInit {
     }
   }
 
+  navigeteToSubTask($event: any) {
+    this.subId = $event
+    // this.router.navigateByUrl("/sub-task/" + $event)
+  }
 
   getUserTaskListByUserEmail() {
 
@@ -121,44 +126,7 @@ export class TodoListComponent implements OnInit {
 
   }
 
-  drop(event: any) { // CdkDragDrop<string[]>
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-    }
-  }
 
-  loadArrays() {
-    this.todo = [];
-    this.inProgress = [];
-    this.done = [];
-    for (let task of this.taskList) {
-      switch (task.listName) {
-        case 'todo':
-          this.todo.push(task.taskName)
-          break;
-        case 'progress':
-          this.inProgress.push(task.taskName)
-          break;
-        case 'done':
-          this.done.push(task.taskName)
-          break;
-        default:
-          this.updateError = true
-          break;
-      }
-    }
-    if (!this.isFirstShifting) {
-      this.containerCounter = this.containerCounter + 3
-    }
-    this.isLoading = false
-  }
 
   //TODO: cdk-drop-list-0
   //IN PROGRESS: cdk-drop-list-1

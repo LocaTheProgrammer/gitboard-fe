@@ -33,3 +33,32 @@
     margin-left: 0.25rem;
     margin-right: 0.25rem;
 }
+
+.hover-div {
+    display: none;
+}
+
+.card-name {
+    position: relative;
+    z-index: 0;
+}
+
+.btn-custom {
+    height: 0.5rem !important;
+    border: 1px solid rgb(53, 53, 53);
+    border-radius: 1rem;
+    padding: 0.5rem 2rem;
+    background-color: rgb(202, 194, 194);
+}
+
+.card-name:hover>.hover-div {
+    display: block;
+    position: relative;
+    z-index: 1;
+    margin-top: -1.25rem;
+}
+
+.userCard:hover,
+.example-box:hover {
+    background-color: rgba(146, 138, 138, 0.4);
+}

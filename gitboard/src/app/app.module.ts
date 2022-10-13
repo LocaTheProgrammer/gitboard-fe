@@ -28,6 +28,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DragNDropComponent } from './@components/drag-n-drop/drag-n-drop.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DragNDropColoneComponent } from './@components/mock/drag-n-drop-colone/drag-n-drop-colone.component';
+import { SubTaskListComponent } from './@pages/sub-task-list/sub-task-list.component';
 
 
 
@@ -40,13 +41,14 @@ import { DragNDropColoneComponent } from './@components/mock/drag-n-drop-colone/
     SignupComponent,
     PasswordForgottenComponent,
     TodoListComponent,
+    SubTaskListComponent,
     SignUpSuccessfulComponent,
     ConfirmResetComponent,
     TodoListCloneComponent,
     AdminControlPanelComponent,
     ProjectListComponent,
     DragNDropComponent,
-    DragNDropColoneComponent
+    DragNDropColoneComponent,
   ],
   imports: [
     DragDropModule,

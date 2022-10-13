@@ -11,12 +11,14 @@ import { TaskList } from 'src/app/@models/DTO/TaskList';
   templateUrl: './drag-n-drop.component.html',
   styleUrls: ['./drag-n-drop.component.scss']
 })
-export class DragNDropComponent implements OnInit {
+export class DragNDropComponent implements OnInit, OnDestroy {
 
   @Input() taskList!: TaskList[]
   @Input() categoryList!: CategoryDTO[]
   @Input() id: number | undefined
   @Input() auth!: string
+
+  @Input() isSubTask: boolean = false
 
   @Input() containerCounter!: number;
 
@@ -24,6 +26,7 @@ export class DragNDropComponent implements OnInit {
 
 
   @Output() result = new EventEmitter<any>();
+  @Output() detailEmitter = new EventEmitter<any>();
 
   containerName: any;
   isFirstShifting: boolean = true;
@@ -31,6 +34,15 @@ export class DragNDropComponent implements OnInit {
 
 
   constructor() {
+  }
+
+  ngOnDestroy(): void {
+    this.taskList = []
+    this.categoryList = []
+    this.auth
+    this.isSubTask = false
+    this.containerCounter = 0
+    this.isLoading = false;
   }
 
 
@@ -55,11 +67,13 @@ export class DragNDropComponent implements OnInit {
 
   loadArrays(catId: number, task: Task) {
 
+
     let cloneCatListLength = this.categoryList.length
     let containerCounterClone = this.containerCounter
-    this.taskList[this.containerNumber].taskListDTOList.forEach(element => {
-      element.listName = this.categoryList[catId - 1].description
-    })
+    // console.log(this.containerCounter)
+    // this.taskList[this.containerNumber].taskListDTOList.forEach(element => {
+    //   element.listName = this.categoryList[catId - 1].description
+    // })
     let result = cloneCatListLength + containerCounterClone
     this.containerCounter = result
 
@@ -95,8 +109,11 @@ export class DragNDropComponent implements OnInit {
     task = new Task(listName, taskName, taskPosition, taskId, taskListId)
 
     this.loadArrays(catId, task)
-    //  this.result.emit(task)
 
+  }
+
+  openDetail(id: any) {
+    this.detailEmitter.emit(id)
   }
 
 

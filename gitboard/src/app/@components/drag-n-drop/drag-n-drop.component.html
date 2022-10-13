@@ -10,7 +10,16 @@
                 class="example-list" (cdkDropListDropped)="drop($event, c.id)">
                 <div [ngClass]="{'userCard':item.userId == id ,'card-disabled': auth!='write'}" class="example-box"
                     *ngFor="let item of taskList[c.id-1].taskListDTOList" cdkDrag [cdkDragDisabled]="auth!='write'">
-                    {{item.taskName}}</div>
+                    <div class="card-name">
+                        {{item.taskName}}
+                        <div class="hover-div" *ngIf="!isSubTask">
+                            <app-button (click)="openDetail(item.taskListId)" class="btn-custom" btnText="DETAILS">
+                            </app-button>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </div>

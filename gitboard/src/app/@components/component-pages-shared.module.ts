@@ -1,4 +1,3 @@
-import { DragDropModule } from "@angular/cdk/drag-drop";
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 
@@ -27,13 +26,11 @@ import { CreateUserComponent } from "./create-user/create-user.component";
 import { DeleteProjectComponent } from "./delete-project/delete-project.component";
 import { DeleteTaskListComponent } from "./delete-task-list/delete-task-list.component";
 import { DeletedCardsComponent } from "./deleted-cards/deleted-cards.component";
-import { DragNDropComponent } from "./drag-n-drop/drag-n-drop.component";
 import { EditProfileComponent } from "./edit-profile/edit-profile.component";
 import { EditUserComponent } from "./edit-user/edit-user.component";
 import { MatFormFieldAutoCompleteComponent } from "./mat-form-field-auto-complete/mat-form-field-auto-complete.component";
 import { MatSelectComponent } from "./mat-select/mat-select.component";
 import { CreateCardComponent } from "./mock/create-card/create-card.component";
-import { DragNDropColoneComponent } from "./mock/drag-n-drop-colone/drag-n-drop-colone.component";
 import { ManageCardsComponent } from "./mock/manage-cards/manage-cards.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { ResultMessageComponent } from "./result-message/result-message.component";
@@ -53,12 +50,9 @@ export const imports = [
     MatSelectModule,
     CommonModule,
     MatAutocompleteModule,
-
     BrowserModule,
     AppRoutingModule,
-
     HttpClientModule,
-
 ]
 
 export const declarations = [

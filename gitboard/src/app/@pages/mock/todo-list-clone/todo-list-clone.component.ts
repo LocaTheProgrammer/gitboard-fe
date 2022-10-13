@@ -49,8 +49,6 @@ export class TodoListCloneComponent implements OnInit {
   isCreateVisible: boolean = false
 
   constructor(
-    private taskService: TaskService,
-    private _Activatedroute: ActivatedRoute,
     private cardService: CardService,
     private authService: AuthService
   ) { }

@@ -9,6 +9,7 @@ import { PasswordForgottenComponent } from './@pages/password-forgotten/password
 import { ProjectListComponent } from './@pages/project-list/project-list.component';
 import { SignUpSuccessfulComponent } from './@pages/sign-up-successful/sign-up-successful.component';
 import { SignupComponent } from './@pages/signup/signup.component';
+import { SubTaskListComponent } from './@pages/sub-task-list/sub-task-list.component';
 import { TodoListComponent } from './@pages/todo-list/todo-list.component';
 import { AuthGuardService } from './@services/auth/AuthGuardService';
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'confirm-reset', component: ConfirmResetComponent },
   { path: 'control-panel', component: AdminControlPanelComponent, canActivate: [AuthGuardService] },
   { path: 'projects', component: ProjectListComponent, canActivate: [AuthGuardService] },
+  { path: 'sub-task/:id', component: SubTaskListComponent, canActivate: [AuthGuardService] },
 
   //mocked api
   { path: 'todo-clone', component: TodoListCloneComponent },
